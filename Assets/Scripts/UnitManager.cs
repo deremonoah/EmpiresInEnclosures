@@ -53,6 +53,20 @@ public class UnitManager : MonoBehaviour
         unit.gameObject.layer = 6;
     }
 
+    public void spawnEnemyUnit(int lcv,Transform pos, bool stay)
+    {
+        //instantiate prefab at spawnPos.pos
+        var unit = Instantiate(enemyPrefabs[lcv], pos.position, EnemyBasePos.rotation);
+        if (!stay)
+        {
+            unit.GetComponent<UnitAI>().SetMoveTarget(PlayerBasePos.position);
+            unit.GetComponent<UnitAI>().setUnitState(UnitState.move);
+        }
+        else { unit.GetComponent<UnitAI>().SetMoveTarget(pos.position); }
+        //setting to enemy unit layer so they don't kill each other
+        unit.gameObject.layer = 6;
+    }
+
     public Transform GetmoveTarget(int layer)
     {
         if (layer == 6)
