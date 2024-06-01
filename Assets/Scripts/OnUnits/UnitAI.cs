@@ -16,6 +16,8 @@ public class UnitAI : MonoBehaviour
     private Vector2 RangedTarget;
     public GameObject ProjectilePrefab;
     public GameObject shootPoint;
+    //CodeMonkey
+    private GameObject selectedGameObject;
 
     void Start()
     {
@@ -27,6 +29,13 @@ public class UnitAI : MonoBehaviour
     private void Awake()
     {
         anim = this.gameObject.GetComponentInChildren<UnitAnimator>();
+        selectedGameObject = transform.Find("Selected").gameObject;
+        SetSelectedVisible(false);
+    }
+
+    public void SetSelectedVisible(bool visible)
+    {
+        selectedGameObject.SetActive(visible);
     }
 
     //make these sections later
