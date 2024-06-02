@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 235266774549139779, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.125
+      objectReference: {fileID: 0}
     - target: {fileID: 1548054115205157805, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
       propertyPath: m_Name
       value: Penguin_Spear

@@ -112,6 +112,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Giraffe+Penguin
       objectReference: {fileID: 0}
+    - target: {fileID: 4263621834570804428, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1940876
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263621834570804428, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6257506
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263621834570804428, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0277
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263621834570804428, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.2147
+      objectReference: {fileID: 0}
     - target: {fileID: 5517565094155568042, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
       propertyPath: m_RootOrder
       value: 0

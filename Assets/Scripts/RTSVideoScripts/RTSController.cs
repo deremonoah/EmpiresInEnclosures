@@ -52,8 +52,11 @@ public class RTSController : MonoBehaviour
                 UnitAI unitRTS = collider2D.GetComponent<UnitAI>();
                 if(unitRTS != null)
                 {
-                    unitRTS.SetSelectedVisible(true);
-                    selectedUnitRTSList.Add(unitRTS);
+                    if (unitRTS.gameObject.layer == 7)
+                    {
+                        unitRTS.SetSelectedVisible(true);
+                        selectedUnitRTSList.Add(unitRTS);
+                    }
                 }
             }
         }
