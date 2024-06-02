@@ -60,11 +60,54 @@ public class RTSController : MonoBehaviour
 
         if(Input.GetMouseButtonDown(1))
         {
+            //Right mouse down
             Vector3 moveToPosition = UtilsClass.GetMouseWorldPosition();
-            foreach(UnitAI unitRTS in selectedUnitRTSList)
+
+            List<Vector3> targetPositionList = GetPositionListAround(moveToPosition, 1f, 5);
+            /*=new List<Vector3>
+             * { old list code
+                moveToPosition + new Vector3(0,0),
+                moveToPosition + new Vector3(1,0),
+                moveToPosition + new Vector3(2,0),
+                moveToPosition + new Vector3(3,0),
+            };*/
+
+            int targetPositionListIndex = 0;
+
+            foreach (UnitAI unitRTS in selectedUnitRTSList)
             {
-                unitRTS.SetMoveTarget(moveToPosition);
+                unitRTS.SetMoveTarget(targetPositionList[targetPositionListIndex]);
+                targetPositionListIndex = (targetPositionListIndex + 1) % targetPositionList.Count;
             }
         }
+    }
+
+    private List<Vector3> GetPositionListAround(Vector3 startPosition,float[] ringDistanceArray, int[] ringPositionCountArray)
+    {
+        List<Vector3> positionList = new List<Vector3>();
+        positionList.Add(startPosition);
+        for(int lcv =0;lcv<ringDistanceArray.Length;lcv++)
+        {
+            positionList.AddRange(GetPositionListAround(startPosition, ringDistanceArray[lcv], ringPositionCountArray[lcv]));
+        }
+        return positionList;
+    }
+
+    private List<Vector3> GetPositionListAround(Vector3 startPosition, float distance, int positionCount)
+    {
+        List<Vector3> positionList = new List<Vector3>();
+        for (int lcv = 0;lcv<positionCount;lcv++)
+        {
+            float angle = lcv * (360f / positionCount);
+            Vector3 dir = ApplyRotationToVector(new Vector3(1, 0), angle);
+            Vector3 position = startPosition + dir * distance;
+            positionList.Add(position);
+        }
+        return positionList;
+    }
+
+    private Vector3 ApplyRotationToVector(Vector3 vec, float angle)
+    {
+        return Quaternion.Euler(0, 0, angle) * vec;
     }
 }
