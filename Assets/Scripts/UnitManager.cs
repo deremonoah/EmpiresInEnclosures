@@ -11,19 +11,25 @@ public class UnitManager : MonoBehaviour
     public List<GameObject> PlayerUnitPrefabs;
     public List<GameObject> enemyPrefabs;
     public Transform EnemyBasePos;
-    [SerializeField] private float PP, MaxPP=12, PPRegenTimer=2;
+    [SerializeField] private float PP, MaxPP=12, PPRegenTimer,PPRegenTimerMax;
     public Text ppText, ppMaxText;
+
+    private void Start()
+    {
+        ppText.text = "" + PP;
+        ppMaxText.text = "" + MaxPP;
+    }
 
     private void Update()
     {
         PPRegenTimer -= Time.deltaTime;
         if(PPRegenTimer<=0)
         {
-            PP++;
-            if (PP >= MaxPP) { PP = MaxPP; }
-            ppText.text = ""+PP;
-            PPRegenTimer = 1;
+            //set up this way if you get pp over max with the penguin pandemic ability it can go over. And with the death of stuff that will have to change
+            if (PP+1 <= MaxPP) { PP++; }
+            PPRegenTimer = PPRegenTimerMax;
         }
+        ppText.text = "" + PP;
     }
 
     public void spawnPlayerUnit(int lcv)
@@ -72,5 +78,34 @@ public class UnitManager : MonoBehaviour
         if (layer == 6)
         {   return PlayerBasePos; }
         return EnemyBasePos;
+    }
+
+    public void PlayerGetsPower(float p,bool canGoAbove)
+    {
+        if(canGoAbove)
+        {
+            PP += p;
+        }else 
+        {
+            if(PP+p<=MaxPP)
+            {
+                PP += p;
+            }//else they just don't get it because it would go over max or is max and this won't overwrite the penguin pandemic ability
+        }
+    }
+
+    public void EnemyGetsPower(float p, bool canGoAbove)
+    {
+        if (canGoAbove)
+        {
+            PP += p;
+        }
+        else
+        {
+            if (PP + p <= MaxPP)
+            {
+                PP += p;
+            }//else they just don't get it because it would go over max or is max and this won't overwrite the penguin pandemic ability
+        }
     }
 }

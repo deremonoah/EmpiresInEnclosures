@@ -13,6 +13,8 @@ public class UnitStats : MonoBehaviour
     [SerializeField] private Vector2 SightRange;
     [SerializeField] private float AttackRange;
     [SerializeField] private UnitType ut;
+    [SerializeField] private float FriendlyPayOnDeath;
+    [SerializeField] private float EnemyPayOnDeath;
     //maybe armor and stuff
 
     public int getCost()
@@ -54,6 +56,16 @@ public class UnitStats : MonoBehaviour
     public float getAttackRange()
     {
         return AttackRange;
+    }
+
+    public float getFriendlyPayOnDeath()
+    {
+        return FriendlyPayOnDeath;
+    }
+
+    public float getEnemyPayOnDeath()
+    {
+        return EnemyPayOnDeath;
     }
 }
 public enum UnitType { melee, ranged, seige }

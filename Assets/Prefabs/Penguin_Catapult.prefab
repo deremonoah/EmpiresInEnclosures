@@ -76,6 +76,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 7343515472698973073, guid: 5a2dd7d4d9566294699780f6396547c5, type: 3}
+      propertyPath: ut
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7343515472698973073, guid: 5a2dd7d4d9566294699780f6396547c5, type: 3}
+      propertyPath: MoveSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7343515472698973073, guid: 5a2dd7d4d9566294699780f6396547c5, type: 3}
+      propertyPath: EnemyPayOnDeath
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a2dd7d4d9566294699780f6396547c5, type: 3}

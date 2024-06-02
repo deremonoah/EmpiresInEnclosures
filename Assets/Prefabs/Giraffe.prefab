@@ -190,7 +190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: MoveSpeed
-      value: 3.5
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: AttackRange
@@ -207,6 +207,14 @@ PrefabInstance:
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: AttackRange.y
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
+      propertyPath: EnemyPayOnDeath
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
+      propertyPath: FriendlyPayOnDeath
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9110106349847532510, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: m_Controller

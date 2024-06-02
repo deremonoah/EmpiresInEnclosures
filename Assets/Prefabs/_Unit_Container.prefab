@@ -280,6 +280,8 @@ MonoBehaviour:
   SightRange: {x: 6, y: 6}
   AttackRange: 1
   ut: 0
+  FriendlyPayOnDeath: 1
+  EnemyPayOnDeath: 1
 --- !u!114 &3843686139427556833
 MonoBehaviour:
   m_ObjectHideFlags: 0
