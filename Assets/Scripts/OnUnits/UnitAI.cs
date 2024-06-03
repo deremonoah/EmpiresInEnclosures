@@ -18,12 +18,15 @@ public class UnitAI : MonoBehaviour
     public GameObject shootPoint;
     //CodeMonkey
     private GameObject selectedGameObject;
+    //fixing facing the wrong way
+    private SpriteRenderer mysr;
 
     void Start()
     {
         myStats = GetComponent<UnitStats>();
         moveSpeed = myStats.getMoveSpeed();
         us = UnitState.move;
+        mysr = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Awake()
@@ -93,6 +96,9 @@ public class UnitAI : MonoBehaviour
         us = state;
         anim.SetAnimationState((int)us);
     }
+
+    
+
     //attack stuff
     //attack type weather its ranged or melee (cavalry just moves faster probably)
     //based on attack speed that would be how often we check for a target(unit or base) then attack

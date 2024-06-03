@@ -20,7 +20,7 @@ public class EnemyBaseAI : MonoBehaviour
     {
         if(SustainedSpawns&&susTimer<=0)
         {
-            int rand = Random.Range(0, 4);
+            int rand = Random.Range(0, 3);
             um.spawnEnemyUnit(rand);
             susTimer = SustainedSpawnTimerMax;
         }else if(SustainedSpawns)
