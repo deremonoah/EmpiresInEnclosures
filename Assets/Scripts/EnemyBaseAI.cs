@@ -20,7 +20,8 @@ public class EnemyBaseAI : MonoBehaviour
     {
         if(SustainedSpawns&&susTimer<=0)
         {
-            um.spawnEnemyUnit(1);
+            int rand = Random.Range(0, 4);
+            um.spawnEnemyUnit(rand);
             susTimer = SustainedSpawnTimerMax;
         }else if(SustainedSpawns)
         {
@@ -33,9 +34,10 @@ public class EnemyBaseAI : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         um.spawnEnemyUnit(1,commandPos[0],true);
         um.spawnEnemyUnit(1, commandPos[1], true);
+        um.spawnEnemyUnit(2, commandPos[1], true);
         //instantiate 2 giraffes send them to their spots then spawn a giraffe every 5 seconds after 20 seconds
         //when base at half hp summon giraffe stack
-        yield return new WaitForSeconds(25f);
+        yield return new WaitForSeconds(18f);
         susTimer = SustainedSpawnTimerMax;
         SustainedSpawns = true;
         

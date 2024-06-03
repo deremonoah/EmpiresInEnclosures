@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1238712791
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 014e3ae119b33224f82cad0e23dc43d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -119,6 +119,10 @@ PrefabInstance:
     - target: {fileID: 3248066881049308706, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
       propertyPath: m_Name
       value: Giraffe+Penguin
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090770981607305579, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4263621834570804428, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
       propertyPath: m_LocalScale.x

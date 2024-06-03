@@ -15,7 +15,7 @@ public class HP : MonoBehaviour
         anim = GetComponent<UnitAnimator>();
     }
 
-    public void DamageThis(float damge)
+    public virtual void DamageThis(float damge)
     {
         currentHp -= damge;
         if (anim != null) { anim.TookDamage(); }
