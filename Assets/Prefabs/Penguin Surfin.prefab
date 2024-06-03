@@ -62,11 +62,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
       propertyPath: EnemyPayOnDeath
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
       propertyPath: FriendlyPayOnDeath
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8429309836335382053, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
       propertyPath: m_RootOrder

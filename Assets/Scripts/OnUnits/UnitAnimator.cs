@@ -5,6 +5,7 @@ using UnityEngine;
 public class UnitAnimator : MonoBehaviour
 {
     private Animator animor;
+    private List<SpriteRenderer> spritesToChange;
     private void Awake()
     {
         animor = GetComponent<Animator>();
@@ -14,17 +15,28 @@ public class UnitAnimator : MonoBehaviour
     {
         var ai = GetComponentInParent<UnitAI>();
         var sr = GetComponent<SpriteRenderer>();
+        spritesToChange = new List<SpriteRenderer>();
+
         //if player face the right way
-        if(ai.gameObject.layer==7)
+        if (ai.gameObject.layer==7)
         {
             sr.flipX = true;
             for(int lcv =0; lcv<this.transform.childCount;lcv++)
             {
                 SpriteRenderer childSR = transform.GetChild(lcv).GetComponent<SpriteRenderer>();
-                if(childSR !=null)
+                if (childSR !=null)
                 {
                     childSR.flipX = true;
                 }
+            }
+        }
+        //for color set up
+        for (int lcv = 0; lcv < this.transform.childCount; lcv++)
+        {
+            SpriteRenderer childSR = transform.GetChild(lcv).GetComponent<SpriteRenderer>();
+            if (childSR != null)
+            {
+                spritesToChange.Add(childSR);
             }
         }
     }
@@ -42,10 +54,18 @@ public class UnitAnimator : MonoBehaviour
 
     public IEnumerator DisplayDamageRoutine()
     {
-        //change material
         SpriteRenderer sr= this.gameObject.GetComponent<SpriteRenderer>();
         sr.color = Color.red;
+        Debug.Log(spritesToChange.Count);
+        for (int lcv=0;lcv< spritesToChange.Count;lcv++)
+        {
+            spritesToChange[lcv].color = Color.red;
+        }
         yield return new WaitForSeconds(0.2f);
         sr.color = Color.white;
+        for (int lcv = 0; lcv < spritesToChange.Count; lcv++)
+        {
+            spritesToChange[lcv].color = Color.white;
+        }
     }
 }

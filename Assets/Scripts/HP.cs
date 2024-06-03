@@ -12,12 +12,13 @@ public class HP : MonoBehaviour
     {
         maxHp = GetComponent<UnitStats>().getMaxHp();
         currentHp = maxHp;
-        anim = GetComponent<UnitAnimator>();
+        anim = GetComponentInChildren<UnitAnimator>();
     }
 
     public virtual void DamageThis(float damge)
     {
         currentHp -= damge;
+        Debug.Log(anim != null);
         if (anim != null) { anim.TookDamage(); }
         if (currentHp <= 0)
         {
@@ -36,4 +37,5 @@ public class HP : MonoBehaviour
         
         return true;
     }
+
 }
