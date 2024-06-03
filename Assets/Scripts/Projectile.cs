@@ -7,12 +7,18 @@ public class Projectile : MonoBehaviour
     public float damage;
     private Vector2 Target;
     public float moveSpeed;
+    public float lifeSpan;
+    
 
     void Update()
     {
         float step = moveSpeed * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, Target, step);
-        
+        if(lifeSpan<=0)
+        {
+            Destroy(this.gameObject);
+        }
+        else { lifeSpan -= Time.deltaTime; }
     }
 
     public void SetTarget(Vector2 pos,GameObject shooter)
