@@ -96,7 +96,8 @@ public class UnitManager : MonoBehaviour
 
     public void EnemyGetsPower(float p, bool canGoAbove)
     {
-        if (canGoAbove)
+        /*make it for enemy later
+         * if (canGoAbove)
         {
             PP += p;
         }
@@ -106,6 +107,6 @@ public class UnitManager : MonoBehaviour
             {
                 PP += p;
             }//else they just don't get it because it would go over max or is max and this won't overwrite the penguin pandemic ability
-        }
+        }*/
     }
 }
