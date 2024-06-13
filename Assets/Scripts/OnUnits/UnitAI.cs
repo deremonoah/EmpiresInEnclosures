@@ -65,6 +65,7 @@ public class UnitAI : MonoBehaviour
 
     public void SeeTarget(Vector2 pos, HP enmTarg)
     {
+        //Debug.Log(this.name + " seeing");
         if (attackTarget == null && currentRoutine==null)
         {
             //only makes new target if old is null
@@ -83,7 +84,7 @@ public class UnitAI : MonoBehaviour
                 currentRoutine = StartCoroutine(MeleeAttackRoutine());
             }
         }
-        moveTarget = pos;
+        SetMoveTarget(pos);
     }
 
     public void Halt()
@@ -115,11 +116,20 @@ public class UnitAI : MonoBehaviour
         }
     }*/
 
-    private void DoneFighting()
+    private IEnumerator DoneFighting()
     {
-        setUnitState(UnitState.move);
-        moveTarget = FindObjectOfType<UnitManager>().GetmoveTarget(gameObject.layer).position;
-        attackTarget = null;
+        Debug.Log("done fighting called atk target?" );
+        Debug.Log(attackTarget == null);
+        Debug.Log("moveTarget?");
+        Debug.Log(moveTarget == null);
+        yield return new WaitForSeconds(0f);
+        if (moveTarget==null)
+        {
+            Debug.Log("in fighting if");
+            setUnitState(UnitState.move);
+            moveTarget = FindObjectOfType<UnitManager>().GetmoveTarget(gameObject.layer).position;
+            attackTarget = null;
+        }
     }
 
     private IEnumerator MeleeAttackRoutine()
@@ -129,11 +139,13 @@ public class UnitAI : MonoBehaviour
             setUnitState(UnitState.attack);
             yield return new WaitForSeconds(myStats.getAttackSpeed());
             if (attackTarget != null)
-            { attackTarget.DamageThis(myStats.getAttack()); }
-            currentRoutine = StartCoroutine(MeleeAttackRoutine());
-            Debug.Log("still attacking");
+            { 
+                attackTarget.DamageThis(myStats.getAttack());
+                currentRoutine = StartCoroutine(MeleeAttackRoutine());
+            }
+            else { StartCoroutine(DoneFighting()); }
         }
-        else { DoneFighting(); }
+        else { StartCoroutine(DoneFighting()); }
 
     }
 
@@ -141,13 +153,15 @@ public class UnitAI : MonoBehaviour
     {
         moveTarget = this.gameObject.transform.position;
         setUnitState( UnitState.attack);
+        //below line should fix the missing if the nemy unit moved form initial position
+        RangedTarget = attackTarget.gameObject.transform.position;
         //then instantiate projectile, give it target, then wait. or maybe wait 1st? well am trying 1st
         var shot = Instantiate(ProjectilePrefab, shootPoint.transform.position, shootPoint.transform.rotation);
         shot.GetComponent<Projectile>().SetTarget(RangedTarget, this.gameObject);
         yield return new WaitForSeconds(myStats.getAttackSpeed());
         if (attackTarget != null)
         { currentRoutine= StartCoroutine(RangedAttackRoutine()); }
-        else { DoneFighting(); }
+        else { StartCoroutine(DoneFighting()); }
     }
 }
 public enum UnitState { idle,move,attack}

@@ -56,7 +56,6 @@ public class UnitAnimator : MonoBehaviour
     {
         SpriteRenderer sr= this.gameObject.GetComponent<SpriteRenderer>();
         sr.color = Color.red;
-        Debug.Log(spritesToChange.Count);
         for (int lcv=0;lcv< spritesToChange.Count;lcv++)
         {
             spritesToChange[lcv].color = Color.red;

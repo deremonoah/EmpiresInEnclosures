@@ -24,14 +24,22 @@ public class Projectile : MonoBehaviour
     public virtual void SetTarget(Vector2 pos,GameObject shooter)
     {
         Target = pos;
-        this.gameObject.layer = shooter.layer;
+        //player shot, so projectile on 9
+        if (shooter.layer == 7)
+        { this.gameObject.layer = 9; }
+
+        //enemy shot on 6 so projectile on 8
+        if (shooter.layer == 6)
+        { this.gameObject.layer = 8; }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //I need to declaire if its enemy or friendly projectile layer
-        Debug.Log("hit something");
-        if (this.gameObject.layer != collision.gameObject.layer)
+        //if (this.gameObject.layer != collision.gameObject.layer) old way
+        //this should now check only the layers that have hp and it should have caught that before tho with the null checck
+        if(collision.gameObject.layer<8 && collision.gameObject.layer > 5)
         {
             if (collision.gameObject.GetComponent<HP>() != null)
             { 
