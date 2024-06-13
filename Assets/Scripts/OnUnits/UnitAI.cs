@@ -65,7 +65,7 @@ public class UnitAI : MonoBehaviour
 
     public void SeeTarget(Vector2 pos, HP enmTarg)
     {
-        if (attackTarget == null)
+        if (attackTarget == null && currentRoutine==null)
         {
             //only makes new target if old is null
             float atkRng = myStats.getAttackRange();

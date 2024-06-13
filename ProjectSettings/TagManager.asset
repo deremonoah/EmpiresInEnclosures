@@ -62,6 +62,9 @@ TagManager:
   - name: unit front
     uniqueID: 2558228413
     locked: 0
+  - name: Projectile
+    uniqueID: 4110580809
+    locked: 0
   - name: UnitSelect
     uniqueID: 2787649847
     locked: 0

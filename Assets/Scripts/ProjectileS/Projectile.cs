@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
         else { lifeSpan -= Time.deltaTime; }
     }
 
-    public void SetTarget(Vector2 pos,GameObject shooter)
+    public virtual void SetTarget(Vector2 pos,GameObject shooter)
     {
         Target = pos;
         this.gameObject.layer = shooter.layer;
@@ -33,7 +33,11 @@ public class Projectile : MonoBehaviour
         Debug.Log("hit something");
         if (this.gameObject.layer != collision.gameObject.layer)
         {
-            collision.gameObject.GetComponent<HP>().DamageThis(damage);
+            if (collision.gameObject.GetComponent<HP>() != null)
+            { 
+                //this is for when projectiles collide with each other
+                collision.gameObject.GetComponent<HP>().DamageThis(damage); 
+            }
         }
         Destroy(this.gameObject);
     }

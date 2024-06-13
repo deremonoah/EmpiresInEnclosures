@@ -10,6 +10,10 @@ public class BaseHP : HP
     {
         base.DamageThis(damge);
         barUI.UpdateHP(base.GetHP());
+        /*if(this.gameObject.layer==6 && this.GetHP()<=0)
+        {
+            //idk what this if was for????
+        }*/
     }
 
     public override bool Die() 
