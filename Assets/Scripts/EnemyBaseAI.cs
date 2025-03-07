@@ -9,40 +9,30 @@ public class EnemyBaseAI : MonoBehaviour
     private bool SustainedSpawns;
     private float susTimer;
     public float SustainedSpawnTimerMax;
+    [SerializeField] BaseHP ourBase;
     //their strategies may vary from group to group
     void Start()
     {
         um = FindObjectOfType<UnitManager>();
+        //in future we will add the based on what scene or some factor it might pick a more strategic enemy
         StartCoroutine(GiraffeStrat());
     }
 
     private void Update()
     {
-        if(SustainedSpawns&&susTimer<=0)
-        {
-            int rand = Random.Range(0, 3);
-            um.spawnEnemyUnit(rand);
-            susTimer = SustainedSpawnTimerMax;
-        }else if(SustainedSpawns)
-        {
-            susTimer -= Time.deltaTime;
-        }
+        
     }
 
+    //this is the spam strat
     public IEnumerator GiraffeStrat()
     {
         yield return new WaitForSeconds(0.1f);
-        um.spawnEnemyUnit(1,commandPos[0],true);
-        um.spawnEnemyUnit(1, commandPos[1], true);
-        um.spawnEnemyUnit(2, commandPos[2], true);
-        
-        //instantiate 2 giraffes send them to their spots then spawn a giraffe every 5 seconds after 20 seconds
-        //when base at half hp summon giraffe stack
-        yield return new WaitForSeconds(17f);
-        susTimer = SustainedSpawnTimerMax;
-        um.spawnEnemyUnit(0, commandPos[3], true);
-        um.spawnEnemyUnit(0, commandPos[4], true);
-        SustainedSpawns = true;
-        
+        //what do I want the ai to do? summon a guy when they have the PP to do so,
+        while (ourBase.GetHP() > 0)
+        {
+            if (um.GetEnmPPAmount() >= um.GetEnmPPAmount())
+            { um.spawnEnemyUnit(0); }
+            yield return new WaitForSeconds(0.3f);
+        }
     }
 }

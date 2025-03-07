@@ -8,8 +8,8 @@ public class UnitAI : MonoBehaviour
     private UnitStats myStats;
     private float moveSpeed;
     public Vector2 moveTarget;
-    private HP attackTarget;
-    private UnitState us;
+    public HP attackTarget;
+    [SerializeField] UnitState unitState;
     private UnitAnimator anim;
     private Coroutine currentRoutine;
     //ranged variables
@@ -20,13 +20,19 @@ public class UnitAI : MonoBehaviour
     private GameObject selectedGameObject;
     //fixing facing the wrong way
     private SpriteRenderer mysr;
+    private UnitManager urManager;
+
+    [Header("universal movement varience")]
+    public Vector2 xRange;
+    public Vector2 yRange;
 
     void Start()
     {
         myStats = GetComponent<UnitStats>();
         moveSpeed = myStats.getMoveSpeed();
-        us = UnitState.move;
+        unitState = UnitState.move;
         mysr = GetComponentInChildren<SpriteRenderer>();
+        urManager = FindObjectOfType<UnitManager>();
     }
 
     private void Awake()
@@ -50,11 +56,12 @@ public class UnitAI : MonoBehaviour
             if (currentRoutine != null)
             { StopCoroutine(currentRoutine); }
         }*/
-        if (us == UnitState.move)
+        if (unitState == UnitState.move)
         {
             float step = moveSpeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, moveTarget, step);
         }
+
         //maybe change to a move routine
     }
     
@@ -65,26 +72,43 @@ public class UnitAI : MonoBehaviour
 
     public void SeeTarget(Vector2 pos, HP enmTarg)
     {
-        //Debug.Log(this.name + " seeing");
-        if (attackTarget == null && currentRoutine==null)
+        //Debug.Log(this.name + " seeing attack target is null? "+(attackTarget==null)+" currentRoutine is null? " +(currentRoutine==null));
+        if (attackTarget == null ||  attackTarget.GetType() == typeof(BaseHP))
         {
-            //only makes new target if old is null
+            //only makes new target if old is null or they are attacking a base
+            StopAllCoroutines();
+            //makes sure we don't double up on attack routines
+
+            //helps be more natural
+            pos = RandomizePos(pos);
+
             float atkRng = myStats.getAttackRange();
             Vector2 curruntPos = this.gameObject.transform.position;
             if (myStats.AmRanged())
             {
                 RangedTarget = pos;
                 attackTarget = enmTarg;
+                setUnitState(UnitState.attack);
                 currentRoutine = StartCoroutine(RangedAttackRoutine());
             }
             //are they in attack range
             else if (atkRng >= curruntPos.x - pos.x && atkRng >= curruntPos.y - pos.y)
             {
                 attackTarget = enmTarg;
+                setUnitState(UnitState.attack);
                 currentRoutine = StartCoroutine(MeleeAttackRoutine());
             }
         }
         SetMoveTarget(pos);
+    }
+
+    public Vector3 RandomizePos(Vector3 aroundHere)
+    {
+        float randx = Random.Range(xRange.x, xRange.y);
+        float randy = Random.Range(yRange.x, yRange.y);
+
+        Vector3 randSpawn = new Vector3(aroundHere.x + randx, aroundHere.y + randy, aroundHere.z);
+        return randSpawn;
     }
 
     public void Halt()
@@ -94,8 +118,8 @@ public class UnitAI : MonoBehaviour
 
     public void setUnitState(UnitState state)
     {
-        us = state;
-        anim.SetAnimationState((int)us);
+        unitState = state;
+        anim.SetAnimationState((int)unitState);
     }
 
     
@@ -116,52 +140,53 @@ public class UnitAI : MonoBehaviour
         }
     }*/
 
-    private IEnumerator DoneFighting()
+    private void DoneFighting()
     {
-        Debug.Log("done fighting called atk target?" );
+        /*Debug.Log("done fighting called atk target?" );
         Debug.Log(attackTarget == null);
         Debug.Log("moveTarget?");
-        Debug.Log(moveTarget == null);
-        yield return new WaitForSeconds(0f);
-        if (moveTarget==null)
-        {
-            Debug.Log("in fighting if");
-            setUnitState(UnitState.move);
-            moveTarget = FindObjectOfType<UnitManager>().GetmoveTarget(gameObject.layer).position;
-            attackTarget = null;
-        }
+        Debug.Log(moveTarget == null);*/
+        moveTarget = urManager.GetmoveTarget(gameObject.layer).position;
+        this.setUnitState(UnitState.move);
+        moveTarget = urManager.GetmoveTarget(gameObject.layer).position;
     }
 
     private IEnumerator MeleeAttackRoutine()
     {
-        if (attackTarget!= null)
-        {
-            setUnitState(UnitState.attack);
-            yield return new WaitForSeconds(myStats.getAttackSpeed());
-            if (attackTarget != null)
+            
+            while (attackTarget != null)
             { 
-                attackTarget.DamageThis(myStats.getAttack());
-                currentRoutine = StartCoroutine(MeleeAttackRoutine());
+                yield return new WaitForSeconds(myStats.getAttackSpeed());
+            if (attackTarget != null)
+            { attackTarget.DamageThis(myStats.getAttack()); }
+            yield return null;
             }
-            else { StartCoroutine(DoneFighting()); }
-        }
-        else { StartCoroutine(DoneFighting()); }
-
+        //change movetarget
+        DoneFighting();
     }
 
     private IEnumerator RangedAttackRoutine()
     {
         moveTarget = this.gameObject.transform.position;
-        setUnitState( UnitState.attack);
-        //below line should fix the missing if the nemy unit moved form initial position
-        RangedTarget = attackTarget.gameObject.transform.position;
+        //could move 1st line of code from ShootShot() here if we want it maybe to miss?
+        
+        while (attackTarget != null)
+        {
+            yield return new WaitForSeconds(myStats.getAttackSpeed());
+            ShootShot();
+            yield return null;
+        }
+        DoneFighting();
+    }
+
+    private void ShootShot()
+    {
+        //below line makes missing harder, but idk if we need it every call
+        if (attackTarget != null)
+        { RangedTarget = attackTarget.gameObject.transform.position; }
         //then instantiate projectile, give it target, then wait. or maybe wait 1st? well am trying 1st
         var shot = Instantiate(ProjectilePrefab, shootPoint.transform.position, shootPoint.transform.rotation);
         shot.GetComponent<Projectile>().SetTarget(RangedTarget, this.gameObject);
-        yield return new WaitForSeconds(myStats.getAttackSpeed());
-        if (attackTarget != null)
-        { currentRoutine= StartCoroutine(RangedAttackRoutine()); }
-        else { StartCoroutine(DoneFighting()); }
     }
 }
 public enum UnitState { idle,move,attack}

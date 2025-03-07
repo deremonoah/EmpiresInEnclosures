@@ -116,6 +116,10 @@ PrefabInstance:
       propertyPath: FriendlyPayOnDeath
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1085246517118650285, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.58
+      objectReference: {fileID: 0}
     - target: {fileID: 3248066881049308706, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
       propertyPath: m_Name
       value: Giraffe+Penguin

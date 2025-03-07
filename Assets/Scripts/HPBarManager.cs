@@ -8,9 +8,8 @@ public class HPBarManager : MonoBehaviour
     public Image healthBar;
     public float health;
 
-    public void UpdateHP(float currentHP)
+    public void UpdateHP(float HPpercent)
     {
-        health = currentHP;
-        healthBar.fillAmount = health / 30f;
+        healthBar.fillAmount = HPpercent;
     }
 }

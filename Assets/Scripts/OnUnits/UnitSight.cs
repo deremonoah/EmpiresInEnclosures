@@ -26,6 +26,7 @@ public class UnitSight : MonoBehaviour
         }
     }
 
+    
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (ai.gameObject.layer == 7 && collision.gameObject.layer == 6)

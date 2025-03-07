@@ -15,6 +15,7 @@ public class UnitStats : MonoBehaviour
     [SerializeField] private UnitType ut;
     [SerializeField] private float FriendlyPayOnDeath;
     [SerializeField] private float EnemyPayOnDeath;
+    [SerializeField] private Sprite portrait;
     //maybe armor and stuff
 
     public int getCost()
@@ -66,6 +67,11 @@ public class UnitStats : MonoBehaviour
     public float getEnemyPayOnDeath()
     {
         return EnemyPayOnDeath;
+    }
+
+    public Sprite getIcon()
+    {
+        return portrait;
     }
 }
 public enum UnitType { melee, ranged, seige }

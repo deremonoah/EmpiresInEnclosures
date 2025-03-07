@@ -80,6 +80,7 @@ public class RTSController : MonoBehaviour
             foreach (UnitAI unitRTS in selectedUnitRTSList)
             {
                 unitRTS.SetMoveTarget(targetPositionList[targetPositionListIndex]);
+                unitRTS.SetSelectedVisible(false);
                 targetPositionListIndex = (targetPositionListIndex + 1) % targetPositionList.Count;
             }
         }

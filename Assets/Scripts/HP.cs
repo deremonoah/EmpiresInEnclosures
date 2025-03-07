@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class HP : MonoBehaviour
 {
-    [SerializeField] private float currentHp, maxHp;
-    private UnitAnimator anim;
+    public float currentHp, maxHp;
+    public UnitAnimator anim;
 
     //handles taking damage and dieing
     void Start()
     {
-        maxHp = GetComponent<UnitStats>().getMaxHp();
         currentHp = maxHp;
         anim = GetComponentInChildren<UnitAnimator>();
     }
@@ -31,10 +30,14 @@ public class HP : MonoBehaviour
         return currentHp;
     }
 
-    public virtual bool Die()
+    public float GetHPPercent()
+    {
+        return currentHp / maxHp;
+    }
+
+    public virtual void Die()
     {
         
-        return true;
     }
 
 }
