@@ -495,7 +495,7 @@ MonoBehaviour:
   unitState: 0
   ProjectilePrefab: {fileID: 0}
   shootPoint: {fileID: 5945825242533879401}
-  xRange: {x: -1, y: 0}
+  xRange: {x: -1, y: 1}
   yRange: {x: -1, y: 1}
 --- !u!50 &8699692239669971468
 Rigidbody2D:
