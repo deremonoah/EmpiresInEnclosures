@@ -153,13 +153,12 @@ public class UnitAI : MonoBehaviour
 
     private IEnumerator MeleeAttackRoutine()
     {
-            
             while (attackTarget != null)
             { 
                 yield return new WaitForSeconds(myStats.getAttackSpeed());
-            if (attackTarget != null)
-            { attackTarget.DamageThis(myStats.getAttack()); }
-            yield return null;
+                if (attackTarget != null)
+                    { attackTarget.DamageThis(myStats.getAttack()); Debug.Log("attack target not null"); }
+                yield return null;
             }
         //change movetarget
         DoneFighting();

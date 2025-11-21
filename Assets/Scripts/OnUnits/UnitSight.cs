@@ -15,12 +15,13 @@ public class UnitSight : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
- 
-        if (ai.gameObject.layer==7 && collision.gameObject.layer ==6)
+        
+        if (ai.gameObject.layer==7 && collision.gameObject.layer ==6)//player saw
         {
             ai.SeeTarget(collision.gameObject.transform.position,collision.GetComponent<HP>());
+            Debug.Log("sighted " + collision.gameObject.name);
         }
-        if (ai.gameObject.layer == 6 && collision.gameObject.layer == 7)
+        if (ai.gameObject.layer == 6 && collision.gameObject.layer == 7)//enemy saw
         {
             ai.SeeTarget(collision.gameObject.transform.position, collision.GetComponent<HP>());
         }
