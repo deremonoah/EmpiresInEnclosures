@@ -26,9 +26,9 @@ public class UnitHp : HP
 
     public override void Die()
     {
-        UnitManager um = FindObjectOfType<UnitManager>();
+        /*UnitManager um = FindObjectOfType<UnitManager>();
         um.PlayerGetsPower(GetComponent<UnitStats>().getFriendlyPayOnDeath(),false);
-        um.EnemyGetsPower(GetComponent<UnitStats>().getEnemyPayOnDeath(), false);
+        um.EnemyGetsPower(GetComponent<UnitStats>().getEnemyPayOnDeath(), false); testing no death rewards*/
         Destroy(this.gameObject);
         
     }

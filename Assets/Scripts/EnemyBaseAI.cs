@@ -30,8 +30,8 @@ public class EnemyBaseAI : MonoBehaviour
         //what do I want the ai to do? summon a guy when they have the PP to do so,
         while (ourBase.GetHP() > 0)
         {
-            if (um.GetEnmPPAmount() >= um.GetEnmPPAmount())
-            { um.spawnEnemyUnit(0); }
+            if (um.GetEnmPPAmount() >= um.GetEnmUnitCost(0))//could make int random, to be fair rn this if not matter, they just spam the button
+            { um.spawnEnemyUnit(0); }//they don't have multiple units or anything they do
             yield return new WaitForSeconds(0.3f);
         }
     }
