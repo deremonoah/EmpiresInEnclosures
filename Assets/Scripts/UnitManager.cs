@@ -12,7 +12,7 @@ public class UnitManager : MonoBehaviour
     public List<GameObject> enemyPrefabs;
     public Transform EnemyBasePos;
     [SerializeField] private float PP, MaxPP=12, PPRegenTimer,PPRegenTimerMax;
-    public Text ppText, ppMaxText;
+    public Text playerPPText, playerPPMaxText;
 
     [Header("Enmey PP stats")]
     
@@ -20,6 +20,7 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private int enmMaxPP;
     [SerializeField] private float enmPPRegenTimer;
     [SerializeField] private float enmPPRegenTimerMax;
+    public Text enmPPText, enmPPMaxText;
 
     [Header("Spawn Varience")]
     public Vector2 xRange;
@@ -27,8 +28,11 @@ public class UnitManager : MonoBehaviour
 
     private void Start()
     {
-        ppText.text = "" + PP;
-        ppMaxText.text = "" + MaxPP;
+        playerPPText.text = "" + PP;
+        playerPPMaxText.text = "" + MaxPP;
+        //setting enemy pp for testing but maybe keep as public info
+        enmPPText.text = "" + enmPP;
+        enmPPMaxText.text = "" + enmMaxPP;
     }
 
     private void Update()
@@ -42,7 +46,8 @@ public class UnitManager : MonoBehaviour
             if (PP+1 <= MaxPP) { PP++; }
             PPRegenTimer = PPRegenTimerMax;
         }
-        ppText.text = "" + PP;
+        playerPPText.text = "" + PP;
+        enmPPText.text = "" + enmPP;
         
         //regen for enemies
         if (enmPPRegenTimer <= 0)
@@ -59,7 +64,7 @@ public class UnitManager : MonoBehaviour
         if (PP >= unitCost)
         {
             PP -= unitCost;
-            ppText.text = "" + PP;
+            playerPPText.text = "" + PP;
             //instantiate prefab at spawnPos.pos
 
             var unit = Instantiate(PlayerUnitPrefabs[lcv], RandomizeSpawn(PlayerBasePos.position), PlayerBasePos.rotation);

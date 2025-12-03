@@ -73,7 +73,7 @@ public class UnitAI : MonoBehaviour
     public void SeeTarget(Vector2 pos, HP enmTarg)
     {
         //Debug.Log(this.name + " seeing attack target is null? "+(attackTarget==null)+" currentRoutine is null? " +(currentRoutine==null));
-        if (attackTarget == null ||  attackTarget.GetType() == typeof(BaseHP))
+        if (attackTarget == null)// was ||  attackTarget.GetType() == typeof(BaseHP). testing if you getting to tank with base can get you back in the game
         {
             //only makes new target if old is null or they are attacking a base
             StopAllCoroutines();
@@ -148,7 +148,7 @@ public class UnitAI : MonoBehaviour
         Debug.Log(moveTarget == null);*/
         moveTarget = urManager.GetmoveTarget(gameObject.layer).position;
         this.setUnitState(UnitState.move);
-        moveTarget = urManager.GetmoveTarget(gameObject.layer).position;
+        //moveTarget = urManager.GetmoveTarget(gameObject.layer).position;
     }
 
     private IEnumerator MeleeAttackRoutine()
