@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHp: 0
-  maxHp: 30
+  maxHp: 40
   anim: {fileID: 0}
   barUI: {fileID: 122008725}
 --- !u!50 &122008723
@@ -2149,11 +2149,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: MaxHp
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: Attack
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: AttackSpeed
@@ -2161,11 +2161,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: SightRange.x
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: SightRange.y
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: EnemyPayOnDeath
@@ -4737,7 +4737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHp: 0
-  maxHp: 30
+  maxHp: 40
   anim: {fileID: 0}
   barUI: {fileID: 1247782800}
 --- !u!50 &1247782798
@@ -7235,11 +7235,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: MaxHp
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: Attack
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: AttackSpeed
@@ -7247,11 +7247,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: SightRange.x
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: SightRange.y
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: EnemyPayOnDeath
