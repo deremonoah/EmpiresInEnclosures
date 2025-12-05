@@ -21,5 +21,9 @@ public class CameraController : MonoBehaviour
         {
             transform.Translate(new Vector3(Input.GetAxisRaw("Horizontal") * currentSpeed * Time.deltaTime,0f,0f));
         }
+        if (Input.GetAxisRaw("Vertical") > 0.5f || Input.GetAxisRaw("Vertical") < -0.5f)
+        {
+            transform.Translate(new Vector3( 0f, Input.GetAxisRaw("Vertical") * currentSpeed * Time.deltaTime, 0f));
+        }
     }
 }
