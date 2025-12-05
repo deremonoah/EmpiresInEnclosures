@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProjectileSpawner : Projectile
 {
     public GameObject SpawnPrefab;
-
+    //this is for a projectile turning into a little guy like the beaver catapult, aww shit just realized beaver balista sounds way cooler
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //I need to declaire if its enemy or friendly projectile layer

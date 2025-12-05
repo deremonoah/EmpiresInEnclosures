@@ -39,14 +39,15 @@ public class Projectile : MonoBehaviour
         //I need to declaire if its enemy or friendly projectile layer
         //if (this.gameObject.layer != collision.gameObject.layer) old way
         //this should now check only the layers that have hp and it should have caught that before tho with the null checck
-        if(collision.gameObject.layer<8 && collision.gameObject.layer > 5)
+        if (collision.gameObject.layer < 8 && collision.gameObject.layer > 5)
         {
             if (collision.gameObject.GetComponent<HP>() != null)
-            { 
+            {
                 //this is for when projectiles collide with each other
-                collision.gameObject.GetComponent<HP>().DamageThis(damage); 
+                collision.gameObject.GetComponent<HP>().DamageThis(damage);
             }
         }
+        Debug.Log("collided with " + collision.gameObject.name);
         Destroy(this.gameObject);
     }
 }

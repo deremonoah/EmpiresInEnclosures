@@ -28,7 +28,16 @@ public class UnitHp : HP
     {
         UnitManager um = FindObjectOfType<UnitManager>();
         um.PlayerGetsPower(GetComponent<UnitStats>().getFriendlyPayOnDeath(),false);
-        um.EnemyGetsPower(GetComponent<UnitStats>().getEnemyPayOnDeath(), false); 
+        um.EnemyGetsPower(GetComponent<UnitStats>().getEnemyPayOnDeath(), false);
+        UltimateManager ulti = FindObjectOfType<UltimateManager>();
+        if(this.gameObject.layer==6)//enemy unit layer
+        {
+            ulti.chargePlayerUlt(false, 5);//this should be from a stat probably
+        }
+        else if(this.gameObject.layer == 6)//enemy unit layer
+        {
+            ulti.chargePlayerUlt(false, 5);//this should be from a stat probably
+        }
         Destroy(this.gameObject);
         
     }
