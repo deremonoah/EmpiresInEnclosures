@@ -30,7 +30,7 @@ public class UnitHp : HP
         um.PlayerGetsPower(GetComponent<UnitStats>().getFriendlyPayOnDeath(),false);
         um.EnemyGetsPower(GetComponent<UnitStats>().getEnemyPayOnDeath(), false);
         UltimateManager ulti = FindObjectOfType<UltimateManager>();
-        if(this.gameObject.layer==6)//enemy unit layer
+        if(this.gameObject.layer==7)//enemy unit layer
         {
             ulti.chargePlayerUlt(false, 2);
         }
