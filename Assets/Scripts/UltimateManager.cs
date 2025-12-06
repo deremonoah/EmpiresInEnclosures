@@ -43,7 +43,7 @@ public class UltimateManager : MonoBehaviour
             ult.GetComponent<ProjectileMulti>().SetTarget(um.EnemyBasePos.position,um.PlayerBasePos.gameObject);
             playerUltProgress = 0;
         }
-        else if(enemyUltProgress>=enemyUltMax)
+        else if(!isPlayer && enemyUltProgress>=enemyUltMax)
         {
             var ult = Instantiate(enemyUltPrefab, um.EnemyBasePos.position, um.EnemyBasePos.rotation);
             ult.GetComponent<ProjectileMulti>().SetTarget(um.PlayerBasePos.position, um.EnemyBasePos.gameObject);

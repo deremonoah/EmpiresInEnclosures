@@ -8146,7 +8146,7 @@ MonoBehaviour:
   - {fileID: 1638327649}
   SustainedSpawnTimerMax: 7
   ourBase: {fileID: 1247782797}
-  FieldOfView: 14
+  FieldOfView: 10
   invaderComp: 
   invaderLastKnownLocation: []
   towerTam: {fileID: 924948149}

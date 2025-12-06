@@ -50,6 +50,11 @@ public class EnemyBaseAI : MonoBehaviour
         }
     }
 
+    private void SpamEm(int one)
+    {
+        um.spawnEnemyUnit(one);
+    }
+
     public IEnumerator BasicStratRoutine()
     {
         while (ourBase.GetHP() > 0)
@@ -69,7 +74,8 @@ public class EnemyBaseAI : MonoBehaviour
             //advance strategy, which should be variable
             //wait until a certain number to make specific build, or spam units if you can afford them, which could be cheapest or favorite
 
-            followBuildStrat();//thinking there might be an issue with spawning them istantly, but will test
+            //followBuildStrat();//thinking there might be an issue with spawning them istantly, but will test
+            SpamEm(1);
 
             yield return new WaitForSeconds(0.3f);
         }
