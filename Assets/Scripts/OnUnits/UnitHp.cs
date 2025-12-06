@@ -32,11 +32,11 @@ public class UnitHp : HP
         UltimateManager ulti = FindObjectOfType<UltimateManager>();
         if(this.gameObject.layer==6)//enemy unit layer
         {
-            ulti.chargePlayerUlt(false, 5);//this should be from a stat probably
+            ulti.chargePlayerUlt(false, 2);
         }
         else if(this.gameObject.layer == 6)//enemy unit layer
         {
-            ulti.chargePlayerUlt(false, 5);//this should be from a stat probably
+            ulti.chargePlayerUlt(false, 2);//5 seemed too high for many units dying, ulti happened very often
         }
         Destroy(this.gameObject);
         

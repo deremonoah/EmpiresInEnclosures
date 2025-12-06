@@ -34,7 +34,7 @@ public class UltimateManager : MonoBehaviour
 
     //we are also going to have it handle the ui, and will want it to fill over time
 
-    public void popUlt(bool isPlayer)
+    public void popPlayerUlt(bool isPlayer)
     {
         //opperating on just needing to spawn on the appropritate base, does need to facce the right direction though, hope the bases do
         if (isPlayer &&playerUltProgress>=playerUltMax)

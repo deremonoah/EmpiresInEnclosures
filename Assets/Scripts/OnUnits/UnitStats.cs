@@ -13,6 +13,7 @@ public class UnitStats : MonoBehaviour
     [SerializeField] private Vector2 SightRange;
     [SerializeField] private float AttackRange;
     [SerializeField] private UnitType ut;
+    [SerializeField] private UnitRole ur;//role is fro enemy ai, while type is for resolving the type of attack I think ut past Noah shit
     [SerializeField] private float FriendlyPayOnDeath;
     [SerializeField] private float EnemyPayOnDeath;
     [SerializeField] private Sprite portrait;
@@ -73,6 +74,10 @@ public class UnitStats : MonoBehaviour
     {
         return portrait;
     }
+
+    public UnitRole getRole()
+    { return ur; }
 }
 public enum UnitType { melee, ranged, seige }
+public enum UnitRole { infantry,range, fast, big} 
 //seige might have custome sight collider set in the editor

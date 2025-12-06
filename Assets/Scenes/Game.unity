@@ -1600,7 +1600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &378742347
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2672,7 +2672,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 841401718}
         m_TargetAssemblyTypeName: UltimateManager, Assembly-CSharp
-        m_MethodName: popUlt
+        m_MethodName: popPlayerUlt
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4215,6 +4215,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882833645}
   m_CullTransparentMesh: 1
+--- !u!4 &924948149 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4156920321826972159, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
+  m_PrefabInstance: {fileID: 546714653}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &943003662
 GameObject:
   m_ObjectHideFlags: 0
@@ -8128,7 +8133,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025082660}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b67a61d2b7265149ba857722c2ae91a, type: 3}
   m_Name: 
@@ -8141,6 +8146,10 @@ MonoBehaviour:
   - {fileID: 1638327649}
   SustainedSpawnTimerMax: 7
   ourBase: {fileID: 1247782797}
+  FieldOfView: 14
+  invaderComp: 
+  invaderLastKnownLocation: []
+  towerTam: {fileID: 924948149}
 --- !u!1 &2095066292
 GameObject:
   m_ObjectHideFlags: 0
