@@ -75,7 +75,7 @@ public class EnemyBaseAI : MonoBehaviour
             //wait until a certain number to make specific build, or spam units if you can afford them, which could be cheapest or favorite
 
             //followBuildStrat();//thinking there might be an issue with spawning them istantly, but will test
-            SpamEm(1);
+            SpamEm(1);//I think in future a smart ai should look at multiple builds or strats and see which will work the best
 
             yield return new WaitForSeconds(0.3f);
         }
