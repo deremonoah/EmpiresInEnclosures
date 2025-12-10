@@ -6,7 +6,7 @@ using UnityEngine;
 public class UnitAI : MonoBehaviour
 {
     private UnitStats myStats;
-    private float moveSpeed;
+    private float currentSpeed;
     public Vector2 moveTarget;
     public HP attackTarget;
     [SerializeField] UnitState unitState;
@@ -29,7 +29,7 @@ public class UnitAI : MonoBehaviour
     void Start()
     {
         myStats = GetComponent<UnitStats>();
-        moveSpeed = myStats.getMoveSpeed();
+        currentSpeed = myStats.getMoveSpeed(Terrain.normal);
         unitState = UnitState.move;
         mysr = GetComponentInChildren<SpriteRenderer>();
         urManager = FindObjectOfType<UnitManager>();
@@ -58,7 +58,7 @@ public class UnitAI : MonoBehaviour
         }*/
         if (unitState == UnitState.move)
         {
-            float step = moveSpeed * Time.deltaTime;
+            float step = currentSpeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, moveTarget, step);
         }
 
@@ -122,6 +122,18 @@ public class UnitAI : MonoBehaviour
         anim.SetAnimationState((int)unitState);
     }
 
+    
+    public void UpdateSpeed(Terrain ter)// maybe sub this to event on UnitTrainFeed, should be terrain oops
+    {
+        currentSpeed = myStats.getMoveSpeed(ter);
+        //also need to increase sight size based on being on mountains
+        if(ter==Terrain.mountain)
+        {
+            //will try this in a bit
+            //I realize that if its only on or off, then players can just step bareley on it and get the same buff
+            //as a player who walked to the center, maybe based off terrains center point? eh work with this for now
+        }
+    }
     
 
     //attack stuff

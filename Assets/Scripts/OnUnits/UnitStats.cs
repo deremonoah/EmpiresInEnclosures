@@ -5,13 +5,21 @@ using UnityEngine;
 //this holds all the stats and is where they would be set on the scriptable object
 public class UnitStats : MonoBehaviour
 {
-    [SerializeField] private int Cost;
-    [SerializeField] private float MoveSpeed;
+    [Header("Stats")]
     [SerializeField] private float MaxHp;
+    [SerializeField] private int Cost;
+
+    [Header("Speed Stats")]// header not added?
+    [SerializeField] private float SwimSpeed;
+    [SerializeField] private float MountainSpeed;
+    [SerializeField] private float MoveSpeed;
+
+    [Header("Attack Stats")]
     [SerializeField] private float Attack;
     [SerializeField] private float AttackSpeed;
     [SerializeField] private Vector2 SightRange;
     [SerializeField] private float AttackRange;
+    [Header("Unit Classifications")]
     [SerializeField] private UnitType ut;
     [SerializeField] private UnitRole ur;//role is fro enemy ai, while type is for resolving the type of attack I think ut past Noah shit
     [SerializeField] private float FriendlyPayOnDeath;
@@ -39,8 +47,12 @@ public class UnitStats : MonoBehaviour
         return MaxHp;
     }
 
-    public float getMoveSpeed()
+    public float getMoveSpeed(Terrain ter)
     {
+        if(ter==Terrain.water)
+        { return SwimSpeed; }
+        else if(ter==Terrain.mountain)
+        { return MountainSpeed; }
         return MoveSpeed;
     }
 
@@ -79,5 +91,5 @@ public class UnitStats : MonoBehaviour
     { return ur; }
 }
 public enum UnitType { melee, ranged, seige }
-public enum UnitRole { infantry,range, fast, big} 
+public enum UnitRole { infantry,range, fast, big}
 //seige might have custome sight collider set in the editor
