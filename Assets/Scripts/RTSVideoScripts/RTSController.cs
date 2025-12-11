@@ -21,21 +21,35 @@ public class RTSController : MonoBehaviour
         {
             //Left Mouse Button Pressed
             selectionAreaTransform.gameObject.SetActive(true);
-            startPosition =UtilsClass.GetMouseWorldPosition();
+            startPosition =Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
 
         if(Input.GetMouseButton(0))
         {
             //left mouse Button Held down
-            Vector3 currentMousePosition = UtilsClass.GetMouseWorldPosition();
+            Vector3 currentMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            /*Debug.Log("mouse pos "+Input.mousePosition);
             Vector3 lowerLeft = new Vector3(
-                Mathf.Min(startPosition.x, currentMousePosition.x),
-                Mathf.Min(startPosition.y, currentMousePosition.y));
-            Vector3 upperRight = new Vector3(
                 Mathf.Max(startPosition.x, currentMousePosition.x),
                 Mathf.Max(startPosition.y, currentMousePosition.y));
+            Vector3 upperRight = new Vector3(
+                Mathf.Min(startPosition.x, currentMousePosition.x),
+                Mathf.Min(startPosition.y, currentMousePosition.y));
+            Debug.Log("lowerLeft " + upperRight);
             selectionAreaTransform.position = lowerLeft;
-            selectionAreaTransform.localScale = upperRight - lowerLeft;
+            selectionAreaTransform.localScale = upperRight - lowerLeft;//back to world to screen point?*/
+
+            //calculate center
+            Vector3 center = (startPosition + currentMousePosition) / 2;
+            center = new Vector3(center.x, center.y, 0f);
+            selectionAreaTransform.position = center;
+
+            Vector3 size = new Vector3(
+                Mathf.Abs(startPosition.x - currentMousePosition.x),
+                Mathf.Abs(startPosition.y - currentMousePosition.y),
+                1f
+                );
+            selectionAreaTransform.localScale = size;
         }
 
         if(Input.GetMouseButtonUp(0))
