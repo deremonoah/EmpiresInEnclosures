@@ -71,11 +71,14 @@ public class EnemyBaseAI : MonoBehaviour
                 //need to defend towers
             }
 
+//high prio    //enemy units (maybe player units too) need to be able to follow a string of points.
+               //so they can follow a path, around terrain
+
             //advance strategy, which should be variable
             //wait until a certain number to make specific build, or spam units if you can afford them, which could be cheapest or favorite
 
-            followBuildStrat();//thinking there might be an issue with spawning them istantly, but will test
-            //SpamEm(1);//I think in future a smart ai should look at multiple builds or strats and see which will work the best
+            //followBuildStrat();//thinking there might be an issue with spawning them istantly, but will test
+            SpamEm(3);//I think in future a smart ai should look at multiple builds or strats and see which will work the best
 
             yield return new WaitForSeconds(0.3f);
         }

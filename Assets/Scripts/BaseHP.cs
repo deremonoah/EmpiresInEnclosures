@@ -10,13 +10,13 @@ public class BaseHP : HP
 
     public override void DamageThis(float damge)
     {
-        Debug.Log(gameObject.name + " in ocerride damageThis");
         base.DamageThis(damge);
         barUI.UpdateHP(base.GetHPPercent());
-        /*if(this.gameObject.layer==6 && this.GetHP()<=0)
+        
+        if(this.GetHP()<=0)
         {
-            //idk what this if was for????
-        }*/
+            Die();
+        }
     }
 
     public override void Die() 

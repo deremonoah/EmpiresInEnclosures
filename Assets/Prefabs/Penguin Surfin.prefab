@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 89999ac0a6bea5c409decb1dc43b186f, type: 3}
     - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
       propertyPath: MoveSpeed
-      value: 2.5
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
       propertyPath: AttackRange
@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
       propertyPath: AttackSpeed
-      value: 2
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
       propertyPath: MountainSpeed

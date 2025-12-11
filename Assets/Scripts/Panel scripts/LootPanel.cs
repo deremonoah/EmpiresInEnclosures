@@ -8,6 +8,8 @@ public class LootPanel : MonoBehaviour
     private void OnEnable()
     {
         //sub to flow manager openLoot +=OpenLootPan;
+        if(FlowManager.instance ==null)
+        { Debug.Log("instance null"); }
         FlowManager.instance.lootPanelSendOpen += OpenLootPan;
         animLoot = GetComponent<Animator>();
     }
@@ -19,11 +21,16 @@ public class LootPanel : MonoBehaviour
         animLoot.SetBool("Open", true);
     }
 
-    private void CloseLootPan()//on select button
+    public void CloseLootPan()//on select button
     {
         animLoot.SetBool("Open", false);
     }
 
+
+    public bool IsPanOpen()
+    {
+        return animLoot.GetBool("Open");
+    }
     //how to do section again? or should these be animLootPanel & the functions for selecting
 
     //selected unit gets added

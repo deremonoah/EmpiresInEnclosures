@@ -17,13 +17,19 @@ public class MapPanel : MonoBehaviour
         animMap.SetBool("OpenMap", true);
     }
 
-    private void closemap()
+    public void closemap()
     {
         animMap.SetBool("OpenMap", false);
+    }
+
+    public bool IsPanOpen()
+    {
+        return animMap.GetBool("Open");
     }
 
     public void pickMapNode()
     {
         //would it also intake a number? probably or the nodes store inffo about who you would fight
+        //can you get data stored on a button while executing a function from the refrence script on the button
     }
 }

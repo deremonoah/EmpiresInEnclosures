@@ -16,7 +16,7 @@ public class HP : MonoBehaviour
 
     public virtual void DamageThis(float damge)
     {
-        Debug.Log("in damage this");
+        //Debug.Log("in damage this");
         currentHp -= damge;
         if (anim != null) { anim.TookDamage(); }
         if (currentHp <= 0)

@@ -19,7 +19,7 @@ public class UnitSight : MonoBehaviour
         if (ai.gameObject.layer==7 && collision.gameObject.layer ==6)//player saw
         {
             ai.SeeTarget(collision.gameObject.transform.position,collision.GetComponent<HP>());
-            Debug.Log("sighted " + collision.gameObject.name);
+            //Debug.Log("sighted " + collision.gameObject.name);
         }
         if (ai.gameObject.layer == 6 && collision.gameObject.layer == 7)//enemy saw
         {
