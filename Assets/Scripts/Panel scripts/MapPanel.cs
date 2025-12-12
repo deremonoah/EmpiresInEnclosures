@@ -71,7 +71,7 @@ public class MapPanel : MonoBehaviour
             );
         //from local point we need to check 2 offset values on the x, just realized we don't need to change y
         //should be half the size on the x, so I can change the size of the 
-        float offset =ScoutPanel.rect.width / 2;
+        float offset =ScoutPanel.rect.width / 1.4f;
         //now need the 2 options one adding & one subtracting offset
 
         Vector2 canvasSize = canvasRect.rect.size;
@@ -79,12 +79,13 @@ public class MapPanel : MonoBehaviour
         localPoint = new Vector2(localPoint.x, ScoutStartPos.y);
 
         Vector2 RightPoint = new Vector2(localPoint.x+offset, localPoint.y);
-        Vector3 LeftPoint = new Vector2(localPoint.x + offset, localPoint.y);
+        Vector3 LeftPoint = new Vector2(localPoint.x - offset, localPoint.y);
 
         Debug.Log("canvas width/2 = " + (canvasWidth/2));
-        Debug.Log("right point+offset = " + (RightPoint.x + offset));
+        Debug.Log("right point = " + (RightPoint.x + offset));
         if(RightPoint.x>(canvasWidth/2))
         {
+            Debug.Log("right point> cavas width/2? "+(RightPoint.x > (canvasWidth / 2)));
             localPoint = LeftPoint;
         }
         else { localPoint = RightPoint; }
