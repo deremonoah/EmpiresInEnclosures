@@ -56,7 +56,6 @@ public class FlowManager : MonoBehaviour
         //start with moving location
         //waiting for player to select a battlefield
         //once picked a battleFieldLoader needs to be subed aswell, so they can prep the arena
-        Debug.Log("in game flow routine");
         curState = gameState.inBattle;
         while (battleLoser.Length<1)//while string is empty
         {
@@ -84,7 +83,8 @@ public class FlowManager : MonoBehaviour
         {
             yield return null;
         }
-        MapPanelSendOpen.Invoke();
+
+        mapPan.openMap();
 
         while(mapPan.IsPanOpen())
         {
@@ -96,7 +96,6 @@ public class FlowManager : MonoBehaviour
 
         //load next battle
 
-        Debug.Log("End of flow reoutine");
         //StartCoroutine(GameFlowRoutine());
     }
     //what happens if player loses? is there a hp? do they lose if they lose a single battle, or do the fights get harder?
@@ -107,16 +106,6 @@ public class FlowManager : MonoBehaviour
         //will become more complex later tracking losses, maybe only losing
         //against a boss counts
         lossPan.SetActive(true);
-    }
-
-    public void ClosedMyMapPanel()
-    {
-
-    }
-
-    public void ClosedMyLootPanel()
-    {
-
     }
 
     private void playerWon()

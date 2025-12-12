@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class NodeData : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // this data is stored on the nodes, for the encounter
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //the level either as a scene so it can be enabled asycronously
 }
