@@ -16,6 +16,7 @@ public class UnitStats : MonoBehaviour
 
     [Header("Attack Stats")]
     [SerializeField] private float Attack;
+    [SerializeField] private float AttackToBase;
     [SerializeField] private float AttackSpeed;
     [SerializeField] private Vector2 SightRange;
     [SerializeField] private float AttackRange;
@@ -32,9 +33,12 @@ public class UnitStats : MonoBehaviour
         return Cost;
     }
 
-    public float getAttack()
+    public float getAttack(bool isBase)
     {
-        return Attack;
+        if(isBase)
+        { return AttackToBase; }
+        else { return Attack; }
+        
     }
 
     public float getAttackSpeed()

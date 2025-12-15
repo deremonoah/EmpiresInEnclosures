@@ -169,7 +169,13 @@ public class UnitAI : MonoBehaviour
             { 
                 yield return new WaitForSeconds(myStats.getAttackSpeed());
                 if (attackTarget != null)
-                    { attackTarget.DamageThis(myStats.getAttack()); /*Debug.Log("attack target not null");*/ }
+                {
+                var isBase=attackTarget.gameObject.GetComponent<BaseHP>();
+                if (isBase != null)
+                { attackTarget.DamageThis(myStats.getAttack(true)); /*Debug.Log("attack target not null");*/ }
+                else
+                { attackTarget.DamageThis(myStats.getAttack(false)); }
+                }
                 yield return null;
             }
         //change movetarget
