@@ -17,19 +17,8 @@ public class UnitAnimator : MonoBehaviour
         var sr = GetComponent<SpriteRenderer>();
         spritesToChange = new List<SpriteRenderer>();
 
-        //if player face the right way
-        if (ai.gameObject.layer==7)
-        {
-            sr.flipX = true;
-            for(int lcv =0; lcv<this.transform.childCount;lcv++)
-            {
-                SpriteRenderer childSR = transform.GetChild(lcv).GetComponent<SpriteRenderer>();
-                if (childSR !=null)
-                {
-                    childSR.flipX = true;
-                }
-            }
-        }
+        //if player face the right way, it is now handled in ai and just flip the transform 180 rotation
+
         //for color set up
         for (int lcv = 0; lcv < this.transform.childCount; lcv++)
         {

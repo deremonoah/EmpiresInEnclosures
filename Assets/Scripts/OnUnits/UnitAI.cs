@@ -33,6 +33,10 @@ public class UnitAI : MonoBehaviour
         unitState = UnitState.move;
         mysr = GetComponentInChildren<SpriteRenderer>();
         urManager = FindObjectOfType<UnitManager>();
+        if (this.gameObject.layer == 7)//so on the player layer, flip the transform 180 so it faces the right way to do animations
+        {
+            this.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        }
     }
 
     private void Awake()
@@ -88,14 +92,13 @@ public class UnitAI : MonoBehaviour
             {
                 RangedTarget = pos;
                 attackTarget = enmTarg;
-                setUnitState(UnitState.attack);
+                setUnitState(UnitState.windUp);
                 currentRoutine = StartCoroutine(RangedAttackRoutine());
             }
             //are they in attack range
-            else if (atkRng >= curruntPos.x - pos.x && atkRng >= curruntPos.y - pos.y)
+            else if (atkRng >= Mathf.Abs(curruntPos.x - pos.x) && atkRng >= Mathf.Abs(curruntPos.y - pos.y))
             {
                 attackTarget = enmTarg;
-                setUnitState(UnitState.attack);
                 currentRoutine = StartCoroutine(MeleeAttackRoutine());
             }
         }
@@ -125,7 +128,7 @@ public class UnitAI : MonoBehaviour
     
     public void UpdateSpeed(Terrain ter)// maybe sub this to event on UnitTrainFeed, should be terrain oops
     {
-        currentSpeed = myStats.getMoveSpeed(ter);
+        currentSpeed = myStats.getMoveSpeed(ter);//would be cool if animation ran slowerWhile on mountain or faster while on water
         //also need to increase sight size based on being on mountains
         if(ter==Terrain.mountain)
         {
@@ -165,17 +168,26 @@ public class UnitAI : MonoBehaviour
 
     private IEnumerator MeleeAttackRoutine()
     {
-            while (attackTarget != null)
-            { 
-                yield return new WaitForSeconds(myStats.getAttackSpeed());
-                if (attackTarget != null)
-                {
+        this.setUnitState(UnitState.windUp);
+        Debug.Log("in meleeRoutine cause Im retarted");
+        yield return new WaitForSeconds(myStats.getAttackSpeed());
+              if (attackTarget != null)
+              {
+                    this.setUnitState(UnitState.strike);
+                    yield return new WaitForSeconds(0.2f);//for testing will need an aniation
                     attackTarget.ThisAttackedYou(myStats); /*Debug.Log("attack target not null");*/
-                }
-            yield return null;
-        }
+                    yield return new WaitForSeconds(0.5f);//could be recovery time
+              }
+        yield return null;
         //change movetarget
-        DoneFighting();
+        if(attackTarget!=null)
+        {
+            StartCoroutine(MeleeAttackRoutine());
+        }
+        else
+        {
+            DoneFighting();
+        }
     }
 
     private IEnumerator RangedAttackRoutine()
@@ -202,4 +214,4 @@ public class UnitAI : MonoBehaviour
         shot.GetComponent<Projectile>().SetTarget(RangedTarget, this.gameObject);
     }
 }
-public enum UnitState { idle,move,attack}
+public enum UnitState { idle,move,windUp,strike}
