@@ -14,9 +14,9 @@ public class UnitHp : HP
         myhp = GetComponent<HPBarManager>();
     }
 
-    public override void DamageThis(float damge)
+    public override void ThisAttackedYou(UnitStats us)
     {
-        base.DamageThis(damge);
+        base.DamageTaken(us.getAttack());
         myhp.UpdateHP(base.GetHPPercent());
         /*if(this.gameObject.layer==6 && this.GetHP()<=0)
         {

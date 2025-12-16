@@ -12,7 +12,7 @@ public class ProjectileSpawner : Projectile
         Debug.Log("hit something");
         if (this.gameObject.layer != collision.gameObject.layer)
         {
-            collision.gameObject.GetComponent<HP>().DamageThis(damage);
+            collision.gameObject.GetComponent<HP>().DamageTaken(damage);//this will have its own calculation for damage not from unit stats like other projectiles use
             
         }
         var dude =Instantiate(SpawnPrefab, this.transform.position, this.transform.rotation);

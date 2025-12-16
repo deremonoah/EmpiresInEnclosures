@@ -478,6 +478,7 @@ MonoBehaviour:
   MountainSpeed: 0
   MoveSpeed: 0
   Attack: 0
+  AttackToBase: 0
   AttackSpeed: 0
   SightRange: {x: 6, y: 6}
   AttackRange: 1
@@ -701,7 +702,7 @@ GameObject:
   - component: {fileID: 1286000417046993202}
   - component: {fileID: 8033771782229424868}
   - component: {fileID: 7365943871803973812}
-  m_Layer: 3
+  m_Layer: 10
   m_Name: feet for terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}

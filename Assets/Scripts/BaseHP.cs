@@ -8,9 +8,9 @@ public class BaseHP : HP
     public HPBarManager barUI;
     public event Action<string> BattleEndedLoserCalls;
 
-    public override void DamageThis(float damge)
+    public override void ThisAttackedYou(UnitStats us)
     {
-        base.DamageThis(damge);
+        base.DamageTaken(us.getBaseAttack());
         barUI.UpdateHP(base.GetHPPercent());
         
         if(this.GetHP()<=0)

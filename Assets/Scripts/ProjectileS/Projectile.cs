@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     private Vector2 Target;
     public float moveSpeed;
     public float lifeSpan;
-    
+    private UnitStats myShootersStats;
 
     void Update()
     {
@@ -31,7 +31,7 @@ public class Projectile : MonoBehaviour
         //enemy shot on 6 so projectile on 8
         if (shooter.layer == 6)
         { this.gameObject.layer = 8; }
-
+        myShootersStats = shooter.GetComponent<UnitStats>();//anything that shoots should have stats
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -44,7 +44,7 @@ public class Projectile : MonoBehaviour
             if (collision.gameObject.GetComponent<HP>() != null)
             {
                 //this is for when projectiles collide with each other
-                collision.gameObject.GetComponent<HP>().DamageThis(damage);
+                collision.gameObject.GetComponent<HP>().ThisAttackedYou(myShootersStats);
             }
         }
         Debug.Log("collided with " + collision.gameObject.name);

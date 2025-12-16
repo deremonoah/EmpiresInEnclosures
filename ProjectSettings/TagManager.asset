@@ -8,14 +8,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Terrain Specific
+  - Terrain
   - Water
   - UI
   - EnemyUnit
   - PlayerUnit
   - EnemyProjectile
   - PlayerProjectile
-  - 
+  - Terrain Feet
   - 
   - 
   - 

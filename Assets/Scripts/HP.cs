@@ -14,16 +14,21 @@ public class HP : MonoBehaviour
         anim = GetComponentInChildren<UnitAnimator>();
     }
 
-    public virtual void DamageThis(float damge)
+    public virtual void DamageTaken(float damage)
     {
         //Debug.Log("in damage this");
-        currentHp -= damge;
+        currentHp -= damage;
         if (anim != null) { anim.TookDamage(); }
         if (currentHp <= 0)
         {
             //maybe other stuff here at some point?
             Die();
         }
+    }
+
+    public virtual void ThisAttackedYou(UnitStats us)
+    {
+
     }
 
     public float GetHP()

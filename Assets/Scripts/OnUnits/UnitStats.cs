@@ -33,12 +33,14 @@ public class UnitStats : MonoBehaviour
         return Cost;
     }
 
-    public float getAttack(bool isBase)
+    public float getAttack()
     {
-        if(isBase)
-        { return AttackToBase; }
-        else { return Attack; }
-        
+        return Attack; 
+    }
+
+    public float getBaseAttack()
+    {
+        return AttackToBase;
     }
 
     public float getAttackSpeed()
