@@ -174,7 +174,7 @@ public class UnitAI : MonoBehaviour
               if (attackTarget != null)
               {
                     this.setUnitState(UnitState.strike);
-                    yield return new WaitForSeconds(0.2f);//for testing will need an aniation
+                    yield return new WaitForSeconds(myStats.getAttackWaitTime());//for testing will need an aniation
                     attackTarget.ThisAttackedYou(myStats); /*Debug.Log("attack target not null");*/
                     yield return new WaitForSeconds(0.5f);//could be recovery time
               }

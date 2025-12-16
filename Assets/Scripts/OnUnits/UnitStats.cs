@@ -18,6 +18,7 @@ public class UnitStats : MonoBehaviour
     [SerializeField] private float Attack;
     [SerializeField] private float AttackToBase;
     [SerializeField] private float AttackSpeed;
+    [SerializeField] private float AnimAttackPreHit;
     [SerializeField] private Vector2 SightRange;
     [SerializeField] private float AttackRange;
     [Header("Unit Classifications")]
@@ -95,6 +96,9 @@ public class UnitStats : MonoBehaviour
 
     public UnitRole getRole()
     { return ur; }
+
+    public float getAttackWaitTime()
+    { return AnimAttackPreHit; }
 }
 public enum UnitType { melee, ranged, seige }
 public enum UnitRole { infantry,range, fast, big}
