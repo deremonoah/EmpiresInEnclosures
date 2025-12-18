@@ -9,18 +9,22 @@ public class UnitManager : MonoBehaviour
 {
     public Transform PlayerBasePos;
     public List<GameObject> PlayerUnitPrefabs;
+    private List<GameObject> PlayerUpgradeHistory;
     public List<GameObject> enemyPrefabs;
     public Transform EnemyBasePos;
     [SerializeField] private float PP, MaxPP=12, PPRegenTimer,PPRegenTimerMax;
     public Text playerPPText, playerPPMaxText;
 
     [Header("Enmey PP stats")]
-    
     [SerializeField] private int enmPP;
     [SerializeField] private int enmMaxPP;
     [SerializeField] private float enmPPRegenTimer;
     [SerializeField] private float enmPPRegenTimerMax;
     public Text enmPPText, enmPPMaxText;
+
+    [Header("Factions Refrence")]
+    [SerializeField] Faction playerFaction;
+    [SerializeField] Faction EnemyFaction;//this needs to get updated by the map
 
     [Header("Spawn Varience")]
     public Vector2 xRange;
@@ -33,6 +37,10 @@ public class UnitManager : MonoBehaviour
         //setting enemy pp for testing but maybe keep as public info
         enmPPText.text = "" + enmPP;
         enmPPMaxText.text = "" + enmMaxPP;
+        PlayerUpgradeHistory = new List<GameObject>();
+        foreach(GameObject go in PlayerUnitPrefabs)
+        { PlayerUpgradeHistory.Add(go); }
+        
     }
 
     private void Update()
@@ -85,25 +93,34 @@ public class UnitManager : MonoBehaviour
         return randSpawn;
     }
 
-    /*public void spawnEnemyUnit(int lcv,Transform pos, bool stay)
+    public void PlayerGotNewUnit(GameObject newU)
     {
-        //instantiate prefab at spawnPos.pos
-        var unit = Instantiate(enemyPrefabs[lcv], pos.position, EnemyBasePos.rotation);
-        enmPP-=unit.GetComponent<UnitStats>().getCost();
-        if (!stay)
-        {
-            unit.GetComponent<UnitAI>().SetMoveTarget(PlayerBasePos.position);
-            unit.GetComponent<UnitAI>().setUnitState(UnitState.move);
-        }
-        else { unit.GetComponent<UnitAI>().SetMoveTarget(pos.position); }
-        //setting to enemy unit layer so they don't kill each other
-        unit.gameObject.layer = 6;
-    }*/
+        PlayerUnitPrefabs.Add(newU);//question is if the count is above 5 then we need to replace 1, how we do that? another panel?
+        PlayerUpgradeHistory.Add(newU);
+        FindObjectOfType<UnitButtonManager>().UnitListChanged();
+    }
+
+    public void PlayerReplaceOldUnit(GameObject newU, int replaced)
+    {
+        PlayerUnitPrefabs[replaced] = newU;
+        PlayerUpgradeHistory.Add(newU);
+        FindObjectOfType<UnitButtonManager>().UnitListChanged();//I am thinking we can see the old units so, pop up versions over the buttons hover shows X
+    }
+
+    public List<GameObject> GetUpgradeHistory()
+    {
+        return PlayerUpgradeHistory;
+    }
+
+    public List<GameObject> GetCurrentUnits()
+    {
+        return PlayerUnitPrefabs;
+    }
 
     public Transform GetmoveTarget(int layer)
     {
         if (layer == 6)
-        {   return PlayerBasePos; }
+        {   return PlayerBasePos; }//I realize if I want players to use the commanding of unit I prob shouldn't auto command them, so they have to do it to learn
         return EnemyBasePos;
     }
 
@@ -137,7 +154,7 @@ public class UnitManager : MonoBehaviour
     }
 
     //code for enemy ai summoner
-
+    #region Enemy ai calls
     public void spawnEnemyUnit(int lcv)
     {
         //instantiate prefab at spawnPos.pos
@@ -168,4 +185,16 @@ public class UnitManager : MonoBehaviour
     {
         return enemyPrefabs[slot].GetComponent<UnitStats>().getCost();
     }
+    #endregion
+
+    #region Faction Functions
+    public Faction GetPlayerFaction()
+    { return playerFaction; }
+
+    public Faction GetEnemyFaction()
+    { return EnemyFaction; }
+
+    public void SetEnemyFaction(Faction fac)//called by the map node load type dealy
+    { EnemyFaction = fac; }
+    #endregion
 }

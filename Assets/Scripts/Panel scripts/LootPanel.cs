@@ -1,10 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LootPanel : MonoBehaviour
 {
     private Animator animLoot;
+    [SerializeField] private List<FactionLoot> LootLists;
+    [Header("panel refrences")]
+    [SerializeField] private GameObject ReplaceButtons;
+    [SerializeField] List<Image> lootImages;
+    private UnitManager um;
+    private bool areReplacingUnit;
+    [SerializeField]private List<GameObject> PickOptions;
+    private int playerPickedThis;
     private void OnEnable()
     {
         //sub to flow manager openLoot +=OpenLootPan;
@@ -12,6 +21,8 @@ public class LootPanel : MonoBehaviour
         { Debug.Log("instance null"); }
         FlowManager.instance.lootPanelSendOpen += OpenLootPan;
         animLoot = GetComponent<Animator>();
+        Resources.Load<FactionLoot>("FactionLootObj");// getting FactionLoot as a list refrence, loading multiple times is less effecient
+        um = FindObjectOfType<UnitManager>();
     }
 
     //probably should still have disable? but the plan is to leave everything loaded
@@ -19,6 +30,8 @@ public class LootPanel : MonoBehaviour
     private void OpenLootPan()
     {
         animLoot.SetBool("Open", true);
+
+        GeneratePicks(um.GetPlayerFaction(),um.GetEnemyFaction());
     }
 
     public void CloseLootPan()//on select button
@@ -36,10 +49,87 @@ public class LootPanel : MonoBehaviour
     //selected unit gets added
     //generate picks & load them into buttons (image, info' prob from scriptable obj)
 
-    public void PickButton(int num)
+    private void GeneratePicks(Faction player, Faction enemy)//needs to take in data or grab it from somewhere which 2 groups are fighting, I am thinking an Enum on their bases
     {
-        //num is for the pick
-        CloseLootPan();
+        //look in the loot list for the list with the right 2 factions
+        FactionLoot loot=null;
+        //find matching loot table
+        for(int lcv=0;lcv<LootLists.Count;lcv++)
+        {
+            if(LootLists[lcv].DoesMatchFactions(player,enemy))
+            {
+                loot = LootLists[lcv];
+            }
+        }
+
+        if(loot==null)
+        {
+            Debug.LogError("loot is Null");
+        }
+        //gotta make it a new one so it doesn't just point?
+        List<GameObject> Potential = new List<GameObject>();
+        List<GameObject> mustAdd = loot.GetLootOptions();
+        foreach(GameObject go in mustAdd)
+        {
+            Potential.Add(go);
+        }
+
+        //now we have the list
+        //fill the 3 buttons with 3 options, but can't repeat things the player already has (maybe want or had incase of getting rid of it)
+        //unit manager needs a list of unit History, which would get compared against
+        List<GameObject> prevUps =um.GetUpgradeHistory();
+
+        //could remove dups from the loot list first? then pull random number
+        for(int lcv=0;lcv<prevUps.Count;lcv++)
+        {
+            for(int lcv2=0;lcv2< Potential.Count;lcv2++)
+            {
+                if(Potential[lcv2]==prevUps[lcv])
+                {
+                    Potential.RemoveAt(lcv2);
+                    lcv2=0;
+                    //do we put a break here? I think it should work
+                }
+            }
+        }
+        //if this works we get 3 randoms, and fill the images,
+        PickOptions.Clear();
+
+        for (int lcv = 0; lcv < 3; lcv++)
+        {
+            int rand = Random.Range(0, Potential.Count);
+            PickOptions.Add(Potential[rand]);
+            //set image
+            lootImages[lcv].sprite = Potential[rand].GetComponent<UnitStats>().getIcon();//set icon sof specific one
+            Potential.RemoveAt(rand);//remove it so no repeats
+        }
+        
+        //I do need a refrence to the images to set them, realizing they need to grab the stat refrence
     }
 
+    public void PickButton(int num)
+    {
+        if(um.GetCurrentUnits().Count+1>5 && !areReplacingUnit)//in future 5 should be a variable, so it can change
+        {
+            areReplacingUnit = true;
+            playerPickedThis = num;
+            ReplaceButtons.SetActive(true);//currently the replace buttons will only come up if we have 5 or more, doesnt need to enable each button
+        }
+        else//had replaceThis function in here as a extra if trying to be too clever
+        {
+            //not replacing and under unit button count
+            um.PlayerGotNewUnit(PickOptions[num]);
+        }
+        if (!areReplacingUnit)
+        { CloseLootPan(); }
+    }
+
+    public void ReplaceThis(int num)
+    {
+        um.PlayerReplaceOldUnit(PickOptions[playerPickedThis], num);
+        CloseLootPan();
+        areReplacingUnit = false;
+        ReplaceButtons.SetActive(false);
+    }
 }
+public enum Faction { Penguins, Giraffes, PolarBears, Beavers, Monkeys}

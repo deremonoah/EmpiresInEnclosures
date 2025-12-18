@@ -117,7 +117,6 @@ public class FlowManager : MonoBehaviour
     public void didPlayerLoseBattle(string whoLost)
     {
         battleLoser = whoLost;
-        Debug.Log("battle loser was: " + battleLoser);
     }
 }
 public enum gameState { movingLocation,inBattle,looting}

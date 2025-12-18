@@ -169,7 +169,6 @@ public class UnitAI : MonoBehaviour
     private IEnumerator MeleeAttackRoutine()
     {
         this.setUnitState(UnitState.windUp);
-        Debug.Log("in meleeRoutine cause Im retarted");
         yield return new WaitForSeconds(myStats.getAttackSpeed());
               if (attackTarget != null)
               {

@@ -36,7 +36,7 @@ public class MapPanel : MonoBehaviour
 
     public bool IsPanOpen()
     {
-        return animMap.GetBool("Open");
+        return animMap.GetBool("OpenMap");
     }
 
     public void pickMapNode()
@@ -81,8 +81,6 @@ public class MapPanel : MonoBehaviour
         Vector2 RightPoint = new Vector2(localPoint.x+offset, localPoint.y);
         Vector3 LeftPoint = new Vector2(localPoint.x - offset, localPoint.y);
 
-        Debug.Log("canvas width/2 = " + (canvasWidth/2));
-        Debug.Log("right point = " + (RightPoint.x + offset));
         if(RightPoint.x>(canvasWidth/2))
         {
             Debug.Log("right point> cavas width/2? "+(RightPoint.x > (canvasWidth / 2)));
