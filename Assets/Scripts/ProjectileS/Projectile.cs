@@ -44,7 +44,9 @@ public class Projectile : MonoBehaviour
             if (collision.gameObject.GetComponent<HP>() != null)
             {
                 //this is for when projectiles collide with each other
-                collision.gameObject.GetComponent<HP>().ThisAttackedYou(myShootersStats);
+                if(myShootersStats!=null)
+                { collision.gameObject.GetComponent<HP>().ThisAttackedYou(myShootersStats); }
+                else { collision.gameObject.GetComponent<HP>().DamageTaken(damage); }
             }
         }
         Debug.Log("collided with " + collision.gameObject.name);

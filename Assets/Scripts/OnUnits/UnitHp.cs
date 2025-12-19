@@ -16,7 +16,7 @@ public class UnitHp : HP
 
     public override void ThisAttackedYou(UnitStats us)
     {
-        base.DamageTaken(us.getAttack());
+        base.DamageTaken(us.getAttack());//the ultimate can't deal damage with this current code
         myhp.UpdateHP(base.GetHPPercent());
         /*if(this.gameObject.layer==6 && this.GetHP()<=0)
         {

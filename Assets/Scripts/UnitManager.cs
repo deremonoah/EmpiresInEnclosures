@@ -7,15 +7,16 @@ using UnityEngine.UI;
 //and will handle the enemy spawns
 public class UnitManager : MonoBehaviour
 {
+    [Header("player stats")]
     public Transform PlayerBasePos;
     public List<GameObject> PlayerUnitPrefabs;
     private List<GameObject> PlayerUpgradeHistory;
-    public List<GameObject> enemyPrefabs;
-    public Transform EnemyBasePos;
     [SerializeField] private float PP, MaxPP=12, PPRegenTimer,PPRegenTimerMax;
     public Text playerPPText, playerPPMaxText;
 
-    [Header("Enmey PP stats")]
+    [Header("Enmey stuff")]
+    public List<GameObject> enemyPrefabs;
+    public Transform EnemyBasePos;
     [SerializeField] private int enmPP;
     [SerializeField] private int enmMaxPP;
     [SerializeField] private float enmPPRegenTimer;

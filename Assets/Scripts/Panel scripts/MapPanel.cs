@@ -6,13 +6,14 @@ using UnityEngine.UI;
 public class MapPanel : MonoBehaviour
 {
     private Animator animMap;
-    private string highlightedEncounter;
+    private NodeData highlightedEncounter;
 
     [SerializeField] RectTransform ScoutPanel;
     private Vector2 ScoutStartPos;
     private float scoutTimer;
     [SerializeField] float scoutAnimDuration;
     [SerializeField] private RectTransform canvasRect;
+    private MapLoader ml;
 
     private void OnEnable()
     {
@@ -21,7 +22,7 @@ public class MapPanel : MonoBehaviour
         //FlowManager.instance.MapPanelSendOpen += openMap; for some reason this is null, but not for LootPanel
         scoutTimer = 0;
         ScoutStartPos = ScoutPanel.anchoredPosition;
-        
+        ml = FindObjectOfType<MapLoader>();
     }
 
     public void openMap()
@@ -41,13 +42,17 @@ public class MapPanel : MonoBehaviour
 
     public void pickMapNode()
     {
-        //could take in a string, and load the data from resoruce folder
-        //displays an encounter info panel, 
+        if(highlightedEncounter.getNodeType()==NodeType.enemy)
+        {
+            ml.loadLevel(highlightedEncounter.getFactionOnNode());//this tells the map loader to load the correct map
+            //tell unit manager what the new faction is & give their unit list
+            //flow manager will start when map is closed
+        }
     }
 
-    public void lookAtMapNode(string encounterToLoad)
+    public void lookAtMapNode(NodeData node)
     {
-        highlightedEncounter = encounterToLoad;
+        highlightedEncounter = node; //technically we also should handle it being a shop, but one thing at a time
         Vector2 mousePos = Input.mousePosition;
         Vector2 posToMove = CalculatePosition(mousePos);
         StartCoroutine(MoveScoutPanelOutRoutine(posToMove));

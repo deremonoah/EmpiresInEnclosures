@@ -12,6 +12,7 @@ public class FlowManager : MonoBehaviour
     public gameState curState;
     public event Action lootPanelSendOpen;
     public event Action MapPanelSendOpen;
+    public event Action BattleStart;
 
     [Header("Panels")]
     [SerializeField] GameObject winPan;
@@ -52,16 +53,22 @@ public class FlowManager : MonoBehaviour
 
     public IEnumerator GameFlowRoutine()
     {
-        curState = gameState.movingLocation;
-        //start with moving location
-        //waiting for player to select a battlefield
-        //once picked a battleFieldLoader needs to be subed aswell, so they can prep the arena
+        mapPan.openMap();
+        curState = gameState.movingLocation;//need to tell ai that we are maping or it checks
+
+        while (mapPan.IsPanOpen())
+        {
+            yield return null;
+        }
+        //map panel handles input of node to load
+        //map loader loads map
         curState = gameState.inBattle;
+        BattleStart.Invoke();//this event should tell ai battle has started
         while (battleLoser.Length<1)//while string is empty
         {
             yield return null;
         }
-        Debug.Log("got past battle loser while loop");
+
         if (battleLoser == "Enemy Base")
         {
             curState = gameState.looting;
@@ -84,19 +91,13 @@ public class FlowManager : MonoBehaviour
             yield return null;
         }
 
-        mapPan.openMap();
-
-        while(mapPan.IsPanOpen())
-        {
-            yield return null;
-        }
 
         //maybe display pre battle info,
         //then would be another waiting for them to hit the fight? is this too many menus?
 
         //load next battle
 
-        //StartCoroutine(GameFlowRoutine());
+        StartCoroutine(GameFlowRoutine());
     }
     //what happens if player loses? is there a hp? do they lose if they lose a single battle, or do the fights get harder?
     //like all enemies get an upgrade, and the boss starts moving to you

@@ -16,12 +16,20 @@ public class EnemyBaseAI : MonoBehaviour
     [Header("Tower")]
     [SerializeField] Transform towerTam;
 
+    private void OnEnable()
+    {
+        FlowManager.instance.BattleStart += beginBattle;
+    }
 
     void Start()
     {
         um = FindObjectOfType<UnitManager>();
         ulti = FindObjectOfType<UltimateManager>();
         //in future we will add the based on what scene or some factor it might pick a more strategic enemy
+    }
+
+    private void beginBattle()
+    {
         StartCoroutine(BasicStratRoutine());
     }
 
