@@ -11,13 +11,14 @@ public class UnitManager : MonoBehaviour
     public Transform PlayerBasePos;
     public List<GameObject> PlayerUnitPrefabs;
     private List<GameObject> PlayerUpgradeHistory;
-    [SerializeField] private float PP, MaxPP=12, PPRegenTimer,PPRegenTimerMax;
+    [SerializeField] private float playerPP,playerStartingPP, playerMaxPP, PPRegenTimer,PPRegenTimerMax;
     public Text playerPPText, playerPPMaxText;
 
     [Header("Enmey stuff")]
     public List<GameObject> enemyPrefabs;
     public Transform EnemyBasePos;
     [SerializeField] private int enmPP;
+    [SerializeField] int enmStartingPP;
     [SerializeField] private int enmMaxPP;
     [SerializeField] private float enmPPRegenTimer;
     [SerializeField] private float enmPPRegenTimerMax;
@@ -33,47 +34,64 @@ public class UnitManager : MonoBehaviour
 
     private void Start()
     {
-        playerPPText.text = "" + PP;
-        playerPPMaxText.text = "" + MaxPP;
+        updatePPText();
+        playerPPMaxText.text = "" + playerMaxPP;
         //setting enemy pp for testing but maybe keep as public info
-        enmPPText.text = "" + enmPP;
-        enmPPMaxText.text = "" + enmMaxPP;
+        enmPPMaxText.text = "" + enmMaxPP;//might want a set max in future for gaining max pp
         PlayerUpgradeHistory = new List<GameObject>();
         foreach(GameObject go in PlayerUnitPrefabs)
         { PlayerUpgradeHistory.Add(go); }
-        
+    }
+
+    private void OnEnable()
+    {
+        FlowManager.instance.BattleStart+=StartOfBattleSetPP;
+    }
+
+    private void StartOfBattleSetPP()
+    {
+        playerPP = playerStartingPP;
+        enmPP = enmStartingPP;
+    }
+
+    private void updatePPText()
+    {
+        playerPPText.text = "" + playerPP;
+        enmPPText.text = "" + enmPP;
     }
 
     private void Update()
     {
-        PPRegenTimer -= Time.deltaTime;
-        enmPPRegenTimer -= Time.deltaTime;
+        if(FlowManager.instance.curState==gameState.inBattle)//maybe make coroutine? and a set pp to starting pp for both bases
+        {
+            PPRegenTimer -= Time.deltaTime;
+            enmPPRegenTimer -= Time.deltaTime;
 
-        if (PPRegenTimer<=0)
-        {
-            //set up this way if you get pp over max with the penguin pandemic ability it can go over. And with the death of stuff that will have to change
-            if (PP+1 <= MaxPP) { PP++; }
-            PPRegenTimer = PPRegenTimerMax;
-        }
-        playerPPText.text = "" + PP;
-        enmPPText.text = "" + enmPP;
-        
-        //regen for enemies
-        if (enmPPRegenTimer <= 0)
-        {
-            //set up this way if you get pp over max with the penguin pandemic ability it can go over. And with the death of stuff that will have to change
-            if (enmPP + 1 <= enmMaxPP) { enmPP++; }
-            enmPPRegenTimer = enmPPRegenTimerMax;
+            if (PPRegenTimer <= 0)
+            {
+                //set up this way if you get pp over max with the penguin pandemic ability it can go over. And with the death of stuff that will have to change
+                if (playerPP + 1 <= playerMaxPP) { playerPP++; }
+                PPRegenTimer = PPRegenTimerMax;
+            }
+            updatePPText();
+
+            //regen for enemies
+            if (enmPPRegenTimer <= 0)
+            {
+                //set up this way if you get pp over max with the penguin pandemic ability it can go over. And with the death of stuff that will have to change
+                if (enmPP + 1 <= enmMaxPP) { enmPP++; }
+                enmPPRegenTimer = enmPPRegenTimerMax;
+            }
         }
     }
 
     public void spawnPlayerUnit(int lcv)
     {
         int unitCost = PlayerUnitPrefabs[lcv].GetComponent<UnitStats>().getCost();
-        if (PP >= unitCost)
+        if (playerPP >= unitCost)
         {
-            PP -= unitCost;
-            playerPPText.text = "" + PP;
+            playerPP -= unitCost;
+            playerPPText.text = "" + playerPP;
             //instantiate prefab at spawnPos.pos
 
             var unit = Instantiate(PlayerUnitPrefabs[lcv], RandomizeSpawn(PlayerBasePos.position), PlayerBasePos.rotation);
@@ -129,12 +147,12 @@ public class UnitManager : MonoBehaviour
     {
         if(canGoAbove)
         {
-            PP += p;
+            playerPP += p;
         }else 
         {
-            if(PP+p<=MaxPP)
+            if(playerPP+p<=playerMaxPP)
             {
-                PP += p;
+                playerPP += p;
             }//else they just don't get it because it would go over max or is max and this won't overwrite the penguin pandemic ability
         }
     }

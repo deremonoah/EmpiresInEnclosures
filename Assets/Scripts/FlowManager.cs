@@ -119,5 +119,8 @@ public class FlowManager : MonoBehaviour
     {
         battleLoser = whoLost;
     }
+
+    public gameState getCurrentState()
+    { return curState; }
 }
 public enum gameState { movingLocation,inBattle,looting}
