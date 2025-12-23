@@ -25,11 +25,30 @@ public class UltimateManager : MonoBehaviour
         um = FindObjectOfType<UnitManager>();
     }
 
+    private void OnEnable()
+    {
+        FlowManager.instance.BattleStart += ResetUltimates;
+    }
+
+    private void OnDisable()
+    {
+        FlowManager.instance.BattleStart -= ResetUltimates;
+    }
+
+    private void ResetUltimates()
+    {
+        playerUltProgress = 0;
+        enemyUltProgress = 0;
+    }
+
     private void FixedUpdate()
     {
-        playerUltProgress += Time.deltaTime;//maybe I could multiply by a speed variable
-        enemyUltProgress += Time.deltaTime;
-        UpdateUltiUI();
+        if(FlowManager.instance.curState == gameState.inBattle)
+        {
+            playerUltProgress += Time.deltaTime;//maybe I could multiply by a speed variable
+            enemyUltProgress += Time.deltaTime;
+            UpdateUltiUI();
+        }
     }
 
     //we are also going to have it handle the ui, and will want it to fill over time

@@ -6,10 +6,15 @@ using UnityEngine;
 public class UnitAI : MonoBehaviour
 {
     private UnitStats myStats;
+    [SerializeField] bool GotToWhereIshouldHave=false;
+    [SerializeField] 
     private float currentSpeed;
-    public Vector2 moveTarget;
-    public HP attackTarget;
-    [SerializeField] UnitState unitState;
+    private Vector2 moveTarget;
+    [SerializeField]
+    private HP attackTarget;
+
+    [SerializeField] 
+    UnitState unitState;
     private UnitAnimator anim;
     private Coroutine currentRoutine;
     //ranged variables
@@ -18,6 +23,7 @@ public class UnitAI : MonoBehaviour
     public GameObject shootPoint;
     //CodeMonkey
     private GameObject selectedGameObject;
+
     //fixing facing the wrong way
     private SpriteRenderer mysr;
     private UnitManager urManager;
@@ -30,9 +36,10 @@ public class UnitAI : MonoBehaviour
     {
         myStats = GetComponent<UnitStats>();
         currentSpeed = myStats.getMoveSpeed(Terrain.normal);
-        unitState = UnitState.move;
+        setUnitState(UnitState.move);
         mysr = GetComponentInChildren<SpriteRenderer>();
         urManager = FindObjectOfType<UnitManager>();
+        
         if (this.gameObject.layer == 7)//so on the player layer, flip the transform 180 so it faces the right way to do animations
         {
             this.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
@@ -46,6 +53,15 @@ public class UnitAI : MonoBehaviour
         SetSelectedVisible(false);
     }
 
+    private void OnDisable()
+    {
+        if (currentRoutine != null)
+        {
+            StopCoroutine(currentRoutine);
+            currentRoutine = null;
+        }
+    }
+
     public void SetSelectedVisible(bool visible)
     {
         selectedGameObject.SetActive(visible);
@@ -54,19 +70,13 @@ public class UnitAI : MonoBehaviour
     //make these sections later
     private void Update()
     {
-        /*if(attackTarget==null)
-        {
-            us = UnitState.move;
-            if (currentRoutine != null)
-            { StopCoroutine(currentRoutine); }
-        }*/
+
         if (unitState == UnitState.move)
         {
             float step = currentSpeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, moveTarget, step);
         }
 
-        //maybe change to a move routine
     }
     
     public void SetMoveTarget(Vector2 pos)
@@ -77,10 +87,9 @@ public class UnitAI : MonoBehaviour
     public void SeeTarget(Vector2 pos, HP enmTarg)
     {
         //Debug.Log(this.name + " seeing attack target is null? "+(attackTarget==null)+" currentRoutine is null? " +(currentRoutine==null));
-        if (attackTarget == null)// was ||  attackTarget.GetType() == typeof(BaseHP). testing if you getting to tank with base can get you back in the game
+        if (attackTarget == null && currentRoutine==null)// was ||  attackTarget.GetType() == typeof(BaseHP). testing if you getting to tank with base can get you back in the game
         {
             //only makes new target if old is null or they are attacking a base
-            StopAllCoroutines();
             //makes sure we don't double up on attack routines
 
             //helps be more natural
@@ -105,7 +114,7 @@ public class UnitAI : MonoBehaviour
         SetMoveTarget(pos);
     }
 
-    public Vector3 RandomizePos(Vector3 aroundHere)
+    private Vector3 RandomizePos(Vector3 aroundHere)
     {
         float randx = Random.Range(xRange.x, xRange.y);
         float randy = Random.Range(yRange.x, yRange.y);
@@ -119,7 +128,7 @@ public class UnitAI : MonoBehaviour
         //this makes units stop when highlighted
     }
 
-    public void setUnitState(UnitState state)
+    private void setUnitState(UnitState state)
     {
         unitState = state;
         anim.SetAnimationState((int)unitState);
@@ -139,54 +148,52 @@ public class UnitAI : MonoBehaviour
     }
     
 
-    //attack stuff
-    //attack type weather its ranged or melee (cavalry just moves faster probably)
-    //based on attack speed that would be how often we check for a target(unit or base) then attack
-    //on trigger stay?
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (us!=UnitState.attack && collision.gameObject.layer!=gameObject.layer)
-        {
-            us = UnitState.attack;
-            anim.SetAnimationState((int)us);
-            attackTarget = collision.gameObject.GetComponent<HP>();
-            currentRoutine = StartCoroutine(MeleeAttackRoutine());
-        }
-    }*/
-
     private void DoneFighting()
     {
-        /*Debug.Log("done fighting called atk target?" );
-        Debug.Log(attackTarget == null);
-        Debug.Log("moveTarget?");
-        Debug.Log(moveTarget == null);*/
+        GotToWhereIshouldHave = true;
         moveTarget = urManager.GetmoveTarget(gameObject.layer).position;
         this.setUnitState(UnitState.move);
-        //moveTarget = urManager.GetmoveTarget(gameObject.layer).position;
     }
 
     private IEnumerator MeleeAttackRoutine()
     {
+        GotToWhereIshouldHave = false;
         this.setUnitState(UnitState.windUp);
         yield return new WaitForSeconds(myStats.getAttackSpeed());
-              if (attackTarget != null)
-              {
-                    this.setUnitState(UnitState.strike);
-                    yield return new WaitForSeconds(myStats.getAttackWaitTime());//for testing will need an aniation
+        if(attackTarget !=null)
+        {
+            this.setUnitState(UnitState.strike);
+            yield return new WaitForSeconds(myStats.getAttackWaitTime());//for testing will need an animation
+            if (attackTarget != null)
+            {
+                attackTarget.ThisAttackedYou(myStats); /*Debug.Log("attack target not null");*/
+                yield return new WaitForSeconds(0.5f);//could be recovery time
+            }
+            else
+            {
+                //make a circle collider around you based on your range & see if you can find an enemy in it
+                var newTarget = checkForOpponentToAttack();
+                if(newTarget!=null)
+                {
+                    attackTarget = newTarget;
                     attackTarget.ThisAttackedYou(myStats); /*Debug.Log("attack target not null");*/
                     yield return new WaitForSeconds(0.5f);//could be recovery time
-              }
-        yield return null;
-        //change movetarget
-        if(attackTarget!=null)
-        {
-            StartCoroutine(MeleeAttackRoutine());
+                }// if it can't find anyone it should move on
+            }
         }
-        else
+        
+        yield return null;
+
+        //change movetarget
+        if(attackTarget==null)
         {
             DoneFighting();
         }
+        else
+        {
+            yield return MeleeAttackRoutine();
+        }
+        currentRoutine = null;
     }
 
     private IEnumerator RangedAttackRoutine()
@@ -201,16 +208,56 @@ public class UnitAI : MonoBehaviour
             yield return null;
         }
         DoneFighting();
+        currentRoutine = null;
     }
 
     private void ShootShot()
     {
         //below line makes missing harder, but idk if we need it every call
         if (attackTarget != null)
-        { RangedTarget = attackTarget.gameObject.transform.position; }
+        { 
+            RangedTarget = attackTarget.gameObject.transform.position; 
+        }
         //then instantiate projectile, give it target, then wait. or maybe wait 1st? well am trying 1st
-        var shot = Instantiate(ProjectilePrefab, shootPoint.transform.position, shootPoint.transform.rotation);
+        var shot = Instantiate(
+            ProjectilePrefab, 
+            shootPoint.transform.position, 
+            shootPoint.transform.rotation
+            );
         shot.GetComponent<Projectile>().SetTarget(RangedTarget, this.gameObject);
     }
+
+    private HP checkForOpponentToAttack()
+    {
+        int layerToAttack = -1;
+        if(this.gameObject.layer == 7)
+        {
+            layerToAttack = 6;//player attack enemy
+        }
+        else if(this.gameObject.layer == 6)
+        {
+            layerToAttack = 7;//enemy attack player
+        }
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, myStats.getAttackRange());
+        foreach (Collider2D col in hits)
+        {
+            if (col.gameObject.layer == layerToAttack)//based on what layer we are
+            {
+                HP target = col.gameObject.GetComponent<HP>();
+                if (target != null)//this means it is a player unit
+                {
+                    return target;
+                }
+            }
+        }
+        return null;//incase there isn't one near by
+    }
 }
-public enum UnitState { idle,move,windUp,strike}
+public enum UnitState 
+{ 
+    idle,
+    move,
+    windUp,
+    strike
+}

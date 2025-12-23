@@ -206,11 +206,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: MaxHp
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: Attack
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: portrait
@@ -218,7 +218,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 625ed8d663893a44bbd5834ea63b6646, type: 3}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: MoveSpeed
-      value: 2.2
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
+      propertyPath: SwimSpeed
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: AttackRange
@@ -226,7 +230,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: AttackSpeed
-      value: 1.2
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
+      propertyPath: AttackToBase
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
+      propertyPath: MountainSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: EnemyPayOnDeath

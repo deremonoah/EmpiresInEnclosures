@@ -4798,7 +4798,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myType: 0
   factionToFight: 1
-  units: []
+  units:
+  - {fileID: 3248066881049308706, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
 --- !u!1 &648475850
 GameObject:
   m_ObjectHideFlags: 0
@@ -14115,7 +14116,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myType: 0
   factionToFight: 3
-  units: []
+  units:
+  - {fileID: 2864915583633797780, guid: 7971749f3f35aad4a8844701b9857367, type: 3}
+  - {fileID: 5212609840737170258, guid: 5a2dd7d4d9566294699780f6396547c5, type: 3}
 --- !u!114 &2002318207
 MonoBehaviour:
   m_ObjectHideFlags: 0

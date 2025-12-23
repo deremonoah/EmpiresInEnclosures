@@ -5,6 +5,7 @@ using UnityEngine;
 public class UnitSight : MonoBehaviour
 {
     private UnitAI ai;
+
     private void Awake()
     {
         ai = gameObject.GetComponentInParent<UnitAI>();

@@ -30,7 +30,10 @@ public class EnemyBaseAI : MonoBehaviour
 
     private void beginBattle()
     {
-        StartCoroutine(BasicStratRoutine());
+        StartCoroutine(SpamStratRoutine());
+
+        //should decide strategy or adapt based off opponent
+        //could base it off which faction it is, which I think it can check from um
     }
 
     //this is the spam strat
@@ -49,7 +52,7 @@ public class EnemyBaseAI : MonoBehaviour
     private void followBuildStrat()//a method to check if you have enough cost for a build
     {
         //setBuild needs, cost of the plan, and spawn order, 
-        if(um.GetEnmPPAmount()>=18)//2 infantry, then 2 ballers
+        if(um.GetEnmPPAmount()>=18)//2 infantry, then 2 ballers, based on
         {
             um.spawnEnemyUnit(1);
             um.spawnEnemyUnit(1);
@@ -63,13 +66,13 @@ public class EnemyBaseAI : MonoBehaviour
         um.spawnEnemyUnit(one);
     }
 
-    public IEnumerator BasicStratRoutine()
+    public IEnumerator SpamStratRoutine()
     {
         while (ourBase.GetHP() > 0)
         {
             //check for invaders
             int isInvaders = InvadersCheck();
-            Debug.Log("Invaders check found " + invaderComp.Count);
+            //Debug.Log("Invaders check found " + invaderComp.Count);
             if (isInvaders == 1)
             {
                 ulti.popPlayerUlt(false);
@@ -86,7 +89,7 @@ public class EnemyBaseAI : MonoBehaviour
             //wait until a certain number to make specific build, or spam units if you can afford them, which could be cheapest or favorite
 
             //followBuildStrat();//thinking there might be an issue with spawning them istantly, but will test
-            SpamEm(3);//I think in future a smart ai should look at multiple builds or strats and see which will work the best
+            SpamEm(0);//I think in future a smart ai should look at multiple builds or strats and see which will work the best
 
             yield return new WaitForSeconds(0.3f);
         }

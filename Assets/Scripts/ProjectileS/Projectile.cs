@@ -5,15 +5,17 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float damage;
-    private Vector2 Target;
+    private Vector2 Target;// will keep this around for homing shots, bees! other homing shots wouldn't make sense imo
+    private Vector2 Direction;
     public float moveSpeed;
     public float lifeSpan;
     private UnitStats myShootersStats;
 
     void Update()
     {
-        float step = moveSpeed * Time.deltaTime;
-        transform.position = Vector2.MoveTowards(transform.position, Target, step);
+        Vector2 step = moveSpeed * Time.deltaTime * Direction;
+        //transform.position = Vector2.MoveTowards(transform.position, Target, step); old way shoots at one pos
+        transform.position += (Vector3)step;
         if(lifeSpan<=0)
         {
             Destroy(this.gameObject);
@@ -23,7 +25,11 @@ public class Projectile : MonoBehaviour
 
     public virtual void SetTarget(Vector2 pos,GameObject shooter)
     {
+        //calculate direction
         Target = pos;
+        Vector2 shooterPos = new Vector2(shooter.transform.position.x, shooter.transform.position.y);
+        Direction= pos- shooterPos;
+        Direction = Direction.normalized;
         //player shot, so projectile on 9
         if (shooter.layer == 7)
         { this.gameObject.layer = 9; }
@@ -49,7 +55,7 @@ public class Projectile : MonoBehaviour
                 else { collision.gameObject.GetComponent<HP>().DamageTaken(damage); }
             }
         }
-        Debug.Log("collided with " + collision.gameObject.name);
+        //Debug.Log("collided with " + collision.gameObject.name);
         Destroy(this.gameObject);
     }
 }

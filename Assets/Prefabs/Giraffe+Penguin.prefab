@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5029433410315436870}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.43199998, y: 0.548, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2783051453921381570}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &173281512314221287
 SpriteRenderer:
@@ -89,7 +89,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 48680864144492257, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
@@ -102,7 +102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 48680864144492257, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
       propertyPath: MoveSpeed
-      value: 3.5
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 48680864144492257, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
       propertyPath: AttackSpeed
@@ -189,10 +189,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7527038395956973005, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3929851349417016613}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
 --- !u!4 &2783051453921381570 stripped
 Transform:

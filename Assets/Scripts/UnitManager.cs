@@ -40,12 +40,19 @@ public class UnitManager : MonoBehaviour
         enmPPMaxText.text = "" + enmMaxPP;//might want a set max in future for gaining max pp
         PlayerUpgradeHistory = new List<GameObject>();
         foreach(GameObject go in PlayerUnitPrefabs)
-        { PlayerUpgradeHistory.Add(go); }
+        { 
+            PlayerUpgradeHistory.Add(go); 
+        }
     }
 
     private void OnEnable()
     {
         FlowManager.instance.BattleStart+=StartOfBattleSetPP;
+    }
+
+    private void OnDisable()
+    {
+        FlowManager.instance.BattleStart -= StartOfBattleSetPP;
     }
 
     private void StartOfBattleSetPP()
@@ -97,7 +104,7 @@ public class UnitManager : MonoBehaviour
             var unit = Instantiate(PlayerUnitPrefabs[lcv], RandomizeSpawn(PlayerBasePos.position), PlayerBasePos.rotation);
             PlayerUnitPrefabs[lcv].GetComponent<UnitStats>().getCost();
             unit.GetComponent<UnitAI>().SetMoveTarget(EnemyBasePos.position);
-            unit.GetComponent<UnitAI>().setUnitState(UnitState.move);
+            //unit.GetComponent<UnitAI>().setUnitState(UnitState.move); will it start by default
             unit.gameObject.layer = 7;
             //truned off friendly fire
         }
@@ -138,9 +145,9 @@ public class UnitManager : MonoBehaviour
 
     public Transform GetmoveTarget(int layer)
     {
-        if (layer == 6)
-        {   return PlayerBasePos; }//I realize if I want players to use the commanding of unit I prob shouldn't auto command them, so they have to do it to learn
-        return EnemyBasePos;
+        if (layer == 6)//enemy layer, so they get the player base pos
+        {   return PlayerBasePos; }
+        return EnemyBasePos; //enemy base pos which is where the enemy base is
     }
 
     public void PlayerGetsPower(float p,bool canGoAbove)
@@ -172,6 +179,16 @@ public class UnitManager : MonoBehaviour
         }
     }
 
+    public void LoadEnemyUnitList(List<GameObject> units)
+    {
+
+        enemyPrefabs.Clear();
+        for (int lcv=0; lcv < units.Count;lcv++)
+        {
+            enemyPrefabs.Add(units[lcv]);
+        }
+    }
+
     //code for enemy ai summoner
     #region Enemy ai calls
     public void spawnEnemyUnit(int lcv)
@@ -189,7 +206,7 @@ public class UnitManager : MonoBehaviour
 
             var unit = Instantiate(enemyPrefabs[lcv], posToSpawn, EnemyBasePos.rotation);
             unit.GetComponent<UnitAI>().SetMoveTarget(PlayerBasePos.position);
-            unit.GetComponent<UnitAI>().setUnitState(UnitState.move);
+            //unit.GetComponent<UnitAI>().setUnitState(UnitState.move);
             //setting to enemy unit layer so they don't kill each other
             unit.gameObject.layer = 6;
         }

@@ -28,6 +28,10 @@ public class NodeData : MonoBehaviour
         return myType;
     }
 
+    public List<GameObject> getUnits()
+    {
+        return units;
+    }
     //either the enemyAi will grab unit info or this sends its info, probably grab info better?
 }
 public enum NodeType { enemy, shop, Boss}
