@@ -87,8 +87,13 @@ public class UnitAI : MonoBehaviour
 
     public void SeeTarget(Vector2 pos, HP enmTarg)
     {
-        //Debug.Log(this.name + " seeing attack target is null? "+(attackTarget==null)+" currentRoutine is null? " +(currentRoutine==null));
-        if (attackTarget == null && currentRoutine==null)// was ||  attackTarget.GetType() == typeof(BaseHP). testing if you getting to tank with base can get you back in the game
+        //to catch any non hp sighted things, so it won't start a routine early
+        if(enmTarg == null)
+        {
+            return;
+        }
+
+        if (attackTarget == null && currentRoutine==null)
         {
             //only makes new target if old is null or they are attacking a base
             //makes sure we don't double up on attack routines
@@ -108,6 +113,7 @@ public class UnitAI : MonoBehaviour
             //are they in attack range
             else if (atkRng >= Mathf.Abs(curruntPos.x - pos.x) && atkRng >= Mathf.Abs(curruntPos.y - pos.y))
             {
+                Debug.Log("set target to" + enmTarg.name);
                 attackTarget = enmTarg;
                 currentRoutine = StartCoroutine(MeleeAttackRoutine());
             }

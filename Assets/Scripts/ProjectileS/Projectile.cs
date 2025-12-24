@@ -23,12 +23,13 @@ public class Projectile : MonoBehaviour
         else { lifeSpan -= Time.deltaTime; }
     }
 
-    public virtual void SetTarget(Vector2 pos,GameObject shooter)
+    public virtual void SetTarget(Vector2 Targetpos,GameObject shooter)
     {
         //calculate direction
-        Target = pos;
-        Vector2 shooterPos = new Vector2(shooter.transform.position.x, shooter.transform.position.y);
-        Direction= pos- shooterPos;
+        Target = Targetpos;
+        //goes from current position, which would be shoot point not position of shooter which is could cause problems
+        Vector2 shootPos = new Vector2(transform.position.x, transform.position.y);
+        Direction= Targetpos- shootPos;
         Direction = Direction.normalized;
         //player shot, so projectile on 9
         if (shooter.layer == 7)
