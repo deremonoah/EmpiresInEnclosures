@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MapPanel : MonoBehaviour
 {
     private Animator animMap;
-    private NodeData highlightedEncounter;
+    private NodeData highlightedNode;
 
     //scout panel data
     [SerializeField] RectTransform ScoutPanel;
@@ -16,7 +16,7 @@ public class MapPanel : MonoBehaviour
     [SerializeField] private RectTransform canvasRect;
     private MapLoader ml;
     [SerializeField]
-    private List<NodeData> VisitedNodes;
+    private List<NodeData> ConqueredNodes;//idea here is once you beat a node it gets added here
 
     private void OnEnable()
     {
@@ -43,30 +43,62 @@ public class MapPanel : MonoBehaviour
         return animMap.GetBool("OpenMap");
     }
 
+    private void GenerateMap()
+    {
+        //probably using prefabs for the nodes
+        //and as I build the level I need to be assigning nearby nodes
+        //but how to actually place them out?
+    }
+
     public void pickMapNode()
     {
-        if(highlightedEncounter.getNodeType()==NodeType.enemy)
+        if(highlightedNode.getNodeType()==NodeType.enemy)
         {
-            ml.loadLevel(highlightedEncounter.getFactionOnNode());//this tells the map loader to load the correct map
+            ml.loadLevel(highlightedNode.getFactionOnNode());//this tells the map loader to load the correct map
             //tell unit manager what the new faction is & give their unit list
-            FindObjectOfType<UnitManager>().LoadEnemyUnitList(highlightedEncounter.getUnits());
+            FindObjectOfType<UnitManager>().LoadEnemyUnitList(highlightedNode.getUnits());
             //flow manager will start when map is closed, which is already on the invade button
+        }
+        if(highlightedNode.getNodeType()==NodeType.shop)
+        {
+            ConqueredNodes.Add(highlightedNode);
         }
     }
 
     public void lookAtMapNode(NodeData node)
     {
-        highlightedEncounter = node; //technically we also should handle it being a shop, but one thing at a time
-        Vector2 mousePos = Input.mousePosition;
-        Vector2 posToMove = CalculatePosition(mousePos);
-        StartCoroutine(MoveScoutPanelOutRoutine(posToMove));
+        highlightedNode = node; //technically we also should handle it being a shop, but one thing at a time
+        if(CanMoveToThisNode(highlightedNode))
+        {
+            Vector2 mousePos = Input.mousePosition;
+            Vector2 posToMove = CalculatePosition(mousePos);
+            StartCoroutine(MoveScoutPanelOutRoutine(posToMove));
 
-        //open scout panel & load appropriate info
-        //map, enemy, maybe units? or sillouetts of their units, which are color selected as black
-        //fun if scout panel looks hand drawn like actual scouts did it, and a little flair for
-        //which character you are or hand holding it, penguin fin
+            //open scout panel & load appropriate info
+            //map, enemy, maybe units? or sillouetts of their units, which are color selected as black
+            //fun if scout panel looks hand drawn like actual scouts did it, and a little flair for
+            //which character you are or hand holding it, penguin fin
 
-        //can use dotween to have it slide into frame
+            //can use dotween to have it slide into frame
+
+            //need highlighted encounter to be on there
+        }
+    }
+
+    private bool CanMoveToThisNode(NodeData no)//maybe in future we just highlight all the nodes a player could go to
+    {
+        List<NodeData> nearbyNodes = no.GetNearbyNodes();
+        for(int lcv=0;lcv<ConqueredNodes.Count;lcv++)
+        {
+            for(int i=0;i<nearbyNodes.Count;i++)
+            {
+                if(nearbyNodes[i]==ConqueredNodes[lcv])
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private Vector2 CalculatePosition(Vector2 mousePos)
@@ -123,5 +155,17 @@ public class MapPanel : MonoBehaviour
 
 
         scoutTimer = 0;
+    }
+
+    public void AddConqueredNode(NodeData node)
+    {
+        ConqueredNodes.Add(node);
+        //maybe we could add a color change to the ui element for the node
+    }
+
+    //called by the flow manager when the player wins a fight
+    public void PlayerBeatNode() 
+    {
+        ConqueredNodes.Add(highlightedNode);
     }
 }

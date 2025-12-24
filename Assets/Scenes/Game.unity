@@ -1545,9 +1545,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63deb9e516d91497eb06e213a660274d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myType: 2
+  myType: 3
   factionToFight: 2
-  units: []
+  units:
+  - {fileID: 4571688680917307098, guid: 3be4a399c29814648a30ad295f157daa, type: 3}
+  - {fileID: 3550317812265094632, guid: 2dc8e5c742e591745a87b5351b348628, type: 3}
+  nodesNextToMe:
+  - {fileID: 2002318206}
 --- !u!1 &201397068
 GameObject:
   m_ObjectHideFlags: 0
@@ -2899,10 +2903,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63deb9e516d91497eb06e213a660274d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myType: 0
+  myType: 1
   factionToFight: 1
   units:
   - {fileID: 3248066881049308706, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
+  nodesNextToMe:
+  - {fileID: 955203099}
 --- !u!114 &414246191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3880,7 +3886,7 @@ MonoBehaviour:
   ScoutStartPos: {x: 0, y: 0}
   scoutAnimDuration: 0.8
   canvasRect: {fileID: 300170880}
-  VisitedNodes: []
+  ConqueredNodes: []
 --- !u!1001 &546714653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5197,10 +5203,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63deb9e516d91497eb06e213a660274d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myType: 0
+  myType: 1
   factionToFight: 1
   units:
   - {fileID: 3248066881049308706, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
+  nodesNextToMe:
+  - {fileID: 955203099}
+  - {fileID: 1161517262}
 --- !u!1 &648475850
 GameObject:
   m_ObjectHideFlags: 0
@@ -7120,6 +7129,7 @@ GameObject:
   - component: {fileID: 955203096}
   - component: {fileID: 955203098}
   - component: {fileID: 955203097}
+  - component: {fileID: 955203099}
   m_Layer: 5
   m_Name: player start
   m_TagString: Untagged
@@ -7185,6 +7195,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 955203095}
   m_CullTransparentMesh: 1
+--- !u!114 &955203099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955203095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63deb9e516d91497eb06e213a660274d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myType: 0
+  factionToFight: 0
+  units: []
+  nodesNextToMe: []
 --- !u!1 &967329672
 GameObject:
   m_ObjectHideFlags: 0
@@ -8500,9 +8526,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63deb9e516d91497eb06e213a660274d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myType: 1
+  myType: 2
   factionToFight: 0
   units: []
+  nodesNextToMe:
+  - {fileID: 629981788}
+  - {fileID: 2002318206}
 --- !u!1 &1178169789
 GameObject:
   m_ObjectHideFlags: 0
@@ -14739,11 +14768,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63deb9e516d91497eb06e213a660274d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myType: 0
+  myType: 1
   factionToFight: 3
   units:
   - {fileID: 2864915583633797780, guid: 7971749f3f35aad4a8844701b9857367, type: 3}
   - {fileID: 5212609840737170258, guid: 5a2dd7d4d9566294699780f6396547c5, type: 3}
+  nodesNextToMe:
+  - {fileID: 1161517262}
+  - {fileID: 192718507}
 --- !u!114 &2002318207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15297,6 +15329,7 @@ MonoBehaviour:
   myType: 0
   factionToFight: 0
   units: []
+  nodesNextToMe: []
 --- !u!1 &2095066292
 GameObject:
   m_ObjectHideFlags: 0

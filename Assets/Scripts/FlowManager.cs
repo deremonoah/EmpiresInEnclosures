@@ -74,6 +74,7 @@ public class FlowManager : MonoBehaviour
             curState = gameState.looting;
             lootPanelSendOpen.Invoke();
             battleLoser = "";//clear it for next time
+            mapPan.PlayerBeatNode();
             //playerWon();
         }
         else if(battleLoser== "Player Base")

@@ -51,6 +51,7 @@ public class UnitAI : MonoBehaviour
         anim = this.gameObject.GetComponentInChildren<UnitAnimator>();
         selectedGameObject = transform.Find("Selected").gameObject;
         SetSelectedVisible(false);
+        currentRoutine = null;
     }
 
     private void OnDisable()
