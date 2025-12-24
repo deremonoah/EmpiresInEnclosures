@@ -3691,6 +3691,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSpeed: 7
   sprintSpeed: 14
+  minZoom: 5
+  maxZoom: 12
+  zoomSpeed: 3
 --- !u!1 &535389192
 GameObject:
   m_ObjectHideFlags: 0
