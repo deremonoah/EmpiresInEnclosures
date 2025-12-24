@@ -9,9 +9,8 @@ public class UnitHp : HP
     void Start()
     {
         maxHp = GetComponent<UnitStats>().getMaxHp();
-        currentHp = maxHp;
-        anim = GetComponentInChildren<UnitAnimator>();
         myhp = GetComponent<HPBarManager>();
+        StartUp();
     }
 
     public override void ThisAttackedYou(UnitStats us)
@@ -29,15 +28,9 @@ public class UnitHp : HP
         UnitManager um = FindObjectOfType<UnitManager>();
         um.PlayerGetsPower(GetComponent<UnitStats>().getFriendlyPayOnDeath(),false);
         um.EnemyGetsPower(GetComponent<UnitStats>().getEnemyPayOnDeath(), false);
-        UltimateManager ulti = FindObjectOfType<UltimateManager>();
-        if(this.gameObject.layer==7)//enemy unit layer
-        {
-            ulti.chargePlayerUlt(false, 2);
-        }
-        else if(this.gameObject.layer == 6)//enemy unit layer
-        {
-            ulti.chargePlayerUlt(false, 2);//5 seemed too high for many units dying, ulti happened very often
-        }
+        
+        ulti.chargePlayerUlt(amPlayer, 2);
+        
         Destroy(this.gameObject);
         
     }

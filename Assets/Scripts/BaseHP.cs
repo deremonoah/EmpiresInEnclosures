@@ -8,12 +8,15 @@ public class BaseHP : HP
     public HPBarManager barUI;
     public event Action<string> BattleEndedLoserCalls;
 
+
     public override void ThisAttackedYou(UnitStats us)
     {
         base.DamageTaken(us.getBaseAttack());
         barUI.UpdateHP(base.GetHPPercent());
-        
-        if(this.GetHP()<=0)
+
+        ulti.chargePlayerUlt(amPlayer, us.getBaseAttack()*3);//for now we will just have it be the damage
+        //trying times 3 for now because ultimate is 180
+        if (this.GetHP()<=0)
         {
             Die();
         }

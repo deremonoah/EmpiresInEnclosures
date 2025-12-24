@@ -100,6 +100,13 @@ public class UnitAI : MonoBehaviour
 
             //helps be more natural
             pos = RandomizePos(pos);
+            float baseBonusRange = 0;
+
+            if(enmTarg.GetType()==typeof(BaseHP))//checks if refrence is base
+            {
+                baseBonusRange = 4;//units couldn't get to the center of the transform because of the hitbox
+                //and setting visually would make sense they can punch the outside of the base
+            }
 
             float atkRng = myStats.getAttackRange();
             Vector2 curruntPos = this.gameObject.transform.position;
@@ -111,7 +118,7 @@ public class UnitAI : MonoBehaviour
                 currentRoutine = StartCoroutine(RangedAttackRoutine());
             }
             //are they in attack range
-            else if (atkRng >= Mathf.Abs(curruntPos.x - pos.x) && atkRng >= Mathf.Abs(curruntPos.y - pos.y))
+            else if (atkRng+ baseBonusRange >= Mathf.Abs(curruntPos.x - pos.x) && atkRng+ baseBonusRange >= Mathf.Abs(curruntPos.y - pos.y))
             {
                 Debug.Log("set target to" + enmTarg.name);
                 attackTarget = enmTarg;
@@ -211,7 +218,10 @@ public class UnitAI : MonoBehaviour
         while (attackTarget != null)
         {
             yield return new WaitForSeconds(myStats.getAttackSpeed());
-            ShootShot();
+            if(attackTarget!=null)
+            {
+                ShootShot();
+            }
             yield return null;
         }
         DoneFighting();
