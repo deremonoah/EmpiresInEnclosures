@@ -88,6 +88,14 @@ public class MapPanel : MonoBehaviour
     private bool CanMoveToThisNode(NodeData no)//maybe in future we just highlight all the nodes a player could go to
     {
         List<NodeData> nearbyNodes = no.GetNearbyNodes();
+        //first check if we have conquered it
+        for(int lcv=0;lcv<ConqueredNodes.Count;lcv++)
+        {
+            if(no==ConqueredNodes[lcv])
+            { return false; }
+        }
+
+        //then check if it is a valid place the player can move
         for(int lcv=0;lcv<ConqueredNodes.Count;lcv++)
         {
             for(int i=0;i<nearbyNodes.Count;i++)
@@ -153,6 +161,7 @@ public class MapPanel : MonoBehaviour
 
         ScoutPanel.localPosition = desiredPosition;
 
+        //maybe also have a penguin image move to the node
 
         scoutTimer = 0;
     }
@@ -167,5 +176,6 @@ public class MapPanel : MonoBehaviour
     public void PlayerBeatNode() 
     {
         ConqueredNodes.Add(highlightedNode);
+        //should move the penguin there or change image, maybe change display image to penguin.
     }
 }
