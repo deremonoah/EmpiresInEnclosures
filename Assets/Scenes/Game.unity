@@ -8529,7 +8529,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myType: 2
   factionToFight: 0
-  units: []
+  units:
+  - {fileID: 3550317812265094632, guid: 2dc8e5c742e591745a87b5351b348628, type: 3}
+  - {fileID: 4571688680917307098, guid: 3be4a399c29814648a30ad295f157daa, type: 3}
+  - {fileID: 3248066881049308706, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
   nodesNextToMe:
   - {fileID: 629981788}
   - {fileID: 2002318206}
