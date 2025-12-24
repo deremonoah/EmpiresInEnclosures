@@ -8,12 +8,15 @@ public class MapPanel : MonoBehaviour
     private Animator animMap;
     private NodeData highlightedEncounter;
 
+    //scout panel data
     [SerializeField] RectTransform ScoutPanel;
-    private Vector2 ScoutStartPos;
+    [SerializeField]private Vector2 ScoutStartPos;
     private float scoutTimer;
     [SerializeField] float scoutAnimDuration;
     [SerializeField] private RectTransform canvasRect;
     private MapLoader ml;
+    [SerializeField]
+    private List<NodeData> VisitedNodes;
 
     private void OnEnable()
     {
@@ -21,7 +24,7 @@ public class MapPanel : MonoBehaviour
         animMap = GetComponent<Animator>();
         //FlowManager.instance.MapPanelSendOpen += openMap; for some reason this is null, but not for LootPanel
         scoutTimer = 0;
-        ScoutStartPos = ScoutPanel.anchoredPosition;
+        ScoutStartPos = ScoutPanel.localPosition;
         ml = FindObjectOfType<MapLoader>();
     }
 
@@ -89,7 +92,7 @@ public class MapPanel : MonoBehaviour
 
         if(RightPoint.x>(canvasWidth/2))
         {
-            Debug.Log("right point> cavas width/2? "+(RightPoint.x > (canvasWidth / 2)));
+            
             localPoint = LeftPoint;
         }
         else { localPoint = RightPoint; }
@@ -97,12 +100,18 @@ public class MapPanel : MonoBehaviour
         return localPoint;
     }
 
+    public void ReturnScoutPanel()
+    {
+        StartCoroutine(MoveScoutPanelOutRoutine(ScoutStartPos));
+        scoutTimer = 0;
+    }
+
     public IEnumerator MoveScoutPanelOutRoutine(Vector2 desiredPosition)
     {
         while (scoutTimer < scoutAnimDuration)
         {
             ScoutPanel.anchoredPosition = Vector2.Lerp(
-                ScoutStartPos,
+                ScoutPanel.localPosition,
                 desiredPosition,
                 scoutTimer / scoutAnimDuration
                 );
@@ -110,7 +119,7 @@ public class MapPanel : MonoBehaviour
             yield return null;
         }
 
-        ScoutPanel.anchoredPosition = desiredPosition;
+        ScoutPanel.localPosition = desiredPosition;
 
 
         scoutTimer = 0;
