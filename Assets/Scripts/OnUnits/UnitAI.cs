@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 //this scrip handles the individual unit's actions: movment and attacking
 public class UnitAI : MonoBehaviour
@@ -9,7 +10,8 @@ public class UnitAI : MonoBehaviour
     [SerializeField] bool GotToWhereIshouldHave=false;
     [SerializeField] 
     private float currentSpeed;
-    private Vector2 moveTarget;
+    [SerializeField]
+    private List<Vector2> moveTargets = new List<Vector2>();
     [SerializeField]
     private HP attackTarget;
 
@@ -44,6 +46,7 @@ public class UnitAI : MonoBehaviour
         {
             this.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
         }
+        
     }
 
     private void Awake()
@@ -68,21 +71,72 @@ public class UnitAI : MonoBehaviour
         selectedGameObject.SetActive(visible);
     }
 
-    //make these sections later
-    private void Update()
+    private void FixedUpdate()
     {
 
-        if (unitState == UnitState.move)
+        if (unitState == UnitState.move && moveTargets.Count>0)
         {
             float step = currentSpeed * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, moveTarget, step);
+            transform.position = Vector2.MoveTowards(transform.position, moveTargets[0], step);
+            isCloseTo(moveTargets[0]);
         }
 
+        
     }
     
-    public void SetMoveTarget(Vector2 pos)
+    public void SetMoveTarget(Vector2 pos)//used for getting agro or initial spawn
     {
-        moveTarget = pos;
+        moveTargets.Insert(0, pos);
+        moveTargets.Distinct();
+    }
+
+    public void CommandUnitsMoveTarget(Vector2 pos)//used when commanding units
+    {
+        //should there be a limit in length?
+        //could check what state its in, if combat then set to the front, and limit to one flag?
+        moveTargets.Add(pos);
+        SortMovementPriorities();
+        moveTargets.Distinct();
+    }
+
+    private void SortMovementPriorities()//moves the last position to go to be the enemy base
+    {
+        //so that commanding units will follow the first one you click then always end with the enemy base
+
+        if (moveTargets.Count < 2)
+        { return; }
+
+        for(int lcv=0;lcv<moveTargets.Count;lcv++)
+        {
+            //if its the enemy base
+            if(moveTargets[lcv]==(Vector2)urManager.GetmoveTarget(gameObject.layer).position)
+            {
+                moveTargets.Add(moveTargets[lcv]);//adds base to end of list
+                moveTargets.RemoveAt(lcv);//removes its previous instance
+            }
+        }
+    }
+
+    private void isCloseTo(Vector3 target)
+    {
+        if(moveTargets.Count<=1)
+        {
+            return;
+        }
+
+        float myx = this.transform.position.x;
+        float myy = this.transform.position.y;
+
+        float targetx = moveTargets[0].x;
+        float targety = moveTargets[0].y;
+
+        //if we are within 0.1f x & y of target move position we don't have to go there anymore
+        if (Mathf.Abs( myx- targetx) < .1f && Mathf.Abs(myy - targety) < .1f)
+        {
+            moveTargets.RemoveAt(0);
+        }
+        //current problem if we want them to wait somewhere they won't
+        //because the always keep the base at the end, maybe remove it? halt button feel clunky
     }
 
     public void SeeTarget(Vector2 pos, HP enmTarg)
@@ -124,8 +178,9 @@ public class UnitAI : MonoBehaviour
                 attackTarget = enmTarg;
                 currentRoutine = StartCoroutine(MeleeAttackRoutine());
             }
+            SetMoveTarget(pos);
         }
-        SetMoveTarget(pos);
+        
     }
 
     private Vector3 RandomizePos(Vector3 aroundHere)
@@ -165,7 +220,8 @@ public class UnitAI : MonoBehaviour
     private void DoneFighting()
     {
         GotToWhereIshouldHave = true;
-        moveTarget = urManager.GetmoveTarget(gameObject.layer).position;
+        moveTargets.Clear();
+        moveTargets.Insert(0, urManager.GetmoveTarget(gameObject.layer).position);
         this.setUnitState(UnitState.move);
     }
 
@@ -212,7 +268,7 @@ public class UnitAI : MonoBehaviour
 
     private IEnumerator RangedAttackRoutine()
     {
-        moveTarget = this.gameObject.transform.position;
+        moveTargets.Insert(0,this.gameObject.transform.position);
         //could move 1st line of code from ShootShot() here if we want it maybe to miss?
         
         while (attackTarget != null)

@@ -191,7 +191,7 @@ public class UnitManager : MonoBehaviour
 
     //code for enemy ai summoner
     #region Enemy ai calls
-    public void spawnEnemyUnit(int lcv)
+    public void spawnEnemyUnit(int lcv, Vector2 whereToGo)
     {
         //instantiate prefab at spawnPos.pos
         // pay for unit
@@ -205,7 +205,7 @@ public class UnitManager : MonoBehaviour
             Vector3 posToSpawn = RandomizeSpawn(EnemyBasePos.position);
 
             var unit = Instantiate(enemyPrefabs[lcv], posToSpawn, EnemyBasePos.rotation);
-            unit.GetComponent<UnitAI>().SetMoveTarget(PlayerBasePos.position);
+            unit.GetComponent<UnitAI>().SetMoveTarget(whereToGo);
             //unit.GetComponent<UnitAI>().setUnitState(UnitState.move);
             //setting to enemy unit layer so they don't kill each other
             unit.gameObject.layer = 6;

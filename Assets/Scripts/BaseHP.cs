@@ -13,7 +13,11 @@ public class BaseHP : HP
     {
         base.DamageTaken(us.getBaseAttack());
         barUI.UpdateHP(base.GetHPPercent());
-
+        //for defending your own base
+        if(!amPlayer)
+        {
+            FindObjectOfType<EnemyBaseAI>().TheyHurtMe(us.gameObject);
+        }
         ulti.chargePlayerUlt(amPlayer, us.getBaseAttack()*3);//for now we will just have it be the damage
         //trying times 3 for now because ultimate is 180
         if (this.GetHP()<=0)

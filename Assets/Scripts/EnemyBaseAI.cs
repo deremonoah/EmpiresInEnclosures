@@ -15,6 +15,8 @@ public class EnemyBaseAI : MonoBehaviour
     [SerializeField] List<Vector2> invaderLastKnownLocation;
     [Header("Tower")]
     [SerializeField] Transform towerTam;
+    [SerializeField] float SearchAreaAroundBase;
+    private Vector2 GoThere;//where ai sends units
 
     private void OnEnable()
     {
@@ -30,7 +32,7 @@ public class EnemyBaseAI : MonoBehaviour
 
     private void beginBattle()
     {
-        StartCoroutine(SpamStratRoutine());
+        StartCoroutine(actionsRoutine());
 
         //should decide strategy or adapt based off opponent
         //could base it off which faction it is, which I think it can check from um
@@ -44,7 +46,7 @@ public class EnemyBaseAI : MonoBehaviour
         while (ourBase.GetHP() > 0)
         {
             if (um.GetEnmPPAmount() >= um.GetEnmUnitCost(0))//could make int random, to be fair rn this if not matter, they just spam the button
-            { um.spawnEnemyUnit(0); }//they don't have multiple units or anything they do
+            { um.spawnEnemyUnit(0, GoThere); }//they don't have multiple units or anything they do
             yield return new WaitForSeconds(0.3f);
         }
     }
@@ -54,19 +56,19 @@ public class EnemyBaseAI : MonoBehaviour
         //setBuild needs, cost of the plan, and spawn order, 
         if(um.GetEnmPPAmount()>=18)//2 infantry, then 2 ballers, based on
         {
-            um.spawnEnemyUnit(1);
-            um.spawnEnemyUnit(1);
-            um.spawnEnemyUnit(2);
-            um.spawnEnemyUnit(2);
+            um.spawnEnemyUnit(1, GoThere);
+            um.spawnEnemyUnit(1, GoThere);
+            um.spawnEnemyUnit(2, GoThere);
+            um.spawnEnemyUnit(2, GoThere);
         }
     }
 
     private void SpamEm(int one)
     {
-        um.spawnEnemyUnit(one);
+        um.spawnEnemyUnit(one, GoThere);
     }
 
-    public IEnumerator SpamStratRoutine()
+    public IEnumerator actionsRoutine()//in future might be more or just different strategy pattern stuff
     {
         while (ourBase.GetHP() > 0)
         {
@@ -81,7 +83,7 @@ public class EnemyBaseAI : MonoBehaviour
             {
                 //need to defend towers
             }
-
+            //check if enemy base isn't the target if bully has been dealt with
 //high prio    //enemy units (maybe player units too) need to be able to follow a string of points.
                //so they can follow a path, around terrain
 
@@ -95,10 +97,10 @@ public class EnemyBaseAI : MonoBehaviour
         }
     }
 
-    private void lookForInvaders(Transform tam)//used to check if there are enemies threatening base or a tower
+    private void lookForInvaders(Vector2 pos,float size)//used to check if there are enemies threatening base or a tower
     {
         //cast pysics circle to check for player units
-        Collider2D[] hits = Physics2D.OverlapCircleAll(tam.position, 14f);//might try different numbers
+        Collider2D[] hits = Physics2D.OverlapCircleAll(pos, size);//might try different numbers
         //clear invader Lists incase things were deleted and to have no dups, also for checking 2 different places
         invaderComp.Clear();
         invaderLastKnownLocation.Clear();
@@ -117,9 +119,9 @@ public class EnemyBaseAI : MonoBehaviour
         }
     }
 
-    private int InvadersCheck()//0 no, 1 base, 2 tower
+    private int InvadersCheck()//0 no, 1 base, 2 tower, go there
     {
-        lookForInvaders(this.transform);
+        lookForInvaders(this.transform.position, SearchAreaAroundBase);
 
         if (invaderComp.Count>0)
         {
@@ -129,12 +131,23 @@ public class EnemyBaseAI : MonoBehaviour
 
         if(towerTam!=null)//would be null if its destroyed pretty sure
         {
-            lookForInvaders(towerTam);
+            lookForInvaders(towerTam.position, SearchAreaAroundBase);
             if (invaderComp.Count > 0) { return 2; }
+        }
+
+        if (GoThere != (Vector2)um.GetmoveTarget(6).position)
+        {
+            lookForInvaders(GoThere, 1f);//checking if specific area invaders are is clear
+            if (invaderComp.Count < 1) { GoThere = um.GetmoveTarget(6).position; }
         }
 
         //currently only checks around itself
         return 0;
+    }
+
+    public void TheyHurtMe(GameObject bully)
+    {
+        GoThere = bully.transform.position;//will be where they send units
     }
 }
 
