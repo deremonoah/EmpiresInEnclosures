@@ -7051,6 +7051,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionAreaTransform: {fileID: 1521665927}
+  GreenFlagPrefab: {fileID: 7438630938145613388, guid: 05f5f827d9b6df34c8af6b27855edd73, type: 3}
+  RedFlagPrefab: {fileID: 0}
 --- !u!114 &841401717
 MonoBehaviour:
   m_ObjectHideFlags: 0

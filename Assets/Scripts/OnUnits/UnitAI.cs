@@ -34,6 +34,8 @@ public class UnitAI : MonoBehaviour
     public Vector2 xRange;
     public Vector2 yRange;
 
+    private RTSController rtsController;
+
     void Start()
     {
         myStats = GetComponent<UnitStats>();
@@ -41,7 +43,8 @@ public class UnitAI : MonoBehaviour
         setUnitState(UnitState.move);
         mysr = GetComponentInChildren<SpriteRenderer>();
         urManager = FindObjectOfType<UnitManager>();
-        
+        rtsController = FindObjectOfType<RTSController>();
+
         if (this.gameObject.layer == 7)//so on the player layer, flip the transform 180 so it faces the right way to do animations
         {
             this.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
@@ -153,7 +156,7 @@ public class UnitAI : MonoBehaviour
             //makes sure we don't double up on attack routines
 
             //helps be more natural
-            pos = RandomizePos(pos);
+            //pos = RandomizePos(pos);
             float baseBonusRange = 0;
 
             if(enmTarg.GetType()==typeof(BaseHP))//checks if refrence is base
@@ -170,6 +173,7 @@ public class UnitAI : MonoBehaviour
                 attackTarget = enmTarg;
                 setUnitState(UnitState.windUp);
                 currentRoutine = StartCoroutine(RangedAttackRoutine());
+                notGoThereNow();//tells RTS controller to get rid of the appropriate placed flags
             }
             //are they in attack range
             else if (atkRng+ baseBonusRange >= Mathf.Abs(curruntPos.x - pos.x) && atkRng+ baseBonusRange >= Mathf.Abs(curruntPos.y - pos.y))
@@ -177,7 +181,9 @@ public class UnitAI : MonoBehaviour
                 Debug.Log("set target to" + enmTarg.name);
                 attackTarget = enmTarg;
                 currentRoutine = StartCoroutine(MeleeAttackRoutine());
+                notGoThereNow();//tells RTS controller to get rid of the appropriate placed flags
             }
+            
             SetMoveTarget(pos);
         }
         
@@ -221,8 +227,14 @@ public class UnitAI : MonoBehaviour
     {
         GotToWhereIshouldHave = true;
         moveTargets.Clear();
-        moveTargets.Insert(0, urManager.GetmoveTarget(gameObject.layer).position);
+
+        moveTargets.Insert(0, urManager.GetmoveTarget(gameObject.layer).position);//might be a check box on screen 
         this.setUnitState(UnitState.move);
+    }
+
+    private void notGoThereNow()
+    {
+        rtsController.ForgotFlag(moveTargets);//if the list is cleard after will it be null?
     }
 
     private IEnumerator MeleeAttackRoutine()

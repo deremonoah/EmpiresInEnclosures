@@ -20,6 +20,8 @@ public class UltimateManager : MonoBehaviour
     [SerializeField] float enemyUltMax;
     [SerializeField] Image enemyUltiProgressIcon;
     //this could probably be a manager then have refrence to the enemy ult and player ult, then grab their refrences from game manager
+
+    //should make a list of units for both player & enemy units to "clear" post combat
     private void Start()
     {
         um = FindObjectOfType<UnitManager>();
