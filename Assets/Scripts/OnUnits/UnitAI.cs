@@ -226,8 +226,8 @@ public class UnitAI : MonoBehaviour
     private void DoneFighting()
     {
         GotToWhereIshouldHave = true;
+        notGoThereNow();
         moveTargets.Clear();
-
         moveTargets.Insert(0, urManager.GetmoveTarget(gameObject.layer).position);//might be a check box on screen 
         this.setUnitState(UnitState.move);
     }
