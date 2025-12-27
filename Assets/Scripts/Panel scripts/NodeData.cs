@@ -5,7 +5,7 @@ using UnityEngine;
 public class NodeData : MonoBehaviour
 {
     [SerializeField] NodeType myType; //this should probably just be a parent child thing, parent node class & shop, enemy & boss enherit
-    [SerializeField] Faction factionToFight;//this gets sent to unit manager? for who the enemy is
+    [SerializeField] List<Faction> factionsOnTeam;//might just use the first one, for displaying art
     [SerializeField] List<GameObject> units;//this should be all possible units then based on "turn" count uses more of them
     [SerializeField] List<NodeData> nodesNextToMe;
     //prefrence for strategy
@@ -27,9 +27,9 @@ public class NodeData : MonoBehaviour
         FindObjectOfType<MapPanel>().lookAtMapNode(this);//this feels weird and prob not right, should I use events?
     }
 
-    public Faction getFactionOnNode()
+    public Faction getMainFactionOnNode()
     {
-        return factionToFight;
+        return factionsOnTeam[0];
     }
 
     public NodeType getNodeType()
@@ -45,6 +45,11 @@ public class NodeData : MonoBehaviour
     public List<NodeData> GetNearbyNodes()
     {
         return nodesNextToMe;
+    }
+
+    public List<Faction> GetFactionsForLoot()
+    {
+        return factionsOnTeam;
     }
     //either the enemyAi will grab unit info or this sends its info, probably grab info better?
 }

@@ -54,7 +54,7 @@ public class MapPanel : MonoBehaviour
     {
         if(highlightedNode.getNodeType()==NodeType.enemy)
         {
-            ml.loadLevel(highlightedNode.getFactionOnNode());//this tells the map loader to load the correct map
+            ml.loadLevel(highlightedNode.getMainFactionOnNode());//this tells the map loader to load the correct map
             //tell unit manager what the new faction is & give their unit list
             FindObjectOfType<UnitManager>().LoadEnemyUnitList(highlightedNode.getUnits());
             //flow manager will start when map is closed, which is already on the invade button
