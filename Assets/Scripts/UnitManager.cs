@@ -26,7 +26,7 @@ public class UnitManager : MonoBehaviour
 
     [Header("Factions Refrence")]
     [SerializeField] Faction playerFaction;
-    [SerializeField] Faction EnemyFaction;//this needs to get updated by the map
+    [SerializeField] List<Faction> EnemyFaction;//this needs to get updated by the map
 
     [Header("Spawn Varience")]
     public Vector2 xRange;
@@ -227,10 +227,10 @@ public class UnitManager : MonoBehaviour
     public Faction GetPlayerFaction()
     { return playerFaction; }
 
-    public Faction GetEnemyFaction()
+    public List<Faction> GetEnemyFactions()
     { return EnemyFaction; }
 
-    public void SetEnemyFaction(Faction fac)//called by the map node load type dealy
+    public void SetEnemyFaction(List<Faction> fac)//called by the map node load type dealy
     { EnemyFaction = fac; }
     #endregion
 }

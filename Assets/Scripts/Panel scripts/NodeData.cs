@@ -47,7 +47,7 @@ public class NodeData : MonoBehaviour
         return nodesNextToMe;
     }
 
-    public List<Faction> GetFactionsForLoot()
+    public List<Faction> GetIncludedFactions()
     {
         return factionsOnTeam;
     }

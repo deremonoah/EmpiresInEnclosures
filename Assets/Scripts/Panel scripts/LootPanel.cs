@@ -6,14 +6,16 @@ using UnityEngine.UI;
 public class LootPanel : MonoBehaviour
 {
     private Animator animLoot;
-    [SerializeField] private List<FactionLoot> LootLists;
+    [Header("loaded from resource folder")]
+    [SerializeField] private List<FactionLoot> FactionLootLists;
     [Header("panel refrences")]
     [SerializeField] private GameObject ReplaceButtons;
     [SerializeField] List<Image> lootImages;
     private UnitManager um;
     private bool areReplacingUnit;
-    [SerializeField]private List<GameObject> PickOptions;
+    [SerializeField]private List<GameObject> PickOptions=new List<GameObject>();
     private int playerPickedThis;
+
     private void OnEnable()
     {
         //sub to flow manager openLoot +=OpenLootPan;
@@ -21,7 +23,7 @@ public class LootPanel : MonoBehaviour
         { Debug.Log("instance null"); }
         FlowManager.instance.lootPanelSendOpen += OpenLootPan;
         animLoot = GetComponent<Animator>();
-        Resources.Load<FactionLoot>("FactionLootObj");// getting FactionLoot as a list refrence, loading multiple times is less effecient
+        FactionLootLists =new List<FactionLoot>(Resources.LoadAll<FactionLoot>("FactionLootObjs"));// getting FactionLoot as a list refrence, loading multiple times is less effecient
         um = FindObjectOfType<UnitManager>();
     }
 
@@ -31,7 +33,7 @@ public class LootPanel : MonoBehaviour
     {
         animLoot.SetBool("Open", true);
 
-        GeneratePicks(um.GetPlayerFaction(),um.GetEnemyFaction());
+        GeneratePicks(um.GetPlayerFaction(),um.GetEnemyFactions());
     }
 
     public void CloseLootPan()//on select button
@@ -49,30 +51,29 @@ public class LootPanel : MonoBehaviour
     //selected unit gets added
     //generate picks & load them into buttons (image, info' prob from scriptable obj)
 
-    private void GeneratePicks(Faction player, Faction enemy)//needs to take in data or grab it from somewhere which 2 groups are fighting, I am thinking an Enum on their bases
+    private void GeneratePicks(Faction player, List<Faction> enemy)//needs to take in data or grab it from somewhere which 2 groups are fighting, I am thinking an Enum on their bases
     {
         //look in the loot list for the list with the right 2 factions
-        FactionLoot loot=null;
+        List<GameObject> lootList=new List<GameObject>();
         //find matching loot table
-        for(int lcv=0;lcv<LootLists.Count;lcv++)
+        Debug.Log("EnemyFactions "+enemy.Count);
+        for(int fcv=0;fcv<enemy.Count;fcv++)
         {
-            if(LootLists[lcv].DoesMatchFactions(player,enemy))
+            for (int lcv = 0; lcv < FactionLootLists.Count; lcv++)
             {
-                loot = LootLists[lcv];
+                if (FactionLootLists[lcv].DoesMatchFactions(player, enemy[fcv]))
+                {
+                    lootList.AddRange(FactionLootLists[lcv].GetLootOptions());
+                }
             }
         }
-
-        if(loot==null)
+        Debug.Log("loot list count " + lootList.Count);
+        if (lootList==null)
         {
             Debug.LogError("loot is Null");
         }
-        //gotta make it a new one so it doesn't just point?
-        List<GameObject> Potential = new List<GameObject>();
-        List<GameObject> mustAdd = loot.GetLootOptions();
-        foreach(GameObject go in mustAdd)
-        {
-            Potential.Add(go);
-        }
+
+        //make lootLists into one long list
 
         //now we have the list
         //fill the 3 buttons with 3 options, but can't repeat things the player already has (maybe want or had incase of getting rid of it)
@@ -82,11 +83,11 @@ public class LootPanel : MonoBehaviour
         //could remove dups from the loot list first? then pull random number
         for(int lcv=0;lcv<prevUps.Count;lcv++)
         {
-            for(int lcv2=0;lcv2< Potential.Count;lcv2++)
+            for(int lcv2=0;lcv2< lootList.Count;lcv2++)
             {
-                if(Potential[lcv2]==prevUps[lcv])
+                if(lootList[lcv2]==prevUps[lcv])
                 {
-                    Potential.RemoveAt(lcv2);
+                    lootList.RemoveAt(lcv2);
                     lcv2=0;
                     //do we put a break here? I think it should work
                 }
@@ -97,11 +98,11 @@ public class LootPanel : MonoBehaviour
 
         for (int lcv = 0; lcv < 3; lcv++)
         {
-            int rand = Random.Range(0, Potential.Count);
-            PickOptions.Add(Potential[rand]);
+            int rand = Random.Range(0, lootList.Count);
+            PickOptions.Add(lootList[rand]);
             //set image
-            lootImages[lcv].sprite = Potential[rand].GetComponent<UnitStats>().getIcon();//set icon sof specific one
-            Potential.RemoveAt(rand);//remove it so no repeats
+            lootImages[lcv].sprite = lootList[rand].GetComponent<UnitStats>().getIcon();//set icon sof specific one
+            lootList.RemoveAt(rand);//remove it so no repeats
         }
         
         //I do need a refrence to the images to set them, realizing they need to grab the stat refrence

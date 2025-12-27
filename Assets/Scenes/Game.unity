@@ -1630,7 +1630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myType: 3
-  factionToFight: 2
+  factionsOnTeam: 02000000
   units:
   - {fileID: 4571688680917307098, guid: 3be4a399c29814648a30ad295f157daa, type: 3}
   - {fileID: 3550317812265094632, guid: 2dc8e5c742e591745a87b5351b348628, type: 3}
@@ -2988,7 +2988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myType: 1
-  factionToFight: 1
+  factionsOnTeam: 01000000
   units:
   - {fileID: 3248066881049308706, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
   nodesNextToMe:
@@ -5503,7 +5503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myType: 1
-  factionToFight: 1
+  factionsOnTeam: 01000000
   units:
   - {fileID: 3248066881049308706, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
   nodesNextToMe:
@@ -7018,7 +7018,7 @@ MonoBehaviour:
   enmPPText: {fileID: 1724881663}
   enmPPMaxText: {fileID: 1968895245}
   playerFaction: 0
-  EnemyFaction: 0
+  EnemyFaction: 
   xRange: {x: -1, y: 1}
   yRange: {x: -1, y: 1}
 --- !u!4 &841401715
@@ -7053,6 +7053,7 @@ MonoBehaviour:
   selectionAreaTransform: {fileID: 1521665927}
   GreenFlagPrefab: {fileID: 7438630938145613388, guid: 05f5f827d9b6df34c8af6b27855edd73, type: 3}
   RedFlagPrefab: {fileID: 0}
+  flagsPlaced: []
 --- !u!114 &841401717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7615,7 +7616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myType: 0
-  factionToFight: 0
+  factionsOnTeam: 
   units: []
   nodesNextToMe: []
 --- !u!1 &967329672
@@ -8936,7 +8937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myType: 2
-  factionToFight: 0
+  factionsOnTeam: 
   units:
   - {fileID: 3550317812265094632, guid: 2dc8e5c742e591745a87b5351b348628, type: 3}
   - {fileID: 4571688680917307098, guid: 3be4a399c29814648a30ad295f157daa, type: 3}
@@ -11040,9 +11041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f95dcaef30603b748bf81c0923b659f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LootLists:
-  - {fileID: 11400000, guid: 597c1a58d3793a44ea7dd19462d5ecc8, type: 2}
-  - {fileID: 11400000, guid: 4bc6ba88e6c0030438c955b4564ac042, type: 2}
+  FactionLootLists: []
   ReplaceButtons: {fileID: 1829615826}
   lootImages:
   - {fileID: 1285930610}
@@ -15476,7 +15475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myType: 1
-  factionToFight: 3
+  factionsOnTeam: 03000000
   units:
   - {fileID: 2864915583633797780, guid: 7971749f3f35aad4a8844701b9857367, type: 3}
   - {fileID: 5212609840737170258, guid: 5a2dd7d4d9566294699780f6396547c5, type: 3}
@@ -16047,7 +16046,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myType: 0
-  factionToFight: 0
+  factionsOnTeam: 
   units: []
   nodesNextToMe: []
 --- !u!1 &2095066292

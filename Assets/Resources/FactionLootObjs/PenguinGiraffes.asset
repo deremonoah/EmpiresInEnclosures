@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86710f33dc69c343ae98aee42e7b082, type: 3}
+  m_Name: PenguinGiraffes
+  m_EditorClassIdentifier: 
+  playersFaction: 0
+  defeatedFaction: 1
+  lootOptions:
+  - {fileID: 7203921678899097389, guid: b242fdf228a0da74c901e915d738cfc2, type: 3}
+  - {fileID: 747321771612565356, guid: dbeb709ccb31d0342a84b25ca13bfef6, type: 3}
+  - {fileID: 1548054115205157805, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
+  - {fileID: 9069953782135950629, guid: 4864614692eeafd41aca06e83250c94f, type: 3}
+  - {fileID: 6935173671622643138, guid: 82220e5d09691a543bfffc0094d90e84, type: 3}
+  - {fileID: 6714081710735843315, guid: 1c172fa278d5ce04aa0518c2dd1b45f7, type: 3}
