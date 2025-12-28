@@ -13,6 +13,7 @@ public class UnitManager : MonoBehaviour
     private List<GameObject> PlayerUpgradeHistory;
     [SerializeField] private float playerPP,playerStartingPP, playerMaxPP, PPRegenTimer,PPRegenTimerMax;
     public Text playerPPText, playerPPMaxText;
+    private List<GameObject> spawnedPlayerUnits = new List<GameObject>();
 
     [Header("Enmey stuff")]
     public List<GameObject> enemyPrefabs;
@@ -23,6 +24,7 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private float enmPPRegenTimer;
     [SerializeField] private float enmPPRegenTimerMax;
     public Text enmPPText, enmPPMaxText;
+    private List<GameObject> spawnedEnemyUnits = new List<GameObject>();
 
     [Header("Factions Refrence")]
     [SerializeField] Faction playerFaction;
@@ -48,11 +50,13 @@ public class UnitManager : MonoBehaviour
     private void OnEnable()
     {
         FlowManager.instance.BattleStart+=StartOfBattleSetPP;
+        FlowManager.instance.lootPanelSendOpen += ClearUnitsAfterFight;
     }
 
     private void OnDisable()
     {
         FlowManager.instance.BattleStart -= StartOfBattleSetPP;
+        FlowManager.instance.lootPanelSendOpen -= ClearUnitsAfterFight;
     }
 
     private void StartOfBattleSetPP()
@@ -106,6 +110,7 @@ public class UnitManager : MonoBehaviour
             unit.GetComponent<UnitAI>().SetMoveTarget(EnemyBasePos.position);
             //unit.GetComponent<UnitAI>().setUnitState(UnitState.move); will it start by default
             unit.gameObject.layer = 7;
+            spawnedPlayerUnits.Add(unit);
             //truned off friendly fire
         }
         
@@ -189,8 +194,20 @@ public class UnitManager : MonoBehaviour
         }
     }
 
-    //code for enemy ai summoner
-    #region Enemy ai calls
+    private void ClearUnitsAfterFight()
+    {
+        foreach(GameObject go in spawnedPlayerUnits)
+        {
+            Destroy(go);
+        }
+
+        foreach(GameObject go in spawnedEnemyUnits)
+        {
+            Destroy(go);
+        }
+    }
+    
+#region Enemy ai calls
     public void spawnEnemyUnit(int lcv, Vector2 whereToGo)
     {
         //instantiate prefab at spawnPos.pos
@@ -209,6 +226,7 @@ public class UnitManager : MonoBehaviour
             //unit.GetComponent<UnitAI>().setUnitState(UnitState.move);
             //setting to enemy unit layer so they don't kill each other
             unit.gameObject.layer = 6;
+            spawnedEnemyUnits.Add(unit);
         }
     }
 
@@ -221,9 +239,9 @@ public class UnitManager : MonoBehaviour
     {
         return enemyPrefabs[slot].GetComponent<UnitStats>().getCost();
     }
-    #endregion
+#endregion
 
-    #region Faction Functions
+#region Faction Functions
     public Faction GetPlayerFaction()
     { return playerFaction; }
 
@@ -232,5 +250,5 @@ public class UnitManager : MonoBehaviour
 
     public void SetEnemyFaction(List<Faction> fac)//called by the map node load type dealy
     { EnemyFaction = fac; }
-    #endregion
+#endregion
 }
