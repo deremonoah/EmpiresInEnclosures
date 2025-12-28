@@ -6,6 +6,9 @@ public class UnitHp : HP
 {
     //handles taking damage and dieing
     private HPBarManager myhp;
+    [SerializeField]
+    private UnitAbility myOnDeathAbility;//should it just be death ability?
+
     void Start()
     {
         maxHp = GetComponent<UnitStats>().getMaxHp();
@@ -30,6 +33,8 @@ public class UnitHp : HP
         um.EnemyGetsPower(GetComponent<UnitStats>().getEnemyPayOnDeath(), false);
         
         ulti.chargePlayerUlt(amPlayer, 2);
+
+        myOnDeathAbility?.UseAbility(this.transform);
         
         Destroy(this.gameObject);
         

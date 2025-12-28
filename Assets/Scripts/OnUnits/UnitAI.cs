@@ -35,6 +35,7 @@ public class UnitAI : MonoBehaviour
     public Vector2 yRange;
 
     private RTSController rtsController;
+    
 
     void Start()
     {

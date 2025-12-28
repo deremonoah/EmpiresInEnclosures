@@ -14,11 +14,15 @@ public class UnitStats : MonoBehaviour
     [SerializeField] private float MountainSpeed;
     [SerializeField] private float MoveSpeed;
 
+    [Header("armor maybe more later")]
+    [SerializeField] private float Armor;
+
     [Header("Attack Stats")]
     [SerializeField] private float Attack;
     [SerializeField] private float AttackToBase;
     [SerializeField] private float AttackSpeed;
     [SerializeField] private float AnimAttackPreHit;
+    [Header("Ranged Stats")]
     [SerializeField] private Vector2 SightRange;
     [SerializeField] private float AttackRange;
     [Header("Unit Classifications")]
@@ -29,6 +33,18 @@ public class UnitStats : MonoBehaviour
     [SerializeField] private Sprite portrait;
     //maybe armor and stuff
 
+    [Header("Buffs so I can check their function for now")]
+    //buff stuff from aura abilities, should this be its own class? but then it would need to call another function to calcuate buff or check with an if
+    [SerializeField] private float bonusAttack;
+    [SerializeField] private float bonusAttackToBase;
+    [SerializeField] private float bonusAttackSpeed;//bonus will be negative for faster
+    [SerializeField] private float bonusMoveSpeed;
+    [SerializeField] private float bonusHP;//will need to integrate unit hp using this class probably?
+    [SerializeField] private float bonusRange;//certain effected classes could have a public updated from buff call
+    [SerializeField] private float bonusArmor;
+    //I feel like can't stack or stack limit, not sure how to calculate that though
+    //maybe a list of units buffing you, and check their type, which shouldn't be done every frame
+
     public int getCost()
     {
         return Cost;
@@ -36,12 +52,12 @@ public class UnitStats : MonoBehaviour
 
     public float getAttack()
     {
-        return Attack; 
+        return Mathf.Clamp(Attack+bonusAttack,0,1000); //idk when damage would get over 1000
     }
 
     public float getBaseAttack()
     {
-        return AttackToBase;
+        return Mathf.Clamp(AttackToBase + bonusAttackToBase, 0, 1000);
     }
 
     public float getAttackSpeed()
@@ -51,7 +67,7 @@ public class UnitStats : MonoBehaviour
 
     public float getMaxHp()
     {
-        return MaxHp;
+        return MaxHp+bonusHP;
     }
 
     public float getMoveSpeed(Terrain ter)

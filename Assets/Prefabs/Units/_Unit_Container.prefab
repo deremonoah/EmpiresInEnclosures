@@ -480,6 +480,7 @@ MonoBehaviour:
   Attack: 0
   AttackToBase: 0
   AttackSpeed: 0
+  AnimAttackPreHit: 0.2
   SightRange: {x: 6, y: 6}
   AttackRange: 1
   ut: 0
@@ -502,6 +503,7 @@ MonoBehaviour:
   currentHp: 0
   maxHp: 0
   anim: {fileID: 0}
+  myOnDeathAbility: {fileID: 0}
 --- !u!114 &6547857816382867222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,7 +516,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03230b27673b7041b8f27a3fbfb0432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTarget: {x: 0, y: 0}
+  GotToWhereIshouldHave: 0
+  currentSpeed: 0
+  moveTargets: []
   attackTarget: {fileID: 0}
   unitState: 0
   ProjectilePrefab: {fileID: 0}
