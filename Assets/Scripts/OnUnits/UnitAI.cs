@@ -35,9 +35,18 @@ public class UnitAI : MonoBehaviour
     public Vector2 yRange;
 
     private RTSController rtsController;
-    
 
-    void Start()
+    private Collider2D forBuff;
+
+    private void Awake()
+    {
+        anim = this.gameObject.GetComponentInChildren<UnitAnimator>();
+        selectedGameObject = transform.Find("Selected").gameObject;
+        SetSelectedVisible(false);
+        currentRoutine = null;
+    }
+
+    private void Start()
     {
         myStats = GetComponent<UnitStats>();
         currentSpeed = myStats.getMoveSpeed(Terrain.normal);
@@ -50,15 +59,6 @@ public class UnitAI : MonoBehaviour
         {
             this.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
         }
-        
-    }
-
-    private void Awake()
-    {
-        anim = this.gameObject.GetComponentInChildren<UnitAnimator>();
-        selectedGameObject = transform.Find("Selected").gameObject;
-        SetSelectedVisible(false);
-        currentRoutine = null;
     }
 
     private void OnDisable()
