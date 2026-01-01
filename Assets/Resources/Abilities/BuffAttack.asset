@@ -15,4 +15,4 @@ MonoBehaviour:
   _buffType: 0
   _buffStrength: 1
   _whoToTarget: 0
-  _AuraSize: 2
+  _AuraSize: 4

@@ -31,7 +31,8 @@ public class UnitAnimator : MonoBehaviour
     }
     public void SetAnimationState(int state)
     {
-        animor.SetFloat("State", state);
+        if (animor != null)
+        { animor.SetFloat("State", state); }
     }
 
     //add took damage and then maybe a coroutine for just chaning the material, so its independant of animator

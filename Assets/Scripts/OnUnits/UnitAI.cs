@@ -179,7 +179,7 @@ public class UnitAI : MonoBehaviour
             //are they in attack range
             else if (atkRng+ baseBonusRange >= Mathf.Abs(curruntPos.x - pos.x) && atkRng+ baseBonusRange >= Mathf.Abs(curruntPos.y - pos.y))
             {
-                Debug.Log("set target to" + enmTarg.name);
+                //Debug.Log("set target to" + enmTarg.name);
                 attackTarget = enmTarg;
                 currentRoutine = StartCoroutine(MeleeAttackRoutine());
                 notGoThereNow();//tells RTS controller to get rid of the appropriate placed flags

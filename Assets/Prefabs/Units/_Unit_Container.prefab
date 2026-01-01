@@ -432,6 +432,7 @@ GameObject:
   - component: {fileID: 8699692239669971468}
   - component: {fileID: 8034002444395697382}
   - component: {fileID: 769499297609996762}
+  - component: {fileID: 4428370250409959228}
   m_Layer: 0
   m_Name: _Unit_Container
   m_TagString: Untagged
@@ -448,7 +449,7 @@ Transform:
   m_GameObject: {fileID: 6354999795987385463}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.13825034, y: -0.45892853, z: 5.1698265}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -477,6 +478,7 @@ MonoBehaviour:
   SwimSpeed: 0
   MountainSpeed: 0
   MoveSpeed: 0
+  Armor: 0
   Attack: 0
   AttackToBase: 0
   AttackSpeed: 0
@@ -488,6 +490,17 @@ MonoBehaviour:
   FriendlyPayOnDeath: 1
   EnemyPayOnDeath: 1
   portrait: {fileID: 0}
+  auraAdders: []
+  bonusAttack: 0
+  bonusAttackToBase: 0
+  bonusAttackSpeed: 0
+  bonusMoveSpeed: 0
+  bonusHP: 0
+  bonusSightRange: 0
+  bonusAttackRange: 0
+  bonusArmor: 0
+  bonusPayOnDeathFriendly: 0
+  bonusPayOnDeathEnemy: 0
 --- !u!114 &3843686139427556833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,6 +624,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 2737252795741696904}
   health: 0
+--- !u!114 &4428370250409959228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6354999795987385463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3cfc6bd9a1e64fe68df6bf1d78e0541, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7150942476793930453
 GameObject:
   m_ObjectHideFlags: 0

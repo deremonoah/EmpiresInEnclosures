@@ -136,6 +136,7 @@ public class UnitStats : MonoBehaviour
     {
         //buffs that are larger have priority, so if you have enemy units that debuff attack by 2 and your unit buffs your units by 1, should they combine? or only apply biggest absolute value?
         //could I handle each stat by itself?
+        Debug.Log("we got in Resolve");
         foreach(AuraAbility buff in auraAdders)
         {
             float absBuffStrength = Mathf.Abs(buff.getBuffStength());
@@ -180,6 +181,7 @@ public class UnitStats : MonoBehaviour
     public void RemovedBuffFrom(AuraAbility buff)
     {
         auraAdders.Remove(buff);
+        ResolveBuffs();
     }
 #endregion
 }

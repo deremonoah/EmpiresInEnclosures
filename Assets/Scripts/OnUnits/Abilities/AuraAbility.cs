@@ -13,30 +13,7 @@ public class AuraAbility : OnDeathAbility //ondeath so it can remove buffs when 
 
     public override void UseAbility(Transform origin)//wait! this could be called for when it dies, to remove all?
     {
-        RemoveAllBuffs();//called on death
-    }
-
-    public void ApplyBuff(UnitStats us)//why did I name class apply buff?
-    {
-        //maybe when applying buff we send our info?
-        us.BuffedFrom(this);
-    }
-
-    public void RemoveBuff(UnitStats us)//this gets called when the thing dies and needs a list of what entered it on auraHolder
-    {
-        //check if list contains unitStats then remove it & remove any null targets
-        //call remove buff
-        buffTargets.Remove(us);
-        us.RemovedBuffFrom(this);
-        //clear any nulls from list here?
-    }
-
-    private void RemoveAllBuffs()//called when unit dies
-    {
-        foreach(UnitStats us in buffTargets)
-        {
-            RemoveBuff(us);
-        }
+        origin.gameObject.GetComponent<UnitStats>().BuffedFrom(this);
     }
 
     //getters for unitStats
