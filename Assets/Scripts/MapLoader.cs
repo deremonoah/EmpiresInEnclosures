@@ -12,6 +12,15 @@ public class MapLoader : MonoBehaviour
     [SerializeField] List<Map> mapList;// could have a map holder that holds the faction refrence on it
     private int currentlyOpenMap;
 
+    private void Start()
+    {
+        //disables all levels at the start
+        for (int lcv = 0; lcv < mapList.Count; lcv++)
+        {
+            mapList[lcv].gameObject.SetActive(false);
+        }
+    }
+
     public void loadLevel(Faction facinLoad)
     {
         mapList[currentlyOpenMap].gameObject.SetActive(false);//disables previous map

@@ -5,18 +5,22 @@ using UnityEngine;
 public class AuraHolder : MonoBehaviour
 {
     [SerializeField] private AuraAbility ability;//maybe could care about it having things in its range, maybe it buffs itself for grapple?
+    [SerializeField] private Transform visual;
     private CircleCollider2D _myCol;
     private List<Collider2D> results = new();
     [SerializeField]
     private List<UnitStats> buffTargets;
-    [SerializeField] private int parentsLayer;
+    private int parentsLayer;
+
+
     private void Start()
     {
         _myCol=GetComponent<CircleCollider2D>();
         _myCol.radius = ability.getAuraSize();
+        visual.localScale = new Vector3(ability.getAuraSize() * 2, ability.getAuraSize() * 2, 1);//times 2 to get equavalent size
         parentsLayer=this.transform.parent.gameObject.layer;//when we set units layer doesn't set below stuff I think
         results.Clear();
-        Physics2D.OverlapCollider(_myCol, new ContactFilter2D().NoFilter(), results);
+        /*Physics2D.OverlapCollider(_myCol, new ContactFilter2D().NoFilter(), results);
 
         foreach(var target in results)
         {
@@ -25,7 +29,7 @@ public class AuraHolder : MonoBehaviour
             {
                 handleCollision(go);
             }
-        }
+        }*/
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

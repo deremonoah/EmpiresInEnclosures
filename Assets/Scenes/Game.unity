@@ -10295,6 +10295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapList:
   - {fileID: 116358327}
+  - {fileID: 1954287843}
 --- !u!4 &1208967096
 Transform:
   m_ObjectHideFlags: 0

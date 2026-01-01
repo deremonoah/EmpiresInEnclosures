@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 //this holds all the stats and is where they would be set on the scriptable object
 public class UnitStats : MonoBehaviour
@@ -137,6 +138,9 @@ public class UnitStats : MonoBehaviour
         //buffs that are larger have priority, so if you have enemy units that debuff attack by 2 and your unit buffs your units by 1, should they combine? or only apply biggest absolute value?
         //could I handle each stat by itself?
         Debug.Log("we got in Resolve");
+
+        auraAdders.Distinct();
+
         foreach(AuraAbility buff in auraAdders)
         {
             float absBuffStrength = Mathf.Abs(buff.getBuffStength());
