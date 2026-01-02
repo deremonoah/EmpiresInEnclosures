@@ -10,8 +10,8 @@ public class UnitSight : MonoBehaviour
     {
         ai = gameObject.GetComponentInParent<UnitAI>();
         var stats =gameObject.GetComponentInParent<UnitStats>();
-        var collider = GetComponent<BoxCollider2D>();
-        collider.size = stats.getSightRange();
+        var collider = GetComponent<CircleCollider2D>();
+        collider.radius = stats.getSightRange();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

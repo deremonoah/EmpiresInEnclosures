@@ -24,7 +24,7 @@ public class UnitStats : MonoBehaviour
     [SerializeField] private float AttackSpeed;
     [SerializeField] private float AnimAttackPreHit;
     [Header("Ranged Stats")]
-    [SerializeField] private Vector2 SightRange;
+    [SerializeField] private float SightRange;
     [SerializeField] private float AttackRange;
     [Header("Unit Classifications")]
     [SerializeField] private UnitType ut;
@@ -95,9 +95,9 @@ public class UnitStats : MonoBehaviour
         return false;
     }
 
-    public Vector2 getSightRange()
+    public float getSightRange()
     {
-        return SightRange + SightRange;
+        return SightRange;
     }
 
     public float getAttackRange()

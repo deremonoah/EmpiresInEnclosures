@@ -306,7 +306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5405865790221118294}
   - component: {fileID: 5690976369346673543}
-  - component: {fileID: 6261015391267740379}
+  - component: {fileID: 4348277364853819977}
   m_Layer: 0
   m_Name: Sight
   m_TagString: Untagged
@@ -341,8 +341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 763143b5c28f29d4db250d6d98e59944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &6261015391267740379
-BoxCollider2D:
+--- !u!58 &4348277364853819977
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -374,18 +374,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7, y: 7}
-  m_EdgeRadius: 0
+  m_Radius: 0.5
 --- !u!1 &5945825242533879401
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +473,7 @@ MonoBehaviour:
   AttackToBase: 0
   AttackSpeed: 0
   AnimAttackPreHit: 0.2
-  SightRange: {x: 6, y: 6}
+  SightRange: 0
   AttackRange: 1
   ut: 0
   ur: 0
