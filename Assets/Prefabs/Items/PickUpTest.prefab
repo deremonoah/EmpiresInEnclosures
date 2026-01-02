@@ -130,7 +130,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3, y: 3}
+  m_Size: {x: 6, y: 6}
   m_EdgeRadius: 0
 --- !u!114 &5990587661420914050
 MonoBehaviour:
@@ -144,9 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a13376ab1ac90748b9b16a612eced11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: 1
-  strength: 10
-  TimeToPickUp: 3
+  _ability: {fileID: 11400000, guid: f718d94acd3b04a18a1e45aaa21caa49, type: 2}
   progTimer: 0
   ProgressBar: {fileID: 1269096449184191406}
   progressText: {fileID: 0}

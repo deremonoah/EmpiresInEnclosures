@@ -34,6 +34,8 @@ public class UnitManager : MonoBehaviour
     public Vector2 xRange;
     public Vector2 yRange;
 
+    public static UnitManager instance;
+
     private void Start()
     {
         updatePPText();
@@ -41,6 +43,9 @@ public class UnitManager : MonoBehaviour
         //setting enemy pp for testing but maybe keep as public info
         enmPPMaxText.text = "" + enmMaxPP;//might want a set max in future for gaining max pp
         PlayerUpgradeHistory = new List<GameObject>();
+
+        instance = this;
+
         foreach(GameObject go in PlayerUnitPrefabs)
         { 
             PlayerUpgradeHistory.Add(go); 
