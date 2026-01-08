@@ -12,4 +12,9 @@ public class HPBarManager : MonoBehaviour
     {
         healthBar.fillAmount = HPpercent;
     }
+
+    public void SetHPBar(Image bar)//this is for the enemy base spawning in right
+    {
+        healthBar = bar;
+    }
 }

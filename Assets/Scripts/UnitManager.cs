@@ -244,6 +244,12 @@ public class UnitManager : MonoBehaviour
     {
         return enemyPrefabs[slot].GetComponent<UnitStats>().getCost();
     }
+
+    //this is called by map on enable when it instantiates
+    public void UpdateBasePos(Transform newBasePos)
+    {
+        EnemyBasePos = newBasePos;
+    }
 #endregion
 
 #region Faction Functions

@@ -149,6 +149,12 @@ public class EnemyBaseAI : MonoBehaviour
     {
         GoThere = bully.transform.position;//will be where they send units
     }
+
+    //this is called by map on enable when it instantiates
+    public void UpdateBaseHP(BaseHP myHP)
+    {
+        ourBase = myHP;
+    }
 }
 
 

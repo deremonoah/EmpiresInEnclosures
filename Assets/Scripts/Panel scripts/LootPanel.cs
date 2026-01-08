@@ -133,4 +133,3 @@ public class LootPanel : MonoBehaviour
         ReplaceButtons.SetActive(false);
     }
 }
-public enum Faction { Penguins, Giraffes, PolarBears, Beavers, Monkeys}

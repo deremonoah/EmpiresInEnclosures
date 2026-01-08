@@ -36,7 +36,7 @@ public class MapLoader : MonoBehaviour
         if (currentlyOpenMap < 0)
         { Debug.LogError("couldn't find matching map currently open map =-1"); }
 
-        //load appropriate tower image on player tower & base
-
+        //the map on enable enstaniates it
     }
+
 }

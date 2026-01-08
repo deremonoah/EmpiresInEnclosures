@@ -124,4 +124,4 @@ public class FlowManager : MonoBehaviour
     public gameState getCurrentState()
     { return curState; }
 }
-public enum gameState { movingLocation,inBattle,looting}
+public enum gameState { starting,movingLocation,inBattle,looting}

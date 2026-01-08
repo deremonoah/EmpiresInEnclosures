@@ -52,18 +52,24 @@ public class MapPanel : MonoBehaviour
 
     public void pickMapNode()
     {
-        if(highlightedNode.getNodeType()==NodeType.enemy)
+        if(highlightedNode is FactionNode) // old way highlightedNode.GetType()==typeof(FactionNode), learned current from google ai, when finding old way, rather than load Simple Samurai
         {
-            ml.loadLevel(highlightedNode.getMainFactionOnNode());//this tells the map loader to load the correct map
-            //tell unit manager what the new faction is & give their unit list
-            UnitManager um = FindObjectOfType<UnitManager>();
-            um.LoadEnemyUnitList(highlightedNode.getUnits());
-            um.SetEnemyFaction(highlightedNode.GetIncludedFactions());
+            //if it is FactionNode, then we can cast the parent version of the child refrence back to its right type
+            HandleFaction((FactionNode)highlightedNode);
         }
-        if(highlightedNode.getNodeType()==NodeType.shop)
+        if(highlightedNode is EncounterNode)
         {
-            ConqueredNodes.Add(highlightedNode);
+            ConqueredNodes.Add(highlightedNode);//this is temporary work around, and should make it so they can only go there once
         }
+    }
+
+    private void HandleFaction(FactionNode enemy)
+    {
+        ml.loadLevel(enemy.getMainFactionOnNode());//this tells the map loader to load the correct map
+        //tell unit manager what the new faction is & give their unit list
+        UnitManager um = FindObjectOfType<UnitManager>();
+        um.LoadEnemyUnitList(enemy.getUnits());
+        um.SetEnemyFaction(enemy.GetIncludedFactions());
     }
 
     public void lookAtMapNode(NodeData node)

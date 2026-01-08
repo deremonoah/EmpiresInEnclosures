@@ -8,6 +8,16 @@ public class BaseHP : HP
     public HPBarManager barUI;
     public event Action<string> BattleEndedLoserCalls;
 
+    private void Start()
+    {
+        if (gameObject.layer == 6)
+        {
+            var healthBar = FindObjectOfType<EnemyHealthBarFinder>().getHPBar();
+            barUI.SetHPBar(healthBar);
+        }
+        base.StartUp();
+        //will need a similar case for player
+    }
 
     public override void ThisAttackedYou(UnitStats us)
     {
