@@ -44,7 +44,7 @@ public class CameraController : MonoBehaviour
 
         if(scrollInput!=0)
         {
-            Debug.Log(scrollInput);
+            //Debug.Log(scrollInput);
 
             float newsize = cam.orthographicSize - scrollInput * zoomSpeed;
 

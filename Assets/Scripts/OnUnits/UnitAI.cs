@@ -38,6 +38,10 @@ public class UnitAI : MonoBehaviour
 
     private Collider2D forBuff;
 
+    private int LayerToAttack;
+    private LayerMask layerMaskToAttack;
+    private float myWidth;
+
     private void Awake()
     {
         anim = this.gameObject.GetComponentInChildren<UnitAnimator>();
@@ -55,10 +59,21 @@ public class UnitAI : MonoBehaviour
         urManager = FindObjectOfType<UnitManager>();
         rtsController = FindObjectOfType<RTSController>();
 
+        //for player facing right and both to have refrence to correct enemy layer or layer Mask
         if (this.gameObject.layer == 7)//so on the player layer, flip the transform 180 so it faces the right way to do animations
         {
             this.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            LayerToAttack = 6;
+            layerMaskToAttack = LayerMask.GetMask("EnemyUnit");
         }
+        else 
+        { 
+            LayerToAttack = 7;
+            layerMaskToAttack = LayerMask.GetMask("PlayerUnit");
+        }
+
+        //for attack calculation
+        myWidth=GetComponent<Collider2D>().bounds.size.x;
     }
 
     private void OnDisable()
@@ -82,7 +97,7 @@ public class UnitAI : MonoBehaviour
         {
             float step = currentSpeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, moveTargets[0], step);
-            isCloseTo(moveTargets[0]);
+            iCloseTo(moveTargets[0]);
         }
 
         
@@ -90,8 +105,11 @@ public class UnitAI : MonoBehaviour
     
     public void SetMoveTarget(Vector2 pos)//used for getting agro or initial spawn
     {
-        moveTargets.Insert(0, pos);
-        moveTargets.Distinct();
+        if(moveTargets.Count<6)
+        {
+            moveTargets.Insert(0, pos);
+            moveTargets.Distinct();//doesn't handle slight movement
+        }
     }
 
     public void CommandUnitsMoveTarget(Vector2 pos)//used when commanding units
@@ -121,7 +139,7 @@ public class UnitAI : MonoBehaviour
         }
     }
 
-    private void isCloseTo(Vector3 target)
+    private void iCloseTo(Vector3 target)
     {
         if(moveTargets.Count<=1)
         {
@@ -131,11 +149,11 @@ public class UnitAI : MonoBehaviour
         float myx = this.transform.position.x;
         float myy = this.transform.position.y;
 
-        float targetx = moveTargets[0].x;
-        float targety = moveTargets[0].y;
+        float targetx = target.x;
+        float targety = target.y;
 
         //if we are within 0.1f x & y of target move position we don't have to go there anymore
-        if (Mathf.Abs( myx- targetx) < .1f && Mathf.Abs(myy - targety) < .1f)
+        if (Mathf.Abs( myx- targetx) < myStats.getAttackRange() && Mathf.Abs(myy - targety) < myStats.getAttackRange())
         {
             moveTargets.RemoveAt(0);
         }
@@ -145,11 +163,6 @@ public class UnitAI : MonoBehaviour
 
     public void SeeTarget(Vector2 pos, HP enmTarg)
     {
-        //to catch any non hp sighted things, so it won't start a routine early
-        if(enmTarg == null)
-        {
-            return;
-        }
 
         if (attackTarget == null && currentRoutine==null)
         {
@@ -158,13 +171,6 @@ public class UnitAI : MonoBehaviour
 
             //helps be more natural
             //pos = RandomizePos(pos);
-            float baseBonusRange = 0;
-
-            if(enmTarg.GetType()==typeof(BaseHP))//checks if refrence is base
-            {
-                baseBonusRange = 4;//units couldn't get to the center of the transform because of the hitbox
-                //and setting visually would make sense they can punch the outside of the base
-            }
 
             float atkRng = myStats.getAttackRange();
             Vector2 curruntPos = this.gameObject.transform.position;
@@ -177,17 +183,53 @@ public class UnitAI : MonoBehaviour
                 notGoThereNow();//tells RTS controller to get rid of the appropriate placed flags
             }
             //are they in attack range
-            else if (atkRng+ baseBonusRange >= Mathf.Abs(curruntPos.x - pos.x) && atkRng+ baseBonusRange >= Mathf.Abs(curruntPos.y - pos.y))
+            else //if (atkRng+ baseBonusRange >= Mathf.Abs(curruntPos.x - pos.x) && atkRng+ baseBonusRange >= Mathf.Abs(curruntPos.y - pos.y))
             {
-                //Debug.Log("set target to" + enmTarg.name);
-                attackTarget = enmTarg;
-                currentRoutine = StartCoroutine(MeleeAttackRoutine());
-                notGoThereNow();//tells RTS controller to get rid of the appropriate placed flags
+                Debug.Log("do we ever fucking get in the melee shit?");
+                if(CheckMeleeInRange(pos))
+                {
+                    Debug.Log("passed check melee in range");
+                    attackTarget = enmTarg;
+                    currentRoutine = StartCoroutine(MeleeAttackRoutine());
+                    notGoThereNow();
+                }
             }
             
             SetMoveTarget(pos);
         }
         
+    }
+
+    private bool CheckMeleeInRange(Vector2 pos)
+    {
+        Debug.Log("in check melee");
+        Vector2 myPos = transform.position;
+        Vector3 direction = pos-myPos;
+        float reach = myStats.getAttackRange() + (myWidth / 2);//divided by 2 so its like going out from center
+        RaycastHit2D hit = Physics2D.Raycast(myPos, direction, reach, layerMaskToAttack);
+        StartCoroutine(drawRoutine(myPos, direction, reach));
+        if (hit.collider!=null)
+        {
+            Debug.Log("collider null? nope");
+            if (hit.collider.gameObject.layer == LayerToAttack)
+            {
+                Debug.Log("layer is even right so we return true");
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    private IEnumerator drawRoutine(Vector2 myPos, Vector3 direction, float reach)
+    {
+        float timer = 0;
+        while(timer<100)
+        {
+            Debug.DrawRay(myPos, direction * reach, Color.red);
+            timer += Time.deltaTime;
+            yield return null;
+        }
     }
 
     private Vector3 RandomizePos(Vector3 aroundHere)
@@ -315,20 +357,11 @@ public class UnitAI : MonoBehaviour
 
     private HP checkForOpponentToAttack()
     {
-        int layerToAttack = -1;
-        if(this.gameObject.layer == 7)
-        {
-            layerToAttack = 6;//player attack enemy
-        }
-        else if(this.gameObject.layer == 6)
-        {
-            layerToAttack = 7;//enemy attack player
-        }
-
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, myStats.getAttackRange());
+        float reach= myStats.getAttackRange()+(myWidth / 2);//this should resualt in equivalent range of the raycast
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, reach);
         foreach (Collider2D col in hits)
         {
-            if (col.gameObject.layer == layerToAttack)//based on what layer we are
+            if (col.gameObject.layer == LayerToAttack)//based on what layer we are
             {
                 HP target = col.gameObject.GetComponent<HP>();
                 if (target != null)//this means it is a player unit
@@ -339,6 +372,8 @@ public class UnitAI : MonoBehaviour
         }
         return null;//incase there isn't one near by
     }
+
+
 }
 public enum UnitState 
 { 
