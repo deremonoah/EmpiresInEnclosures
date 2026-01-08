@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8966980984871428075}
   - component: {fileID: 2415006183494072683}
   - component: {fileID: 6188276175542288373}
+  - component: {fileID: -3898137152693260294}
   m_Layer: 0
   m_Name: Penguin Base
   m_TagString: Untagged
@@ -75,8 +76,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -996889835
-  m_SortingLayer: 2
+  m_SortingLayerID: 1443643183
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.41006586, g: 0.89591014, b: 0.9150943, a: 1}
@@ -191,6 +192,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
   health: 0
+--- !u!114 &-3898137152693260294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2455438260212836218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfb0453d2fb143c42865a2fbac9f56af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3464275490917429564
 GameObject:
   m_ObjectHideFlags: 0

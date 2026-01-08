@@ -62,7 +62,6 @@ public class UnitAI : MonoBehaviour
         //for player facing right and both to have refrence to correct enemy layer or layer Mask
         if (this.gameObject.layer == 7)//so on the player layer, flip the transform 180 so it faces the right way to do animations
         {
-            this.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
             LayerToAttack = 6;
             layerMaskToAttack = LayerMask.GetMask("EnemyUnit");
         }

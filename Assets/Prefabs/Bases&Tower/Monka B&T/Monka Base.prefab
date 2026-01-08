@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 7810850618553585392}
   - component: {fileID: 4428504170930136946}
   - component: {fileID: 5421796122630402049}
+  - component: {fileID: 5316211128473022533}
+  - component: {fileID: 336783673337209945}
   m_Layer: 0
   m_Name: Monka Base
   m_TagString: Untagged
@@ -75,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -996889835
-  m_SortingLayer: 2
+  m_SortingLayerID: 1443643183
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.0864044, g: 0.06448024, b: 0.1981132, a: 1}
@@ -191,6 +193,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
   health: 0
+--- !u!114 &5316211128473022533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207419985641515455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfb0453d2fb143c42865a2fbac9f56af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &336783673337209945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207419985641515455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfb0453d2fb143c42865a2fbac9f56af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7579812432246380188
 GameObject:
   m_ObjectHideFlags: 0
