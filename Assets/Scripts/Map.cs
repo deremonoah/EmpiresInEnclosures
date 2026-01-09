@@ -6,14 +6,14 @@ public class Map : MonoBehaviour
 {
     //this is like a map label, which holds the faction's level
     [SerializeField] Faction myFaction;
-    //base holder?
-    [Header("Base variables")]
-    [SerializeField] GameObject BasePrefab;
-    [SerializeField] Transform placeBaseHere;//later can be randomly generated position
+    //base holder
+    [Header("Enemy Base variables")]
+    [SerializeField] GameObject e_BasePrefab;
+    [SerializeField] Transform e_placeBaseHere;//later can be randomly generated position
 
-    [Header("Tower variables")]
-    [SerializeField] GameObject TowerPrefab;
-    [SerializeField] Transform placeTowerHere;
+    [Header("Enemy Tower variables")]
+    [SerializeField] GameObject e_TowerPrefab;
+    [SerializeField] Transform e_placeTowerHere;
     
 
     public Faction GetFaction()
@@ -39,18 +39,20 @@ public class Map : MonoBehaviour
         //set the player layer
 
         //based off player layer on start it should flip its x? 180
+        //pBase.gameObject.name = "Player Base";
     }
 
     private void SpawnEnemyBase()
     {
         Debug.Log("we are in spawn enemy base");
-        var Base = Instantiate(BasePrefab, placeBaseHere.position, placeBaseHere.rotation);
-        Base.layer = 6;
-        BaseHP baseHp = Base.GetComponent<BaseHP>();
+        var eBase = Instantiate(e_BasePrefab, e_placeBaseHere.position, e_placeBaseHere.rotation);
+        eBase.layer = 6;
+        eBase.gameObject.name = "Enemy Base";
+        BaseHP baseHp = eBase.GetComponent<BaseHP>();
         FindObjectOfType<EnemyBaseAI>().UpdateBaseHP(baseHp);
-        FindObjectOfType<UnitManager>().UpdateBasePos(placeBaseHere);
+        FindObjectOfType<UnitManager>().UpdateBasePos(e_placeBaseHere);
         //child it to the base "folder" easier to find in heirachy, maybe only editor code
-        var Tower = Instantiate(TowerPrefab, placeTowerHere.position, TowerPrefab.transform.rotation);
+        var Tower = Instantiate(e_TowerPrefab, e_placeTowerHere.position, e_TowerPrefab.transform.rotation);
         Tower.layer = 6;
     }
 }

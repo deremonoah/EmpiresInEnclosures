@@ -118,6 +118,7 @@ public class FlowManager : MonoBehaviour
 
     public void didPlayerLoseBattle(string whoLost)
     {
+        Debug.Log("got in battle loser");
         battleLoser = whoLost;
     }
 
