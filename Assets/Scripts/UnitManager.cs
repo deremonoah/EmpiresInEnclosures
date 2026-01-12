@@ -246,9 +246,14 @@ public class UnitManager : MonoBehaviour
     }
 
     //this is called by map on enable when it instantiates
-    public void UpdateBasePos(Transform newBasePos)
+    public void UpdateEnemyBasePos(Transform newBasePos)
     {
         EnemyBasePos = newBasePos;
+    }
+
+    public void UpdatePlayerBasePos(Transform here)
+    {
+        PlayerBasePos = here;
     }
 #endregion
 
