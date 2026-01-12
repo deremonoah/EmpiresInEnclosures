@@ -46,7 +46,7 @@ public class Map : MonoBehaviour
         //will need to get equiped base, this also needs to handle any upgrades they have
         //set the player layer
 
-        var pBase=Instantiate(_playerEquip.GetPlayerBase(), p_placeBaseHere, p_placeBaseHere);
+        var pBase=Instantiate(_playerEquip.GetPlayerBase(), p_placeBaseHere.position, p_placeBaseHere.rotation);
         pBase.gameObject.name = "Player Base";
         //realizing we need to clear up all these instantiated objects over time, added to a list on here, clears ondisable?
         //do we it gets disabled?
@@ -54,7 +54,7 @@ public class Map : MonoBehaviour
         _um.UpdatePlayerBasePos(p_placeBaseHere);
 
         //tower
-        var pTow = Instantiate(_playerEquip.GetPlayerTower(), p_placeTowerHere, p_placeTowerHere);
+        var pTow = Instantiate(_playerEquip.GetPlayerTower(), p_placeTowerHere.position, p_placeTowerHere.rotation);
         pTow.layer = 7;
     }
 
