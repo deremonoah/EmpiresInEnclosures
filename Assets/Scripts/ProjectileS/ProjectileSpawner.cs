@@ -16,7 +16,7 @@ public class ProjectileSpawner : Projectile
             
         }
         var dude =Instantiate(SpawnPrefab, this.transform.position, this.transform.rotation);
-        dude.gameObject.layer = this.gameObject.layer;
+        dude.gameObject.layer = myShootersStats.gameObject.layer;
         //get target of which base from unit manager
         Transform tar = FindObjectOfType<UnitManager>().GetmoveTarget(dude.gameObject.layer);
         dude.GetComponent<UnitAI>().SetMoveTarget(tar.position);

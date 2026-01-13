@@ -11,9 +11,13 @@ public class UnitSight : MonoBehaviour
     private List<Collider2D> results = new();
     private int LayerToTarget;
 
-    private void Start()//needs to be on start so parent has enough time to get its layer to be correct for held layer refrence
+    private void OnEnable()//ontrigger enter will proc on enalbe & it needs to know its pappy
     {
         ai = gameObject.GetComponentInParent<UnitAI>();
+    }
+
+    private void Start()//needs to be on start so parent has enough time to get its layer to be correct for held layer refrence
+    {
         aiLayer = ai.gameObject.layer;//easier way to grab parent layer?
         var stats =gameObject.GetComponentInParent<UnitStats>();
         _myCol = GetComponent<CircleCollider2D>();

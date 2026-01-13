@@ -60,7 +60,7 @@ public class Map : MonoBehaviour
 
     private void SpawnEnemyBuildings()
     {
-        Debug.Log("we are in spawn enemy base");
+        
         var eBase = Instantiate(e_BasePrefab, e_placeBaseHere.position, e_placeBaseHere.rotation);
         eBase.layer = 6;
         eBase.gameObject.name = "Enemy Base";

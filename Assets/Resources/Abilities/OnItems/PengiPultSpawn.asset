@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6725fa903b4415cbc29b1506de513c, type: 3}
   m_Name: PengiPultSpawn
   m_EditorClassIdentifier: 
+  TimeToPickUp: 14
   spawnPrefab: {fileID: 6714081710735843315, guid: 1c172fa278d5ce04aa0518c2dd1b45f7, type: 3}

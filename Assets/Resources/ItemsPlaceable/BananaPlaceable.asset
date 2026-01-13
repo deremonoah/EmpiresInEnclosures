@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b6725fa903b4415cbc29b1506de513c, type: 3}
-  m_Name: BeaverPultSpawn
+  m_Script: {fileID: 11500000, guid: 7c9d05d2a593f384bbf181291d8be701, type: 3}
+  m_Name: BananaPlaceable
   m_EditorClassIdentifier: 
-  TimeToPickUp: 14
-  spawnPrefab: {fileID: 5212609840737170258, guid: 5a2dd7d4d9566294699780f6396547c5, type: 3}
+  itemPrefab: {fileID: 8080213249626163882, guid: cdb9f0038810dd649a4fa4420dd830fa, type: 3}
+  uses: 1
+  icon: {fileID: 21300000, guid: b8fcbf8785b85aa4883cd4794411b773, type: 3}

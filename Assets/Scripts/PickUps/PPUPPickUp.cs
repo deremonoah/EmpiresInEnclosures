@@ -6,7 +6,7 @@ using UnityEngine;
 public class PPUPPickUp : PickUpAbility
 {
     [SerializeField] float strength;
-    [SerializeField] float TimeToPickUp;
+    
 
     public override void ActivatePickUp(Transform origin, int isPlayerLayer)
     {
@@ -22,9 +22,4 @@ public class PPUPPickUp : PickUpAbility
         }
     }
 
-
-    public float getTimeToPickUP()
-    {
-        return TimeToPickUp;
-    }
 }

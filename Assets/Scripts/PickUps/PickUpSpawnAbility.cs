@@ -10,18 +10,18 @@ public class PickUpSpawnAbility : PickUpAbility
 
     public override void ActivatePickUp(Transform origin, int isPlayerLayer)
     {
-        Debug.Log("in activate Pickup Ability");
         //for spawn these are the blue prints so if the orgin layer== isPlayerLayer
-
         //if the one who summoned it (set by spawning item system)
         if(origin.gameObject.layer==isPlayerLayer)
         {
-            Debug.Log("the one who spawned it got it");
+            var unit = Instantiate(spawnPrefab, origin.position, origin.rotation);
+            unit.layer = isPlayerLayer;
         }
         else
         {
             Debug.Log("the one who didn't spawn it destroyed it");
-            //use player layer for who would get the pp if reward
+            //should enemy get a reward?
+            //should instantiate a visual for destroying it add juice
         }
     }
 }

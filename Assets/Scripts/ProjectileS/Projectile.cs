@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
     private Vector2 Direction;
     public float moveSpeed;
     public float lifeSpan;
-    private UnitStats myShootersStats;
+    protected UnitStats myShootersStats;
 
     void Update()
     {

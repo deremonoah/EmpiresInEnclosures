@@ -48,17 +48,17 @@ public class UnitAI : MonoBehaviour
         selectedGameObject = transform.Find("Selected").gameObject;
         SetSelectedVisible(false);
         currentRoutine = null;
+        myStats = GetComponent<UnitStats>();
+        mysr = GetComponentInChildren<SpriteRenderer>();
+        urManager = FindObjectOfType<UnitManager>();
+        rtsController = FindObjectOfType<RTSController>();
     }
 
     private void Start()
     {
-        myStats = GetComponent<UnitStats>();
+        
         currentSpeed = myStats.getMoveSpeed(Terrain.normal);
         setUnitState(UnitState.move);
-        mysr = GetComponentInChildren<SpriteRenderer>();
-        urManager = FindObjectOfType<UnitManager>();
-        rtsController = FindObjectOfType<RTSController>();
-
         //for player facing right and both to have refrence to correct enemy layer or layer Mask
         if (this.gameObject.layer == 7)//so on the player layer, flip the transform 180 so it faces the right way to do animations
         {
@@ -201,7 +201,6 @@ public class UnitAI : MonoBehaviour
 
     private bool CheckMeleeInRange(Vector2 pos)
     {
-        Debug.Log("in check melee");
         Vector2 myPos = transform.position;
         Vector3 direction = pos-myPos;
         float reach = myStats.getAttackRange() + (myWidth / 2);//divided by 2 so its like going out from center
@@ -209,7 +208,6 @@ public class UnitAI : MonoBehaviour
         StartCoroutine(drawRoutine(myPos, direction, reach));
         if (hit.collider!=null)
         {
-            Debug.Log("collider null? nope");
             if (hit.collider.gameObject.layer == LayerToAttack)
             {
                 Debug.Log("layer is even right so we return true");

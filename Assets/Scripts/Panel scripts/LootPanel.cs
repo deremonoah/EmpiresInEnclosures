@@ -19,7 +19,7 @@ public class LootPanel : MonoBehaviour
     private void OnEnable()
     {
         //sub to flow manager openLoot +=OpenLootPan;
-        if(FlowManager.instance ==null)
+        if(FlowManager.instance == null)
         { Debug.Log("instance null"); }
         FlowManager.instance.lootPanelSendOpen += OpenLootPan;
         animLoot = GetComponent<Animator>();

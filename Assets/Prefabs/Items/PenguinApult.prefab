@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9016329828636060724}
   - component: {fileID: 5990587661420914050}
   m_Layer: 0
-  m_Name: PickUpTest
+  m_Name: PenguinApult
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.25943398, g: 0.85959965, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a13376ab1ac90748b9b16a612eced11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ability: {fileID: 11400000, guid: f718d94acd3b04a18a1e45aaa21caa49, type: 2}
+  _ability: {fileID: 11400000, guid: 842c594c7cab04077a63c8a9d2e0a96b, type: 2}
   progTimer: 0
   ProgressBar: {fileID: 1269096449184191406}
   progressText: {fileID: 0}

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//realizing these names are very confusing
 public class PickUp : MonoBehaviour
 {
-    [SerializeField] PPUPPickUp _ability;
+    [SerializeField] PickUpAbility _ability;
     [SerializeField] private float progTimer;
     private float _timeToPickUp;
 
@@ -27,8 +28,7 @@ public class PickUp : MonoBehaviour
         playerHere = false;
         enemyHere = false;
         _timeToPickUp = _ability.getTimeToPickUP();
-        progTimer = (_timeToPickUp / 2);
-        Debug.Log("prog bitch " + progTimer);
+        progTimer = _timeToPickUp / 2;
         refTimer = refreshRate;
         _myCol = GetComponent<Collider2D>();
         DisplayProgress();
