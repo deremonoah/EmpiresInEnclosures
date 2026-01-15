@@ -14,7 +14,7 @@ public class EquipManagerPlayer : MonoBehaviour
 
     public void InitialEquip(Faction fac)
     {
-        //based on faction it will grab initial base & tower prefabs
+        //this will get called when player selects their zoonets, for initial base & tower prefabs
     }
 
     public GameObject GetPlayerBase()
@@ -25,5 +25,11 @@ public class EquipManagerPlayer : MonoBehaviour
     public GameObject GetPlayerTower()
     {
         return playerTowerPrefab;
+    }
+
+    public void GainedNewBuff(BuffReward buff)
+    {
+        //maybe a fork here for it buff is to base gotta handle it
+        Debug.LogError("still need to actually code handling the buff in EquipManagerPlayer");
     }
 }

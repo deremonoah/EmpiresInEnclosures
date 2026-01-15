@@ -7,7 +7,7 @@ public class FactionLoot : ScriptableObject
 {
     [SerializeField] private Faction playersFaction;
     [SerializeField] private Faction defeatedFaction;
-    [SerializeField] private List<GameObject> lootOptions;//in future this might need to be a scriptable obj or something
+    [SerializeField] private List<Reward> lootOptions;//in future this might need to be a scriptable obj or something
 
     public bool DoesMatchFactions(Faction p, Faction e)
     {
@@ -18,7 +18,7 @@ public class FactionLoot : ScriptableObject
         return false;
     }
 
-    public List<GameObject> GetLootOptions()
+    public List<Reward> GetLootOptions()
     {
         return lootOptions;
     }

@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="ItemPlaceAble",menuName = "ItemPlaceAble")]
-public class ItemToBePlaced : ScriptableObject
+[CreateAssetMenu(fileName ="ItemPlaceAble",menuName = "LootRewards/ItemPlaceAble")]
+public class ItemToBePlaced : Reward
 {
     [SerializeField] GameObject itemPrefab;
     [SerializeField] int uses;
-    [SerializeField] Sprite icon;
 
     public GameObject getPrefab()
     {
@@ -19,8 +18,8 @@ public class ItemToBePlaced : ScriptableObject
         return uses;
     }
 
-    public Sprite getIcon()
+    public override void SelectReward()
     {
-        return icon;
+        PlacingController.instance.GainedNewItem(this);
     }
 }

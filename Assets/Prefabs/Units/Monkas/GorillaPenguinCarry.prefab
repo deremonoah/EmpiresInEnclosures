@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: MaxHp
       value: 22
       objectReference: {fileID: 0}
+    - target: {fileID: 3878812106233685776, guid: 26a22a1a474774ff3a66e936ba9f7a85, type: 3}
+      propertyPath: SightRange
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8785091085086417499, guid: 26a22a1a474774ff3a66e936ba9f7a85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

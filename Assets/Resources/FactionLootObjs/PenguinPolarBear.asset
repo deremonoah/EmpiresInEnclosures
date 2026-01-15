@@ -15,8 +15,8 @@ MonoBehaviour:
   playersFaction: 0
   defeatedFaction: 2
   lootOptions:
-  - {fileID: 4571688680917307098, guid: 3be4a399c29814648a30ad295f157daa, type: 3}
-  - {fileID: 3550317812265094632, guid: 2dc8e5c742e591745a87b5351b348628, type: 3}
+  - {fileID: 11400000, guid: 0ad46cb45484b2e48ab4aee0e7dca0bc, type: 2}
+  - {fileID: 11400000, guid: d701f14092cd08b479fa8dd55e37fb20, type: 2}
   - {fileID: 7203921678899097389, guid: b242fdf228a0da74c901e915d738cfc2, type: 3}
   - {fileID: 1548054115205157805, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
   - {fileID: 6714081710735843315, guid: 1c172fa278d5ce04aa0518c2dd1b45f7, type: 3}

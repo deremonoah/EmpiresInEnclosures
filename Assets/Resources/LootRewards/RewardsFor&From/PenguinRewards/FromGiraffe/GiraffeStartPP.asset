@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c9d05d2a593f384bbf181291d8be701, type: 3}
-  m_Name: PenguinApultPlaceable
+  m_Script: {fileID: 11500000, guid: dced9ae16b0c91640857f5ebfd4ee363, type: 3}
+  m_Name: GiraffeStartPP
   m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 4802293818890951166, guid: df6a4493ca7b13944a8929c2ef9ce5f9, type: 3}
-  uses: 2
-  icon: {fileID: 21300000, guid: 08cd407e47ca91941b481c2f1e33d6d4, type: 3}
+  rName: 
+  icon: {fileID: 21300000, guid: 88a566954af7c314088dfaaea673d3ff, type: 3}
+  description: 

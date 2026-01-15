@@ -21,6 +21,20 @@ public class PlacingController : MonoBehaviour
     private int heldItem=-1;
     //needs to track number of times you can place the items
 
+    public static PlacingController instance;
+
+    private void Awake()
+    {
+        if(instance !=null & instance!=this)
+        {
+            Debug.LogError("we got 2 placing controllers in the scene");
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -52,6 +66,7 @@ public class PlacingController : MonoBehaviour
 
         //they have to click on it again
         heldItem = -1;
+        ButtonManager.instance.UpdateItemUses();
     }
 
     private void Update()
@@ -67,10 +82,26 @@ public class PlacingController : MonoBehaviour
         }
     }
 
-    public void GainedNewItem()//sends scriptable obj?
+    public void GainedNewItem(ItemToBePlaced item)//sends scriptable obj?
     {
-        //adds prefab from scriptable obj to list
-        //looks at scriptable object, how many uses
+        itemsToPlace.Add(item);
+        itemUses.Add(item.getUses());
         //should we hold just the item to be placed & it has the image rather than the mess above?
+        ButtonManager.instance.ItemListChanged();
+    }
+
+    public int GetItemCount()
+    {
+        return itemsToPlace.Count;
+    }
+
+    public int GetItemsCurrentUses(int thisOne)
+    {
+        return itemUses[thisOne];
+    }
+
+    public Sprite GetItemsIcon(int thisOne)
+    {
+        return itemsToPlace[thisOne].getIcon();
     }
 }

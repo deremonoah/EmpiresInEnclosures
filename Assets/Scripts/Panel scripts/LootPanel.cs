@@ -11,9 +11,9 @@ public class LootPanel : MonoBehaviour
     [Header("panel refrences")]
     [SerializeField] private GameObject ReplaceButtons;
     [SerializeField] List<Image> lootImages;
-    private UnitManager um;
+    private PlacingController itemGoHere;
     private bool areReplacingUnit;
-    [SerializeField]private List<GameObject> PickOptions=new List<GameObject>();
+    [SerializeField]private List<Reward> PickOptions=new List<Reward>();
     private int playerPickedThis;
 
     private void OnEnable()
@@ -24,7 +24,7 @@ public class LootPanel : MonoBehaviour
         FlowManager.instance.lootPanelSendOpen += OpenLootPan;
         animLoot = GetComponent<Animator>();
         FactionLootLists =new List<FactionLoot>(Resources.LoadAll<FactionLoot>("FactionLootObjs"));// getting FactionLoot as a list refrence, loading multiple times is less effecient
-        um = FindObjectOfType<UnitManager>();
+        itemGoHere = FindObjectOfType<PlacingController>();
     }
 
     //probably should still have disable? but the plan is to leave everything loaded
@@ -33,7 +33,7 @@ public class LootPanel : MonoBehaviour
     {
         animLoot.SetBool("Open", true);
 
-        GeneratePicks(um.GetPlayerFaction(),um.GetEnemyFactions());
+        GeneratePicks(UnitManager.instance.GetPlayerFaction(), UnitManager.instance.GetEnemyFactions());
     }
 
     public void CloseLootPan()//on select button
@@ -54,7 +54,7 @@ public class LootPanel : MonoBehaviour
     private void GeneratePicks(Faction player, List<Faction> enemy)//needs to take in data or grab it from somewhere which 2 groups are fighting, I am thinking an Enum on their bases
     {
         //look in the loot list for the list with the right 2 factions
-        List<GameObject> lootList=new List<GameObject>();
+        List<Reward> lootList=new List<Reward>();
         //find matching loot table
         Debug.Log("EnemyFactions "+enemy.Count);
         for(int fcv=0;fcv<enemy.Count;fcv++)
@@ -78,7 +78,7 @@ public class LootPanel : MonoBehaviour
         //now we have the list
         //fill the 3 buttons with 3 options, but can't repeat things the player already has (maybe want or had incase of getting rid of it)
         //unit manager needs a list of unit History, which would get compared against
-        List<GameObject> prevUps =um.GetUpgradeHistory();
+        List<GameObject> prevUps =UnitManager.instance.GetUpgradeHistory();
 
         //could remove dups from the loot list first? then pull random number
         for(int lcv=0;lcv<prevUps.Count;lcv++)
@@ -101,7 +101,7 @@ public class LootPanel : MonoBehaviour
             int rand = Random.Range(0, lootList.Count);
             PickOptions.Add(lootList[rand]);
             //set image
-            lootImages[lcv].sprite = lootList[rand].GetComponent<UnitStats>().getIcon();//set icon sof specific one
+            lootImages[lcv].sprite = lootList[rand].getIcon();//set icon sof specific one
             lootList.RemoveAt(rand);//remove it so no repeats
         }
         
@@ -110,24 +110,18 @@ public class LootPanel : MonoBehaviour
 
     public void PickButton(int num)
     {
-        if(um.GetCurrentUnits().Count+1>5 && !areReplacingUnit)//in future 5 should be a variable, so it can change
-        {
-            areReplacingUnit = true;
-            playerPickedThis = num;
-            ReplaceButtons.SetActive(true);//currently the replace buttons will only come up if we have 5 or more, doesnt need to enable each button
-        }
-        else//had replaceThis function in here as a extra if trying to be too clever
-        {
-            //not replacing and under unit button count
-            um.PlayerGotNewUnit(PickOptions[num]);
-        }
-        if (!areReplacingUnit)
-        { CloseLootPan(); }
+        //check if PickOptions[num] is a unit or not
+        PickOptions[num].SelectReward();
+
+        CloseLootPan();//but we don't always want to close it, or we have a whole new panel pop up that takes over the screen
     }
 
+    //might remove this too
     public void ReplaceThis(int num)
     {
-        um.PlayerReplaceOldUnit(PickOptions[playerPickedThis], num);
+        UnitReward u = (UnitReward)PickOptions[playerPickedThis];
+        GameObject unit = u.GetPrefab();
+        UnitManager.instance.PlayerReplaceOldUnit(unit, num);
         CloseLootPan();
         areReplacingUnit = false;
         ReplaceButtons.SetActive(false);

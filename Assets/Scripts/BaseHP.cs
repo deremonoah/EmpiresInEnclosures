@@ -6,7 +6,7 @@ using System;
 public class BaseHP : HP
 {
     public HPBarManager barUI;
-    public event Action<string> BattleEndedLoserCalls;
+    //public event Action<string> BattleEndedLoserCalls;
 
     private void Start()
     {
@@ -15,8 +15,13 @@ public class BaseHP : HP
             var healthBar = FindObjectOfType<EnemyHealthBarFinder>().getHPBar();
             barUI.SetHPBar(healthBar);
         }
+        else if(gameObject.layer ==7)
+        {
+            var healthBar = FindObjectOfType<PlayerHPBarFinder>().getHPBar();
+            barUI.SetHPBar(healthBar);
+        }
         base.StartUp();
-        //will need a similar case for player
+        
     }
 
     public override void ThisAttackedYou(UnitStats us)
@@ -38,6 +43,7 @@ public class BaseHP : HP
 
     public override void Die() 
     {
-        BattleEndedLoserCalls.Invoke(this.gameObject.name);//sends out event with its name on it, so flow manager will know if player lost battle
+        //BattleEndedLoserCalls.Invoke(this.gameObject.name);//sends out event with its name on it, so flow manager will know if player lost battle
+        FlowManager.instance.didPlayerLoseBattle(this.gameObject.name);
     }
 }

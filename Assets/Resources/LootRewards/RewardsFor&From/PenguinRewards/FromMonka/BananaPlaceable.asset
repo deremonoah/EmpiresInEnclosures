@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9d05d2a593f384bbf181291d8be701, type: 3}
   m_Name: BananaPlaceable
   m_EditorClassIdentifier: 
+  rName: BANANAS
+  icon: {fileID: 21300000, guid: b8fcbf8785b85aa4883cd4794411b773, type: 3}
+  description: allows you to place a bushel of BANANAS onto the battlefield when
+    retrieved your population can increase
   itemPrefab: {fileID: 8080213249626163882, guid: cdb9f0038810dd649a4fa4420dd830fa, type: 3}
   uses: 1
-  icon: {fileID: 21300000, guid: b8fcbf8785b85aa4883cd4794411b773, type: 3}

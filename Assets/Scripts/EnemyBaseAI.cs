@@ -25,7 +25,7 @@ public class EnemyBaseAI : MonoBehaviour
 
     void Start()
     {
-        um = FindObjectOfType<UnitManager>();
+        um = UnitManager.instance;//we use it so much across class best to store it as a field
         ulti = FindObjectOfType<UltimateManager>();
         //in future we will add the based on what scene or some factor it might pick a more strategic enemy
     }

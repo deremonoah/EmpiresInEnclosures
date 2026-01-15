@@ -474,7 +474,7 @@ MonoBehaviour:
   AttackToBase: 0
   AttackSpeed: 0
   AnimAttackPreHit: 0.2
-  SightRange: 0
+  SightRange: 4
   AttackRange: 1
   ut: 0
   ur: 0

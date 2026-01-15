@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyHealthBarFinder : MonoBehaviour
+public class PlayerHPBarFinder : MonoBehaviour
 {
     private Image hpBar;
     private void OnEnable()

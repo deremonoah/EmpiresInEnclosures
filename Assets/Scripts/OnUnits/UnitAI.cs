@@ -28,7 +28,6 @@ public class UnitAI : MonoBehaviour
 
     //fixing facing the wrong way
     private SpriteRenderer mysr;
-    private UnitManager urManager;
 
     [Header("universal movement varience")]
     public Vector2 xRange;
@@ -50,7 +49,6 @@ public class UnitAI : MonoBehaviour
         currentRoutine = null;
         myStats = GetComponent<UnitStats>();
         mysr = GetComponentInChildren<SpriteRenderer>();
-        urManager = FindObjectOfType<UnitManager>();
         rtsController = FindObjectOfType<RTSController>();
     }
 
@@ -130,7 +128,7 @@ public class UnitAI : MonoBehaviour
         for(int lcv=0;lcv<moveTargets.Count;lcv++)
         {
             //if its the enemy base
-            if(moveTargets[lcv]==(Vector2)urManager.GetmoveTarget(gameObject.layer).position)
+            if(moveTargets[lcv]==(Vector2)UnitManager.instance.GetmoveTarget(gameObject.layer).position)
             {
                 moveTargets.Add(moveTargets[lcv]);//adds base to end of list
                 moveTargets.RemoveAt(lcv);//removes its previous instance
@@ -268,7 +266,7 @@ public class UnitAI : MonoBehaviour
         GotToWhereIshouldHave = true;
         notGoThereNow();
         moveTargets.Clear();
-        moveTargets.Insert(0, urManager.GetmoveTarget(gameObject.layer).position);//might be a check box on screen 
+        moveTargets.Insert(0, UnitManager.instance.GetmoveTarget(gameObject.layer).position);//might be a check box on screen 
         this.setUnitState(UnitState.move);
     }
 

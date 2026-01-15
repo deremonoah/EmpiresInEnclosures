@@ -22,18 +22,26 @@ public class FlowManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance != null & instance != this)
+        {
+            Debug.LogError("we got 2 FlowManagers in the scene");
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 
     private void OnEnable()
     {
         //subscribe to mapSelectionEvent
         //subscribe to end of battle description
-        BaseHP[] baseHPs = FindObjectsOfType<BaseHP>();//there is supposed to be a better way to do this,says in another oh his videos-> https://www.youtube.com/watch?v=AGGmnVIhHvc
+        /*BaseHP[] baseHPs = FindObjectsOfType<BaseHP>();//there is supposed to be a better way to do this,says in another oh his videos-> https://www.youtube.com/watch?v=AGGmnVIhHvc
         foreach (BaseHP bhp in baseHPs)
         {
             bhp.BattleEndedLoserCalls += didPlayerLoseBattle;
-        }
+        }*/
         //should subscribe to events from these?
         mapPan = FindObjectOfType<MapPanel>();
         looPan = FindObjectOfType<LootPanel>();
@@ -44,11 +52,11 @@ public class FlowManager : MonoBehaviour
     private void OnDisable()
     {
         //unsubscribe to end of battle description
-        BaseHP[] baseHPs = FindObjectsOfType<BaseHP>();//there is supposed to be a better way to do this,says in another oh his videos-> https://www.youtube.com/watch?v=AGGmnVIhHvc
+        /*BaseHP[] baseHPs = FindObjectsOfType<BaseHP>();//there is supposed to be a better way to do this,says in another oh his videos-> https://www.youtube.com/watch?v=AGGmnVIhHvc
         foreach (BaseHP bhp in baseHPs)
         {
             bhp.BattleEndedLoserCalls -= didPlayerLoseBattle;
-        }
+        }*/
     }
 
     public IEnumerator GameFlowRoutine()
@@ -85,7 +93,7 @@ public class FlowManager : MonoBehaviour
         }
         else
         { Debug.LogWarning("sent from neither base? not player or enemy"); }
-
+        battleLoser = "";
         
         while(looPan.IsPanOpen())
         {

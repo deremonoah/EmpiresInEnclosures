@@ -36,6 +36,19 @@ public class UnitManager : MonoBehaviour
 
     public static UnitManager instance;
 
+    private void Awake()
+    {
+        if (instance != null & instance != this)
+        {
+            Debug.LogError("we got 2 Unit Managers in the scene");
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+    }
+
     private void Start()
     {
         updatePPText();
@@ -43,8 +56,6 @@ public class UnitManager : MonoBehaviour
         //setting enemy pp for testing but maybe keep as public info
         enmPPMaxText.text = "" + enmMaxPP;//might want a set max in future for gaining max pp
         PlayerUpgradeHistory = new List<GameObject>();
-
-        instance = this;
 
         foreach(GameObject go in PlayerUnitPrefabs)
         { 
@@ -133,14 +144,14 @@ public class UnitManager : MonoBehaviour
     {
         PlayerUnitPrefabs.Add(newU);//question is if the count is above 5 then we need to replace 1, how we do that? another panel?
         PlayerUpgradeHistory.Add(newU);
-        FindObjectOfType<UnitButtonManager>().UnitListChanged();
+        FindObjectOfType<ButtonManager>().UnitListChanged();
     }
 
     public void PlayerReplaceOldUnit(GameObject newU, int replaced)
     {
         PlayerUnitPrefabs[replaced] = newU;
         PlayerUpgradeHistory.Add(newU);
-        FindObjectOfType<UnitButtonManager>().UnitListChanged();//I am thinking we can see the old units so, pop up versions over the buttons hover shows X
+        FindObjectOfType<ButtonManager>().UnitListChanged();//I am thinking we can see the old units so, pop up versions over the buttons hover shows X
     }
 
     public List<GameObject> GetUpgradeHistory()
