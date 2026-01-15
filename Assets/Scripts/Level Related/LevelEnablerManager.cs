@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapLoader : MonoBehaviour
+public class LevelEnablerManager : MonoBehaviour
 {
     //this holds the different maps and simpley enables them
     //in future it might handle randomization either from multiple hand made versions or randomly generated maps
 
     //do we need a current map one? probably
 
-    [SerializeField] List<Map> mapList;// could have a map holder that holds the faction refrence on it
+    [SerializeField] List<Level> mapList;// could have a map holder that holds the faction refrence on it
     private int currentlyOpenMap;
 
     private void Start()

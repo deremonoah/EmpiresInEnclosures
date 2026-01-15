@@ -14,7 +14,7 @@ public class MapPanel : MonoBehaviour
     private float scoutTimer;
     [SerializeField] float scoutAnimDuration;
     [SerializeField] private RectTransform canvasRect;
-    private MapLoader ml;
+    private LevelEnablerManager ml;
     [SerializeField]
     private List<NodeData> ConqueredNodes;//idea here is once you beat a node it gets added here
 
@@ -25,7 +25,7 @@ public class MapPanel : MonoBehaviour
         //FlowManager.instance.MapPanelSendOpen += openMap; for some reason this is null, but not for LootPanel
         scoutTimer = 0;
         ScoutStartPos = ScoutPanel.localPosition;
-        ml = FindObjectOfType<MapLoader>();
+        ml = FindObjectOfType<LevelEnablerManager>();
     }
 
     public void openMap()

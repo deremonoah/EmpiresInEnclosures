@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Map : MonoBehaviour
+public class Level : MonoBehaviour
 {
     //this is like a map label, which holds the faction's level
     [SerializeField] Faction myFaction;
