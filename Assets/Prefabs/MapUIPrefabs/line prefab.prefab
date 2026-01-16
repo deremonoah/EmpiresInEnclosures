@@ -128,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodePos: {fileID: 7040577621880842659}
   count: 0
+  ChildDirectionRange: 60
 --- !u!1 &7257072882361259255
 GameObject:
   m_ObjectHideFlags: 0

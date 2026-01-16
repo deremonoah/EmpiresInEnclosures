@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +8,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] GameObject linePrefab;
     [SerializeField] RawImage im;
     //private Transform canvasParent;
-    private MapGenerator instance;
+    public static MapGenerator instance;
 
     [Header("Perlin Noise numbers")]
     [SerializeField] int width = 256;
@@ -63,6 +61,9 @@ public class MapGenerator : MonoBehaviour
         //I expect this to make many spokes
     }
 
+    public GameObject GetPrefab() => linePrefab;
+
+#region Visualize Perlin
     Texture2D GenerateTexture()
     {
         Texture2D texture = new Texture2D(width, height);
@@ -88,14 +89,15 @@ public class MapGenerator : MonoBehaviour
         float sample = Mathf.PerlinNoise(xCoord, yCoord);
         return new Color(sample, sample, sample);
     }
+#endregion
 
-    float GetValue(Vector2 pos)
+    public float GetValue(Vector2 pos)
     {
         float xCoord = (float)pos.x / width * scale + xOffSet;
         float yCoord = (float)pos.y / height * scale + yOffSet;
 
         float sample = Mathf.PerlinNoise(xCoord, yCoord);
-        Debug.Log(sample + "");
+        //Debug.Log(sample + "");
         return sample;
     }
 
@@ -104,6 +106,8 @@ public class MapGenerator : MonoBehaviour
         xOffSet = Random.Range(0, 9999999);
         yOffSet = Random.Range(0, 9999999);
     }
+
+
 }
 /*Refrences
  * perlin noise Brakeys https://www.youtube.com/watch?v=bG0uEXV6aHQ
