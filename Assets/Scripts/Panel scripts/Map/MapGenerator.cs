@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class MapGenerator : MonoBehaviour
 {
     [SerializeField] Transform startingNode;
     [SerializeField] GameObject linePrefab;
+    [SerializeField] RawImage im;
     //private Transform canvasParent;
     private MapGenerator instance;
 
     [Header("Perlin Noise numbers")]
     [SerializeField] int width = 256;
     [SerializeField] int height = 256;
-    float scale = 20f;
+    [SerializeField] float scale = 20f;
     [Header("offsets")]
     [SerializeField] int xOffSet;
-    [SerializeField] int yOffSet;
+    [SerializeField] int yOffSet;//these 2 numbers are basically the seed, could use for save?
 
 
     private void Awake()
@@ -33,17 +35,30 @@ public class MapGenerator : MonoBehaviour
 
         RandomizeOffsets();
 
-        Renderer renderer = GetComponent<Renderer>();
-        renderer.material.mainTexture = GenerateTexture();
+        //Renderer renderer = GetComponent<Renderer>();
+        im.texture = GenerateTexture();
     }
 
     private void OnEnable()
     {
-        for(int lcv=0;lcv<365;lcv+=15)
+        float x = startingNode.position.x;
+        float y = startingNode.position.y;
+
+        for (int lcv=0;lcv<365;lcv+=15)
         {
             var quat = Quaternion.Euler(0, 0, lcv);
-            var line =Instantiate(linePrefab, startingNode.transform.position, quat, startingNode);
-            line.GetComponent<RectTransform>().SetAsFirstSibling();
+
+            float xCalc = x * Mathf.Cos(lcv);
+            float yCalc = y * Mathf.Sin(lcv);
+
+            Vector2 nodePos = new Vector3(xCalc, yCalc);
+            //var nodePos = line.GetComponent<MapLine>().getNodePos();
+            if (GetValue(nodePos)>0.55f)
+            {
+                var line = Instantiate(linePrefab, startingNode.transform.position, quat, startingNode);
+                line.GetComponent<RectTransform>().SetAsFirstSibling();
+                line.GetComponent<MapLine>().SetCount(3);
+            }
         }
         //I expect this to make many spokes
     }
@@ -72,6 +87,16 @@ public class MapGenerator : MonoBehaviour
         
         float sample = Mathf.PerlinNoise(xCoord, yCoord);
         return new Color(sample, sample, sample);
+    }
+
+    float GetValue(Vector2 pos)
+    {
+        float xCoord = (float)pos.x / width * scale + xOffSet;
+        float yCoord = (float)pos.y / height * scale + yOffSet;
+
+        float sample = Mathf.PerlinNoise(xCoord, yCoord);
+        Debug.Log(sample + "");
+        return sample;
     }
 
     void RandomizeOffsets()
