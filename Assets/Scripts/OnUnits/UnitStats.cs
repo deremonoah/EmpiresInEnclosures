@@ -41,6 +41,8 @@ public class UnitStats : MonoBehaviour
     [SerializeField] private float bonusAttackToBase;
     [SerializeField] private float bonusAttackSpeed;//bonus will be negative for faster
     [SerializeField] private float bonusMoveSpeed;//hmm maybe for specific terrain?
+    [SerializeField] private float bonusWaterMoveSpeed;
+    [SerializeField] private float bonusMountianMoveSpeed;
     [SerializeField] private float bonusHP;//will need to integrate unit hp using this class probably?
     [SerializeField] private float bonusSightRange;//certain effected classes could have a public updated from buff call
     [SerializeField] private float bonusAttackRange;
@@ -83,10 +85,10 @@ public class UnitStats : MonoBehaviour
     public float getMoveSpeed(Terrain ter)
     {
         if(ter==Terrain.water)
-        { return SwimSpeed; }
+        { return Mathf.Clamp(SwimSpeed+bonusMoveSpeed+bonusWaterMoveSpeed,0, 99); }
         else if(ter==Terrain.mountain)
-        { return MountainSpeed; }
-        return MoveSpeed;
+        { return Mathf.Clamp(SwimSpeed + bonusMoveSpeed + bonusMountianMoveSpeed, 0, 99); }
+        return Mathf.Clamp(SwimSpeed + bonusMoveSpeed , 0, 99);
     }
 
     public bool AmRanged()
