@@ -7,16 +7,8 @@ using System.Linq;
 public class UnitStats : MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] private float MaxHp;
     [SerializeField] private int Cost;
-
-    [Header("Speed Stats")]// header not added?
-    [SerializeField] private float SwimSpeed;
-    [SerializeField] private float MountainSpeed;
-    [SerializeField] private float MoveSpeed;
-
-    [Header("armor maybe more later")]
-    [SerializeField] private float Armor;
+    [SerializeField] private float MaxHp;
 
     [Header("Attack Stats")]
     [SerializeField] private float Attack;
@@ -24,11 +16,24 @@ public class UnitStats : MonoBehaviour
     [SerializeField] private float AttackSpeed;
     [SerializeField] private float AnimAttackPreHit;
     [Header("Ranged Stats")]
-    [SerializeField] private float SightRange;
     [SerializeField] private float AttackRange;
+    [SerializeField] private float SightRange;
+
+
+    [Header("Speed Stats")]// header not added?
+    [SerializeField] private float MoveSpeed;
+    [SerializeField] private float SwimSpeed;
+    [SerializeField] private float MountainSpeed;
+    
+
     [Header("Unit Classifications")]
     [SerializeField] private UnitType ut;
     [SerializeField] private UnitRole ur;//role is fro enemy ai, while type is for resolving the type of attack I think ut past Noah shit
+
+    [Header("armor maybe more later")]
+    [SerializeField] private float Armor;
+
+    [Header("Unit Death Stats")]
     [SerializeField] private float FriendlyPayOnDeath;
     [SerializeField] private float EnemyPayOnDeath;
     [SerializeField] private Sprite portrait;

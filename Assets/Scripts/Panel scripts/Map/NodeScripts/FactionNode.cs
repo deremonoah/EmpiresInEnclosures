@@ -24,4 +24,4 @@ public class FactionNode : NodeData
         return units;
     }
 }
-public enum Faction { Penguins, Giraffes, PolarBears, Beavers, Monkeys }
+public enum Faction { Penguins, Giraffes, PolarBears, Beavers, Monkeys, Goats, Seals }
