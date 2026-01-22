@@ -17,4 +17,4 @@ MonoBehaviour:
   lootOptions:
   - {fileID: 11400000, guid: cd9c740ef9dea0c4f86a88ca553d5175, type: 2}
   - {fileID: 11400000, guid: 6aa2328baf6d11b4a905b7893c4009bb, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: b0395029ef77ccb4190267b07e8986fa, type: 2}

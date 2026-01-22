@@ -178,6 +178,8 @@ MonoBehaviour:
   bonusAttackToBase: 0
   bonusAttackSpeed: 0
   bonusMoveSpeed: 0
+  bonusWaterMoveSpeed: 0
+  bonusMountianMoveSpeed: 0
   bonusHP: 0
   bonusSightRange: 0
   bonusAttackRange: 0
@@ -865,7 +867,7 @@ Transform:
   m_GameObject: {fileID: 7876431908717531312}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.93, y: 4.42, z: 0}
+  m_LocalPosition: {x: -0.71, y: 1.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

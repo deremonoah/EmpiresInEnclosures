@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: aa0e59456f5964747bc94e20a68bf707, type: 3}
     - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
       propertyPath: Attack
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
       propertyPath: portrait
@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
       propertyPath: AttackToBase
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8429309836335382053, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
       propertyPath: m_LocalPosition.x
