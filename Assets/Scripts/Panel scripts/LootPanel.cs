@@ -11,7 +11,6 @@ public class LootPanel : MonoBehaviour
     [Header("panel refrences")]
     [SerializeField] private GameObject ReplaceButtons;
     [SerializeField] List<Image> lootImages;
-    private PlacingController itemGoHere;
     private bool areReplacingUnit;
     [SerializeField]private List<Reward> PickOptions=new List<Reward>();
     private int playerPickedThis;
@@ -23,8 +22,7 @@ public class LootPanel : MonoBehaviour
         { Debug.Log("instance null"); }
         FlowManager.instance.lootPanelSendOpen += OpenLootPan;
         animLoot = GetComponent<Animator>();
-        FactionLootLists =new List<FactionLoot>(Resources.LoadAll<FactionLoot>("FactionLootObjs"));// getting FactionLoot as a list refrence, loading multiple times is less effecient
-        itemGoHere = FindObjectOfType<PlacingController>();
+        FactionLootLists =new List<FactionLoot>(Resources.LoadAll<FactionLoot>("FactionLootSets"));// getting FactionLoot as a list refrence, loading multiple times is less effecient
     }
 
     //probably should still have disable? but the plan is to leave everything loaded

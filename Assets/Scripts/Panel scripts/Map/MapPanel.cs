@@ -50,7 +50,7 @@ public class MapPanel : MonoBehaviour
         //but how to actually place them out?
     }
 
-    public void pickMapNode()
+    public void pickMapNode()//this is on the scout panel
     {
         if(highlightedNode is FactionNode) // old way highlightedNode.GetType()==typeof(FactionNode), learned current from google ai, when finding old way, rather than load Simple Samurai
         {
@@ -72,7 +72,7 @@ public class MapPanel : MonoBehaviour
         um.SetEnemyFaction(enemy.GetIncludedFactions());
     }
 
-    public void lookAtMapNode(NodeData node)
+    public void lookAtMapNode(NodeData node)//this is on the node buttons
     {
         highlightedNode = node; //technically we also should handle it being a shop, but one thing at a time
         if(CanMoveToThisNode(highlightedNode))

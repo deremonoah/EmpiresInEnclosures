@@ -168,7 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5279642681663944739}
   m_Layer: 0
-  m_Name: railing walls
+  m_Name: railing walls default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
