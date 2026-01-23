@@ -65,14 +65,23 @@ public class UnitManager : MonoBehaviour
 
     private void OnEnable()
     {
-        FlowManager.instance.BattleStart+=StartOfBattleSetPP;
-        FlowManager.instance.lootPanelSendOpen += ClearUnitsAfterFight;
+        if (FlowManager.instance != null)
+        {
+            FlowManager.instance.BattleStart += StartOfBattleSetPP;
+            FlowManager.instance.lootPanelSendOpen += ClearUnitsAfterFight;
+        }
+        else {
+            StartOfBattleSetPP();
+            Debug.Log("flow manager is null"); }
     }
 
     private void OnDisable()
     {
-        FlowManager.instance.BattleStart -= StartOfBattleSetPP;
-        FlowManager.instance.lootPanelSendOpen -= ClearUnitsAfterFight;
+        if (FlowManager.instance != null)
+        {
+            FlowManager.instance.BattleStart -= StartOfBattleSetPP;
+            FlowManager.instance.lootPanelSendOpen -= ClearUnitsAfterFight;
+        }
     }
 
     private void StartOfBattleSetPP()
@@ -89,7 +98,31 @@ public class UnitManager : MonoBehaviour
 
     private void Update()
     {
-        if(FlowManager.instance.curState==gameState.inBattle)//maybe make coroutine? and a set pp to starting pp for both bases
+        if(FlowManager.instance!=null)
+        {
+            if (FlowManager.instance.curState == gameState.inBattle)//maybe make coroutine? and a set pp to starting pp for both bases
+            {
+                PPRegenTimer -= Time.deltaTime;
+                enmPPRegenTimer -= Time.deltaTime;
+
+                if (PPRegenTimer <= 0)
+                {
+                    //set up this way if you get pp over max with the penguin pandemic ability it can go over. And with the death of stuff that will have to change
+                    if (playerPP + 1 <= playerMaxPP) { playerPP++; }
+                    PPRegenTimer = PPRegenTimerMax;
+                }
+                updatePPText();
+
+                //regen for enemies
+                if (enmPPRegenTimer <= 0)
+                {
+                    //set up this way if you get pp over max with the penguin pandemic ability it can go over. And with the death of stuff that will have to change
+                    if (enmPP + 1 <= enmMaxPP) { enmPP++; }
+                    enmPPRegenTimer = enmPPRegenTimerMax;
+                }
+            }
+        }
+        else
         {
             PPRegenTimer -= Time.deltaTime;
             enmPPRegenTimer -= Time.deltaTime;
@@ -239,6 +272,28 @@ public class UnitManager : MonoBehaviour
 
             var unit = Instantiate(enemyPrefabs[lcv], posToSpawn, EnemyBasePos.rotation);
             unit.GetComponent<UnitAI>().SetMoveTarget(whereToGo);
+            //unit.GetComponent<UnitAI>().setUnitState(UnitState.move);
+            //setting to enemy unit layer so they don't kill each other
+            unit.gameObject.layer = 6;
+            spawnedEnemyUnits.Add(unit);
+        }
+    }
+//for test buttons for enemy
+    public void spawnEnemyUnit(int lcv)
+    {
+        //instantiate prefab at spawnPos.pos
+        // pay for unit
+        int cost = enemyPrefabs[lcv].GetComponent<UnitStats>().getCost();
+        if (enmPP - cost >= 0)
+        {
+            //pay for it
+            enmPP -= cost;
+            //below is summoning part
+
+            Vector3 posToSpawn = RandomizeSpawn(EnemyBasePos.position);
+
+            var unit = Instantiate(enemyPrefabs[lcv], posToSpawn, EnemyBasePos.rotation);
+            unit.GetComponent<UnitAI>().SetMoveTarget(PlayerBasePos.position);
             //unit.GetComponent<UnitAI>().setUnitState(UnitState.move);
             //setting to enemy unit layer so they don't kill each other
             unit.gameObject.layer = 6;

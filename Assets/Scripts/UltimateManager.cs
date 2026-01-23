@@ -29,12 +29,19 @@ public class UltimateManager : MonoBehaviour
 
     private void OnEnable()
     {
-        FlowManager.instance.BattleStart += ResetUltimates;
+        if(FlowManager.instance!=null)
+        {
+            FlowManager.instance.BattleStart += ResetUltimates;
+        }
+        else { Debug.Log("flow manager is null"); }
     }
 
     private void OnDisable()
     {
-        FlowManager.instance.BattleStart -= ResetUltimates;
+        if (FlowManager.instance != null)
+        {
+            FlowManager.instance.BattleStart -= ResetUltimates;
+        }
     }
 
     private void ResetUltimates()
@@ -45,11 +52,14 @@ public class UltimateManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(FlowManager.instance.curState == gameState.inBattle)
+        if(FlowManager.instance!=null)
         {
-            playerUltProgress += Time.deltaTime;//maybe I could multiply by a speed variable
-            enemyUltProgress += Time.deltaTime;
-            UpdateUltiUI();
+            if (FlowManager.instance.curState == gameState.inBattle)
+            {
+                playerUltProgress += Time.deltaTime;//maybe I could multiply by a speed variable
+                enemyUltProgress += Time.deltaTime;
+                UpdateUltiUI();
+            }
         }
     }
 

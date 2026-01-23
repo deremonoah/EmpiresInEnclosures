@@ -20,7 +20,11 @@ public class EnemyBaseAI : MonoBehaviour
 
     private void OnEnable()
     {
-        FlowManager.instance.BattleStart += beginBattle;
+        if(FlowManager.instance!=null)
+        {
+            FlowManager.instance.BattleStart += beginBattle;
+        }
+        else { Debug.Log("in enemy base AI null flow manager"); }
     }
 
     void Start()
