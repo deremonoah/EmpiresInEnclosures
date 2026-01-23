@@ -182,7 +182,6 @@ public class UnitAI : MonoBehaviour
             //are they in attack range
             else //if (atkRng+ baseBonusRange >= Mathf.Abs(curruntPos.x - pos.x) && atkRng+ baseBonusRange >= Mathf.Abs(curruntPos.y - pos.y))
             {
-                Debug.Log("do we ever fucking get in the melee shit?");
                 if(CheckMeleeInRange(pos))
                 {
                     Debug.Log("passed check melee in range");
@@ -203,9 +202,13 @@ public class UnitAI : MonoBehaviour
         Vector3 direction = pos-myPos;
         float reach = myStats.getAttackRange() + (myWidth / 2);//divided by 2 so its like going out from center
         RaycastHit2D hit = Physics2D.Raycast(myPos, direction, reach, layerMaskToAttack);
-        StartCoroutine(drawRoutine(myPos, direction, reach));
+        /*if(gameObject.name== "Penguin Polar sleigh Variant(Clone)")//to look at specific guys draw calls
+        {
+            StartCoroutine(drawRoutine(myPos, direction, reach));
+        }*/
         if (hit.collider!=null)
         {
+            //Debug.Log(gameObject.name+" raycasted and hit " + hit.collider.gameObject.name);
             if (hit.collider.gameObject.layer == LayerToAttack)
             {
                 Debug.Log("layer is even right so we return true");

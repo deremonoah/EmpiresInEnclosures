@@ -9,11 +9,20 @@ public class UnitHp : HP
     [SerializeField]
     private UnitAbility myOnDeathAbility;//should it just be death ability?
 
+    [Header("yeah bad practice IK")]
+    [SerializeField] GameObject rider;
+
     void Start()
     {
         maxHp = GetComponent<UnitStats>().getMaxHp();
         myhp = GetComponent<HPBarManager>();
         StartUp();
+
+        Debug.Log("my layer "+gameObject.layer);
+        if (rider != null)
+        {
+            rider.layer = gameObject.layer;
+        }
     }
 
     public override void ThisAttackedYou(UnitStats us)
@@ -35,7 +44,12 @@ public class UnitHp : HP
         ulti.chargePlayerUlt(amPlayer, 2);
 
         myOnDeathAbility?.UseAbility(this.transform);
-        
+
+        if (rider != null)
+        {
+            rider.transform.parent = null;
+        }
+
         Destroy(this.gameObject);
         
     }
