@@ -9,7 +9,7 @@ public class EquipManagerPlayer : MonoBehaviour
     [SerializeField] private GameObject playerTowerPrefab;//serialize field for now
     public static EquipManagerPlayer instance;
 
-    [SerializeField] List<AuraAbility> UnitStatbuffs;
+    [SerializeField] List<AuraAbility> playerBuffs;
 
     private void Awake()
     {
@@ -41,16 +41,29 @@ public class EquipManagerPlayer : MonoBehaviour
         return playerTowerPrefab;
     }
 
-    public void GainedNewBuff(BuffReward buff)
+    public void GainedNewBuff(AuraAbility buff)
     {
-        //maybe a fork here for it buff is to base gotta handle it
-        Debug.LogError("still need to actually code handling the buff in EquipManagerPlayer");
+        playerBuffs.Add(buff);
+        //infuture this might need to handle different kinds of buffs
     }
+
+    //or more GainedNewBuff(buffToTower)
 
     public List<AuraAbility> getPlayerBuffs()
     {
-        return UnitStatbuffs;
+        return playerBuffs;
     }
 
-
+    public float GetPlayerBaseBuff()
+    {
+        float totalBasebuff = 0;
+        foreach(AuraAbility buff in playerBuffs)
+        {
+            if(buff.getTypeToBuff()==UnitType.Base)
+            {
+                totalBasebuff += buff.getBuffStength();
+            }
+        }
+        return totalBasebuff;
+    }
 }

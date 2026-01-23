@@ -88,20 +88,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d88a28c1a086024c977f5a403b0e631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHp: 35
   Cost: 0
-  SwimSpeed: 0
-  MountainSpeed: 0
-  MoveSpeed: 0
-  Armor: 0
+  MaxHp: 35
   Attack: 2
   AttackToBase: 0
   AttackSpeed: 1.9
   AnimAttackPreHit: 0.2
-  SightRange: 9
   AttackRange: 1
-  ut: 1
-  ur: 0
+  SightRange: 9
+  MoveSpeed: 0
+  SwimSpeed: 0
+  MountainSpeed: 0
+  _unitType: 0
+  _unitRole: 4
+  Armor: 0
   FriendlyPayOnDeath: 5
   EnemyPayOnDeath: 15
   portrait: {fileID: 0}
@@ -134,6 +134,7 @@ MonoBehaviour:
   maxHp: 0
   anim: {fileID: 0}
   myOnDeathAbility: {fileID: 0}
+  rider: {fileID: 0}
 --- !u!114 &2350619758639740554
 MonoBehaviour:
   m_ObjectHideFlags: 0

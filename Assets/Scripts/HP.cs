@@ -50,11 +50,6 @@ public class HP : MonoBehaviour
         return currentHp;
     }
 
-    public float GetHPPercent()
-    {
-        return currentHp / maxHp;
-    }
-
     public virtual void Die()
     {
         

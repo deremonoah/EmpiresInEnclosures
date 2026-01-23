@@ -19,15 +19,16 @@ public class BaseHP : HP
         {
             var healthBar = FindObjectOfType<PlayerHPBarFinder>().getHPBar();
             barUI.SetHPBar(healthBar);
+            base.maxHp+=EquipManagerPlayer.instance.GetPlayerBaseBuff();//has to add every time its instantiated a new base
         }
         base.StartUp();
-        
+        barUI.UpdateHP(base.currentHp, base.maxHp);
     }
 
     public override void ThisAttackedYou(UnitStats us)
     {
         base.DamageTaken(us.getBaseAttack());
-        barUI.UpdateHP(base.GetHPPercent());
+        barUI.UpdateHP(base.currentHp, base.maxHp);
         //for defending your own base
         if(!amPlayer)
         {

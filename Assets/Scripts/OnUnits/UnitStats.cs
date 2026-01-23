@@ -278,5 +278,12 @@ public class UnitStats : MonoBehaviour
 #endregion
 }
 public enum AttackType { melee, ranged }
-public enum UnitType { infantry,range, fast, big, all}//all is for buff aura to use
+public enum UnitType { 
+    infantry,
+    range, 
+    fast, 
+    big, 
+    tower,
+    Base , 
+    all}//all is for buff aura to use & includes towers but not bases(as bases don't have a unitAI component)
 //seige might have custome sight collider set in the editor
