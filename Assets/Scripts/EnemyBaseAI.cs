@@ -11,7 +11,7 @@ public class EnemyBaseAI : MonoBehaviour
     [SerializeField] BaseHP ourBase;
     [Header("Invader Information")]
     [SerializeField] float FieldOfView;
-    [SerializeField] List<UnitRole> invaderComp;
+    [SerializeField] List<UnitType> invaderComp;
     [SerializeField] List<Vector2> invaderLastKnownLocation;
     [Header("Tower")]
     [SerializeField] Transform towerTam;

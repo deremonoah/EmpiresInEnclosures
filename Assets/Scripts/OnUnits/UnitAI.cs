@@ -255,8 +255,10 @@ public class UnitAI : MonoBehaviour
     {
         currentSpeed = myStats.getMoveSpeed(ter);//would be cool if animation ran slowerWhile on mountain or faster while on water
         //also need to increase sight size based on being on mountains
-        if(ter==Terrain.mountain)
+        Debug.Log(ter);
+        if (ter==Terrain.mountain)
         {
+            
             //will try this in a bit
             //I realize that if its only on or off, then players can just step bareley on it and get the same buff
             //as a player who walked to the center, maybe based off terrains center point? eh work with this for now

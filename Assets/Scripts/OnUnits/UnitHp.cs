@@ -18,7 +18,6 @@ public class UnitHp : HP
         myhp = GetComponent<HPBarManager>();
         StartUp();
 
-        Debug.Log("my layer "+gameObject.layer);
         if (rider != null)
         {
             rider.layer = gameObject.layer;

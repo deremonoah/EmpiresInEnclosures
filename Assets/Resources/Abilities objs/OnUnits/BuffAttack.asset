@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BuffAttack
   m_EditorClassIdentifier: 
   _buffType: 0
-  _buffStrength: 1
+  _buffStrength: 2
   _whoToTarget: 0
+  _whatToBuff: 4
   _AuraSize: 4

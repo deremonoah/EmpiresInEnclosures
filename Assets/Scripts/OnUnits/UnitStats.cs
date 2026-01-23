@@ -27,8 +27,8 @@ public class UnitStats : MonoBehaviour
     
 
     [Header("Unit Classifications")]
-    [SerializeField] private UnitType ut;
-    [SerializeField] private UnitRole ur;//role is fro enemy ai, while type is for resolving the type of attack I think ut past Noah shit
+    [SerializeField] private AttackType _unitType;
+    [SerializeField] private UnitType _unitRole;//role is fro enemy ai, while type is for resolving the type of attack I think ut past Noah shit
 
     [Header("armor maybe more later")]
     [SerializeField] private float Armor;
@@ -56,6 +56,23 @@ public class UnitStats : MonoBehaviour
     [SerializeField] private float bonusPayOnDeathEnemy;
     //I feel like can't stack or stack limit, not sure how to calculate that though
     //maybe a list of units buffing you, and check their type, which shouldn't be done every frame
+
+    private void Start()//for getting auras from the equipManager
+    {
+        List<AuraAbility> unitBuffs = new List<AuraAbility>();
+        if(gameObject.layer==7)
+        {
+            unitBuffs=EquipManagerPlayer.instance.getPlayerBuffs();
+        }
+        else if(gameObject.layer==6)
+        {
+            //thinking equipManager should be for both player and enemy
+        }
+        foreach(AuraAbility buff in unitBuffs)
+        {
+            BuffedFrom(buff);
+        }
+    }
 
     public int getCost()//could be modified?
     {
@@ -92,13 +109,13 @@ public class UnitStats : MonoBehaviour
         if(ter==Terrain.water)
         { return Mathf.Clamp(SwimSpeed+bonusMoveSpeed+bonusWaterMoveSpeed,0, 99); }
         else if(ter==Terrain.mountain)
-        { return Mathf.Clamp(SwimSpeed + bonusMoveSpeed + bonusMountianMoveSpeed, 0, 99); }
-        return Mathf.Clamp(SwimSpeed + bonusMoveSpeed , 0, 99);
+        { return Mathf.Clamp(MountainSpeed + bonusMoveSpeed + bonusMountianMoveSpeed, 0, 99); }
+        return Mathf.Clamp(MoveSpeed + bonusMoveSpeed , 0, 99);
     }
 
     public bool AmRanged()
     {
-        if (ut == UnitType.ranged) { return true; }
+        if (_unitType == AttackType.ranged) { return true; }
         return false;
     }
 
@@ -127,8 +144,8 @@ public class UnitStats : MonoBehaviour
         return portrait;
     }
 
-    public UnitRole getRole()
-    { return ur; }
+    public UnitType getRole()
+    { return _unitRole; }
 
     public float getAttackWaitTime()
     { return AnimAttackPreHit; }
@@ -137,10 +154,74 @@ public class UnitStats : MonoBehaviour
     public void BuffedFrom(AuraAbility buff)
     {
         auraAdders.Add(buff);
-        ResolveBuffs();
+        //ResolveBuffsConservative();
+        ResolveBuffAllIn();
     }
     
-    private void ResolveBuffs()
+    private void ResolveBuffAllIn()//allows buffs to stack
+    {
+        auraAdders.Distinct();//so a buff target isn't on there twice
+        ClearBuffsForRecalculate();
+        foreach (AuraAbility buff in auraAdders)
+        {
+            float buffValue = buff.getBuffStength();
+            if(_unitRole==buff.getTypeToBuff())
+            {
+                switch (buff.getBuffType())
+                {
+                    case BuffsType.attack:
+                        bonusAttack += buffValue;
+                        break;
+                    case BuffsType.attackToBase:
+                        bonusAttackToBase += buffValue;
+                        break;
+                    case BuffsType.attackRange:
+                        bonusAttackRange += buffValue;
+                        break;
+                    case BuffsType.attackSpeed:
+                        bonusAttackSpeed += buffValue;
+                        break;
+                    case BuffsType.sightRange:
+                        bonusHP += buffValue;
+                        break;
+                    case BuffsType.HP:
+                        bonusHP += buffValue;
+                        break;
+                    case BuffsType.armor:
+                        bonusArmor += buffValue;
+                        break;
+                    case BuffsType.moveSpeed:
+                        //will worry about which specific one later
+                        break;
+                    case BuffsType.BonusPayOnDeathEnemy:
+                        bonusPayOnDeathFriendly += buffValue;
+                        break;
+                    case BuffsType.BonusPayOnDeathFriendly:
+                        bonusPayOnDeathFriendly += buffValue;//for now only the biggest + or - applies
+                        break;
+
+                }
+            }
+        }
+    }
+
+    private void ClearBuffsForRecalculate()
+    {
+        bonusAttack = 0;
+        bonusAttackToBase = 0;
+        bonusAttackSpeed = 0;
+        bonusMoveSpeed = 0;
+        bonusWaterMoveSpeed = 0;
+        bonusMountianMoveSpeed = 0;
+        bonusHP = 0;
+        bonusSightRange = 0;
+        bonusAttackRange = 0;
+        bonusArmor = 0;
+        bonusPayOnDeathFriendly = 0;
+        bonusPayOnDeathEnemy = 0;
+    }
+
+    private void ResolveBuffsConservative()//doesn't allow them to stack
     {
         //buffs that are larger have priority, so if you have enemy units that debuff attack by 2 and your unit buffs your units by 1, should they combine? or only apply biggest absolute value?
         //could I handle each stat by itself?
@@ -192,10 +273,10 @@ public class UnitStats : MonoBehaviour
     public void RemovedBuffFrom(AuraAbility buff)
     {
         auraAdders.Remove(buff);
-        ResolveBuffs();
+        ResolveBuffsConservative();
     }
 #endregion
 }
-public enum UnitType { melee, ranged, seige }
-public enum UnitRole { infantry,range, fast, big}
+public enum AttackType { melee, ranged }
+public enum UnitType { infantry,range, fast, big, all}//all is for buff aura to use
 //seige might have custome sight collider set in the editor

@@ -8,6 +8,7 @@ public class AuraAbility : OnDeathAbility //ondeath so it can remove buffs when 
     [SerializeField] private BuffsType _buffType;
     [SerializeField] private float _buffStrength;
     [SerializeField] private Targets _whoToTarget;
+    [SerializeField] private UnitType _whatToBuff;
     [SerializeField] private float _AuraSize;
     private List<UnitStats> buffTargets;
 
@@ -36,6 +37,9 @@ public class AuraAbility : OnDeathAbility //ondeath so it can remove buffs when 
     {
         return _AuraSize;
     }
+
+    public UnitType getTypeToBuff()
+    { return _whatToBuff; }
 }
 public enum BuffsType 
 { 
@@ -57,3 +61,4 @@ public enum Targets
     Opponents,
     All
 }
+

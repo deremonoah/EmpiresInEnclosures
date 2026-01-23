@@ -7,7 +7,21 @@ public class EquipManagerPlayer : MonoBehaviour
     //the job of this class is to handle any upgrades to player units or bases
     [SerializeField] private GameObject playerBasePrefab;
     [SerializeField] private GameObject playerTowerPrefab;//serialize field for now
+    public static EquipManagerPlayer instance;
 
+    [SerializeField] List<AuraAbility> UnitStatbuffs;
+
+    private void Awake()
+    {
+        if(instance!=null & instance != this)
+        {
+            Debug.LogError("2 equip managers in the scene");
+        }
+        else
+        {
+            instance = this;
+        }
+    }
     //handle buffs to tower or base
     //handle blue prints in here?
     //handle equp buffs like to all units or bases or unit types
@@ -32,4 +46,11 @@ public class EquipManagerPlayer : MonoBehaviour
         //maybe a fork here for it buff is to base gotta handle it
         Debug.LogError("still need to actually code handling the buff in EquipManagerPlayer");
     }
+
+    public List<AuraAbility> getPlayerBuffs()
+    {
+        return UnitStatbuffs;
+    }
+
+
 }

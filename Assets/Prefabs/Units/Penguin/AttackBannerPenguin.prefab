@@ -265,12 +265,32 @@ PrefabInstance:
       value: AttackBannerPenguin
       objectReference: {fileID: 0}
     - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
+      propertyPath: Cost
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
+      propertyPath: MaxHp
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
+      propertyPath: Attack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
       propertyPath: MoveSpeed
-      value: 1.8
+      value: 1.76
       objectReference: {fileID: 0}
     - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
       propertyPath: SightRange
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
+      propertyPath: AttackSpeed
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090476165267209070, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
+      propertyPath: AttackToBase
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8147744658904798611, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
       propertyPath: m_Radius
