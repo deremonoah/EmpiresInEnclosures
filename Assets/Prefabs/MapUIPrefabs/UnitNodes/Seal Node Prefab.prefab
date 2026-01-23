@@ -223,5 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodesNextToMe: []
   factionsOnTeam: 06000000
-  units: []
+  units:
+  - {fileID: 6909386831927512734, guid: eadd6c1c24d7b44fdb024aad4d68fc76, type: 3}
+  - {fileID: 4989976218964095001, guid: d9f0d7ecdab8f4b4b88452aa12ae5d87, type: 3}
   isBoss: 0
