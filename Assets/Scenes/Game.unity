@@ -8396,6 +8396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBasePrefab: {fileID: 2455438260212836218, guid: b20c862243aa9d54599a4ef4c90dee02, type: 3}
   playerTowerPrefab: {fileID: 2189900637060357098, guid: 8f24835ff5eb26d4c9dd765a5aad0e9b, type: 3}
+  playerBuffs: []
 --- !u!1001 &847699705
 PrefabInstance:
   m_ObjectHideFlags: 0

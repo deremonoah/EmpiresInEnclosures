@@ -59,4 +59,9 @@ public class Projectile : MonoBehaviour
         //Debug.Log("collided with " + collision.gameObject.name);
         Destroy(this.gameObject);
     }
+
+    public void setDamage(float dmg)
+    {
+        damage = dmg;
+    }
 }

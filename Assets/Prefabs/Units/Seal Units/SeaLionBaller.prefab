@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SeaLionBaller
       objectReference: {fileID: 0}
+    - target: {fileID: 6547857816382867222, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
+      propertyPath: ProjectilePrefab
+      value: 
+      objectReference: {fileID: 505377949687604157, guid: bfdae778232e0874ebc1941b3321ddf9, type: 3}
     - target: {fileID: 7030533889356451745, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: m_Size.x
       value: 6

@@ -352,7 +352,9 @@ public class UnitAI : MonoBehaviour
             shootPoint.transform.position, 
             shootPoint.transform.rotation
             );
-        shot.GetComponent<Projectile>().SetTarget(RangedTarget, this.gameObject);
+        var proj=shot.GetComponent<Projectile>();
+        proj.SetTarget(RangedTarget, this.gameObject);
+        proj.setDamage(myStats.getAttack());// so I can set the damage on the units, granted it would be nice to set speed, but eh itll be fine
     }
 
     private HP checkForOpponentToAttack()

@@ -6,6 +6,7 @@ public class Reward : ScriptableObject
 {
     [SerializeField] string rName;
     [SerializeField] Sprite icon;
+    [TextArea(3,10)]
     [SerializeField] string description;
 
     public string getName()
