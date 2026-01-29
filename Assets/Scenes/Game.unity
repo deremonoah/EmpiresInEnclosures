@@ -2698,8 +2698,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1416685969}
   - {fileID: 536584724}
+  - {fileID: 1416685969}
   - {fileID: 585991827}
   - {fileID: 2030422003}
   m_Father: {fileID: 1262515326}
@@ -4800,6 +4800,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1678674931}
     m_Modifications:
     - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      propertyPath: nodesNextToMe.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      propertyPath: rewardOptions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: nodesNextToMe.Array.data[0]
       value: 
       objectReference: {fileID: 629981788}
@@ -4807,6 +4815,10 @@ PrefabInstance:
       propertyPath: nodesNextToMe.Array.data[1]
       value: 
       objectReference: {fileID: 2002318210}
+    - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      propertyPath: nodesNextToMe.Array.data[2]
+      value: 
+      objectReference: {fileID: 7790311395787984332}
     - target: {fileID: 6890069252681624986, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4886,6 +4898,10 @@ PrefabInstance:
     - target: {fileID: 6890069252681624986, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275484442910913524, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SendNodeData
       objectReference: {fileID: 0}
     - target: {fileID: 7895922294567784901, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: m_Name
@@ -10604,6 +10620,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1825153255}
     m_Modifications:
     - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      propertyPath: nodesNextToMe.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: nodesNextToMe.Array.data[0]
       value: 
       objectReference: {fileID: 629981788}
@@ -12156,6 +12176,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1825153255}
     m_Modifications:
+    - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      propertyPath: nodesNextToMe.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: nodesNextToMe.Array.data[0]
       value: 
@@ -19370,8 +19394,8 @@ RectTransform:
   - {fileID: 231515986}
   - {fileID: 1706718779}
   - {fileID: 1023179687}
-  - {fileID: 1956212125}
   - {fileID: 2042768272}
+  - {fileID: 1956212125}
   - {fileID: 1085482391}
   - {fileID: 1182913949}
   - {fileID: 1353428901}
@@ -20721,6 +20745,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1825153255}
     m_Modifications:
+    - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      propertyPath: nodesNextToMe.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: nodesNextToMe.Array.data[0]
       value: 
@@ -22110,13 +22138,33 @@ PrefabInstance:
     m_TransformParent: {fileID: 1825153255}
     m_Modifications:
     - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      propertyPath: nodesNextToMe.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      propertyPath: rewardOptions.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: nodesNextToMe.Array.data[0]
       value: 
-      objectReference: {fileID: 629981788}
+      objectReference: {fileID: 955203099}
     - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: nodesNextToMe.Array.data[1]
       value: 
       objectReference: {fileID: 2002318210}
+    - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      propertyPath: rewardOptions.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: cd9c740ef9dea0c4f86a88ca553d5175, type: 2}
+    - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      propertyPath: rewardOptions.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 404cf6d32135854418aabd44737a115e, type: 2}
+    - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      propertyPath: rewardOptions.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9ca96aa3ebebcbd40b854ed9c0947794, type: 2}
     - target: {fileID: 5089061098940423791, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: m_Color.a
       value: 0.62352943
@@ -22200,6 +22248,10 @@ PrefabInstance:
     - target: {fileID: 6890069252681624986, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275484442910913524, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SendNodeData
       objectReference: {fileID: 0}
     - target: {fileID: 7895922294567784901, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: m_Name
@@ -22603,7 +22655,6 @@ GameObject:
   - component: {fileID: 2078052291}
   - component: {fileID: 2078052290}
   - component: {fileID: 2078052289}
-  - component: {fileID: 2078052292}
   m_Layer: 5
   m_Name: Invade Button
   m_TagString: Untagged
@@ -22687,30 +22738,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 536584728}
-        m_TargetAssemblyTypeName: MapPanel, Assembly-CSharp
-        m_MethodName: closemap
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 536584728}
-        m_TargetAssemblyTypeName: MapPanel, Assembly-CSharp
-        m_MethodName: ReturnScoutPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &2078052290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22749,19 +22776,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2078052287}
   m_CullTransparentMesh: 1
---- !u!114 &2078052292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2078052287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63deb9e516d91497eb06e213a660274d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodesNextToMe: []
 --- !u!1 &2089740683
 GameObject:
   m_ObjectHideFlags: 0
@@ -24137,6 +24151,10 @@ PrefabInstance:
     - target: {fileID: 6890069252681624986, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275484442910913524, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SendNodeData
       objectReference: {fileID: 0}
     - target: {fileID: 7895922294567784901, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: m_Name

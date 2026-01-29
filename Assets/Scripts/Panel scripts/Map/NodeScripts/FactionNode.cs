@@ -23,5 +23,34 @@ public class FactionNode : NodeData
     {
         return units;
     }
+
+    public override List<Reward> GenerateRewardOptions()
+    {
+        Faction pf= UnitManager.instance.GetPlayerFaction();
+        
+
+        List<Reward> lootList = new List<Reward>();
+        //find matching loot table
+        var FactionLootLists = LootPanel.instance.FactionLootLists;
+
+        for (int fcv = 0; fcv < factionsOnTeam.Count; fcv++)
+        {
+            for (int lcv = 0; lcv < FactionLootLists.Count; lcv++)
+            {
+                if (FactionLootLists[lcv].DoesMatchFactions(pf, factionsOnTeam[fcv]))
+                {
+                    lootList.AddRange(FactionLootLists[lcv].GetLootOptions());
+                }
+            }
+        }
+        Debug.Log("loot list count " + lootList.Count);
+        if (lootList == null)
+        {
+            Debug.LogError("loot is Null");
+        }
+
+        return RemoveDuplicateUpgrages(lootList);//this is so the player can't upgrades they already have
+    }
+
 }
 public enum Faction { Penguins, Giraffes, PolarBears, Beavers, Monkeys, Goats, Seals }

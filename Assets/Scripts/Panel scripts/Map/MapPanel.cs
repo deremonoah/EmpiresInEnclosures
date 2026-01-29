@@ -17,6 +17,22 @@ public class MapPanel : MonoBehaviour
     private LevelEnablerManager ml;
     [SerializeField]
     private List<NodeData> ConqueredNodes;//idea here is once you beat a node it gets added here
+    private bool isUndecided;
+
+    public static MapPanel instance;
+
+    private void Awake()
+    {
+        if(instance!=null && instance!=this)
+        {
+            Debug.LogError("We got 2 map panels bro wtf?");
+        }
+        else
+        {
+            instance = this;
+            //DontDestroyOnLoad(this.gameObject);//will this take the object off the canvas? hey I was right
+        }
+    }
 
     private void OnEnable()
     {
@@ -30,6 +46,7 @@ public class MapPanel : MonoBehaviour
 
     public void openMap()
     {
+        isUndecided = true;
         animMap.SetBool("OpenMap", true);
     }
 
@@ -52,15 +69,16 @@ public class MapPanel : MonoBehaviour
 
     public void pickMapNode()//this is on the scout panel
     {
-        if(highlightedNode is FactionNode) // old way highlightedNode.GetType()==typeof(FactionNode), learned current from google ai, when finding old way, rather than load Simple Samurai
+        if (highlightedNode is EncounterNode)
+        {
+            HandleEncounter();
+        }
+        else if (highlightedNode is FactionNode) // old way highlightedNode.GetType()==typeof(FactionNode), learned current from google ai, when finding old way, rather than load Simple Samurai
         {
             //if it is FactionNode, then we can cast the parent version of the child refrence back to its right type
             HandleFaction((FactionNode)highlightedNode);
         }
-        if(highlightedNode is EncounterNode)
-        {
-            ConqueredNodes.Add(highlightedNode);//this is temporary work around, and should make it so they can only go there once
-        }
+        ReturnScoutPanel();
     }
 
     private void HandleFaction(FactionNode enemy)
@@ -70,6 +88,15 @@ public class MapPanel : MonoBehaviour
         UnitManager um = FindObjectOfType<UnitManager>();
         um.LoadEnemyUnitList(enemy.getUnits());
         um.SetEnemyFaction(enemy.GetIncludedFactions());
+        isUndecided = false;
+        closemap();
+    }
+
+    private void HandleEncounter()
+    {
+        //ConqueredNodes.Add(highlightedNode);
+        FlowManager.instance.didPlayerLoseBattle("Enemy Base");//hopefully work around to skip battle issues
+        isUndecided = false;
     }
 
     public void lookAtMapNode(NodeData node)//this is on the node buttons
@@ -184,5 +211,15 @@ public class MapPanel : MonoBehaviour
     {
         ConqueredNodes.Add(highlightedNode);
         //should move the penguin there or change image, maybe change display image to penguin.
+    }
+
+    public bool isStillDecidingNode()
+    {
+        return isUndecided;
+    }
+
+    public NodeData getCurrentNode()
+    {
+        return highlightedNode;
     }
 }

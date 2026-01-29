@@ -9,4 +9,9 @@ public class EncounterNode : NodeData
     //otherwise it might be a pick of several options, like the fountains giving temporary buffs, or popsycle stand
     [SerializeField] List<Reward> rewardOptions;//might need scriptable objects for these, maybe just whole encounter?
     //can we reuse the code for upgrade panel?
+    public override List<Reward> GenerateRewardOptions()
+    {
+        Debug.Log("in encounter node");
+        return RemoveDuplicateUpgrages(rewardOptions);
+    }
 }

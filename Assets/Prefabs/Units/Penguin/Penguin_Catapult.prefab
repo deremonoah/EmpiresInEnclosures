@@ -97,6 +97,14 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7343515472698973073, guid: 5a2dd7d4d9566294699780f6396547c5, type: 3}
+      propertyPath: _unitRole
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7343515472698973073, guid: 5a2dd7d4d9566294699780f6396547c5, type: 3}
+      propertyPath: _unitType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7343515472698973073, guid: 5a2dd7d4d9566294699780f6396547c5, type: 3}
       propertyPath: AttackSpeed
       value: 3.5
       objectReference: {fileID: 0}

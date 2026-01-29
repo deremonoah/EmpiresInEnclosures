@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playersFaction: 0
   defeatedFaction: 6
-  lootOptions: []
+  lootOptions:
+  - {fileID: 11400000, guid: 9ca96aa3ebebcbd40b854ed9c0947794, type: 2}
+  - {fileID: 11400000, guid: 63bc97a5e71f6104f80b708dbd948326, type: 2}

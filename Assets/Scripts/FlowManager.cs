@@ -20,6 +20,8 @@ public class FlowManager : MonoBehaviour
     private MapPanel mapPan;
     private LootPanel looPan;
 
+    private int turnCount;
+
     private void Awake()
     {
         if (instance != null & instance != this)
@@ -64,14 +66,16 @@ public class FlowManager : MonoBehaviour
         mapPan.openMap();
         curState = gameState.movingLocation;//need to tell ai that we are maping or it checks
 
-        while (mapPan.IsPanOpen())
+        while (mapPan.isStillDecidingNode())
         {
             yield return null;
         }
-        //map panel handles input of node to load
-        //map loader loads map
-        curState = gameState.inBattle;
-        BattleStart.Invoke();//this event should tell ai battle has started
+        
+        if(battleLoser.Length<1)
+        {
+            curState = gameState.inBattle;
+            BattleStart.Invoke();//this event should tell ai battle has started
+        }
         while (battleLoser.Length<1)//while string is empty
         {
             yield return null;
@@ -83,6 +87,7 @@ public class FlowManager : MonoBehaviour
             lootPanelSendOpen.Invoke();
             battleLoser = "";//clear it for next time
             mapPan.PlayerBeatNode();
+            Debug.Log("got to where it should open panel");
             //playerWon();
         }
         else if(battleLoser== "Player Base")
@@ -105,7 +110,7 @@ public class FlowManager : MonoBehaviour
         //then would be another waiting for them to hit the fight? is this too many menus?
 
         //load next battle
-
+        turnCount++;
         StartCoroutine(GameFlowRoutine());
     }
     //what happens if player loses? is there a hp? do they lose if they lose a single battle, or do the fights get harder?
