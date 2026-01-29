@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float damage;
+    public float damage;//set by the unit ai rn
     private Vector2 Target;// will keep this around for homing shots, bees! other homing shots wouldn't make sense imo
     private Vector2 Direction;
     public float moveSpeed;
