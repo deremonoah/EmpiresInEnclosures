@@ -464,20 +464,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d88a28c1a086024c977f5a403b0e631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHp: 0
   Cost: 0
-  SwimSpeed: 0
-  MountainSpeed: 0
-  MoveSpeed: 0
-  Armor: 0
+  MaxHp: 0
   Attack: 0
   AttackToBase: 0
   AttackSpeed: 0
   AnimAttackPreHit: 0.2
-  SightRange: 4
   AttackRange: 1
-  ut: 0
-  ur: 0
+  SightRange: 4
+  MoveSpeed: 1
+  SwimSpeed: 1
+  MountainSpeed: 1
+  _unitType: 0
+  _unitRole: 0
+  Armor: 0
   FriendlyPayOnDeath: 1
   EnemyPayOnDeath: 1
   portrait: {fileID: 0}
@@ -486,6 +486,8 @@ MonoBehaviour:
   bonusAttackToBase: 0
   bonusAttackSpeed: 0
   bonusMoveSpeed: 0
+  bonusWaterMoveSpeed: 0
+  bonusMountianMoveSpeed: 0
   bonusHP: 0
   bonusSightRange: 0
   bonusAttackRange: 0
@@ -508,6 +510,7 @@ MonoBehaviour:
   maxHp: 0
   anim: {fileID: 0}
   myOnDeathAbility: {fileID: 0}
+  rider: {fileID: 0}
 --- !u!114 &6547857816382867222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,6 +532,7 @@ MonoBehaviour:
   shootPoint: {fileID: 5945825242533879401}
   xRange: {x: -1, y: 1}
   yRange: {x: -1, y: 1}
+  myAttackAbility: {fileID: 0}
 --- !u!50 &8699692239669971468
 Rigidbody2D:
   serializedVersion: 4

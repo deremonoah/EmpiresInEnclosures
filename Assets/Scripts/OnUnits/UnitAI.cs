@@ -33,6 +33,9 @@ public class UnitAI : MonoBehaviour
     public Vector2 xRange;
     public Vector2 yRange;
 
+    [Header("AttackAbility")]
+    [SerializeField] AttackAbility myAttackAbility;
+
     private RTSController rtsController;
 
     private Collider2D forBuff;
@@ -291,8 +294,8 @@ public class UnitAI : MonoBehaviour
             yield return new WaitForSeconds(myStats.getAttackWaitTime());//for testing will need an animation
             if (attackTarget != null)
             {
-                attackTarget.ThisAttackedYou(myStats); /*Debug.Log("attack target not null");*/
-                yield return new WaitForSeconds(0.5f);//could be recovery time
+                MeleeDealDamage(attackTarget); /*Debug.Log("attack target not null");*/
+               yield return new WaitForSeconds(0.5f);//could be recovery time
             }
             else
             {
@@ -301,7 +304,7 @@ public class UnitAI : MonoBehaviour
                 if(newTarget!=null)
                 {
                     attackTarget = newTarget;
-                    attackTarget.ThisAttackedYou(myStats); /*Debug.Log("attack target not null");*/
+                    MeleeDealDamage(attackTarget); /*Debug.Log("attack target not null");*/
                     yield return new WaitForSeconds(0.5f);//could be recovery time
                 }// if it can't find anyone it should move on
             }
@@ -319,6 +322,15 @@ public class UnitAI : MonoBehaviour
             yield return MeleeAttackRoutine();
         }
         currentRoutine = null;
+    }
+
+    private void MeleeDealDamage(HP attackTarget)//added so it can handle attack ability too
+    {
+        attackTarget.ThisAttackedYou(myStats);
+        if(myAttackAbility!=null)
+        {
+            myAttackAbility.UseAttackAbility(attackTarget, this.gameObject, LayerToAttack);
+        }
     }
 
     private IEnumerator RangedAttackRoutine()

@@ -8027,7 +8027,7 @@ MonoBehaviour:
   playerPPText: {fileID: 1987334328}
   playerPPMaxText: {fileID: 1153561328}
   enemyPrefabs:
-  - {fileID: 3248066881049308706, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
+  - {fileID: 3550317812265094632, guid: 2dc8e5c742e591745a87b5351b348628, type: 3}
   - {fileID: 2864915583633797780, guid: 7971749f3f35aad4a8844701b9857367, type: 3}
   - {fileID: 9069953782135950629, guid: 4864614692eeafd41aca06e83250c94f, type: 3}
   - {fileID: 747321771612565356, guid: dbeb709ccb31d0342a84b25ca13bfef6, type: 3}
