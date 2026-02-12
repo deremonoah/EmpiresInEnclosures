@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "SwipeAbility", menuName = "Abilities/SwipeAbility")]
 
@@ -18,29 +19,44 @@ public class SwipeAbility : AttackAbility
         UnitStats dmg = attacker.GetComponent<UnitStats>();
         //cast physics circle there
         Collider2D[] hits = Physics2D.OverlapCircleAll(pos, swipeRange);
-        GameObject oneToHit=null;
+        GameObject[] onesToHit= new GameObject[extraTargets];
+        Debug.Log("array length " + onesToHit.Length);
         float closestDis=swipeRange+1;
 
-        foreach(Collider2D col in hits)
-        {
-            var tar = col.gameObject;
-            Vector2 tarPos= col.gameObject.transform.position;
 
-            if (tar.layer==layerToAttack)
+        for(int lcv=0;lcv<onesToHit.Length;lcv++)
+        {
+            closestDis = swipeRange + 1;
+            foreach (Collider2D col in hits)
             {
-                var newDis = Vector2.Distance(pos, tarPos);
-                if(newDis<closestDis && newDis!=0)
+                var tar = col.gameObject;
+                Vector2 tarPos = col.gameObject.transform.position;
+
+                if (tar.layer == layerToAttack)
                 {
-                    closestDis = newDis;
-                    oneToHit = tar;
+                    var newDis = Vector2.Distance(pos, tarPos);
+                    if (newDis < closestDis && newDis != 0)
+                    {
+                        if(!onesToHit.Contains(tar))
+                        {
+                            closestDis = newDis;
+                            onesToHit[lcv] = tar;
+                            Debug.Log("we have set " + lcv);
+                        }
+                    }
                 }
             }
         }
 
         //deal attackers damage to the closest one
-        if (oneToHit!=null)
+        for(int lcv=0;lcv<onesToHit.Length;lcv++)
         {
-            oneToHit.GetComponent<HP>().ThisAttackedYou(dmg);
+            if (onesToHit[lcv] != null)
+            {
+                onesToHit[lcv].GetComponent<HP>().ThisAttackedYou(dmg);
+            }
+            else { Debug.Log("pos " + lcv + " is empty"); }
         }
+        
     }
 }

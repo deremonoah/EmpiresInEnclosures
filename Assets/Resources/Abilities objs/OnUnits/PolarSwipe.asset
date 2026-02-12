@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 637e3500a08962947a6c45dba11fada4, type: 3}
   m_Name: PolarSwipe
   m_EditorClassIdentifier: 
-  extraTargets: 1
+  extraTargets: 2
   swipeRange: 2

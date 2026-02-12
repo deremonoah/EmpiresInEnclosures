@@ -210,7 +210,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: MoveSpeed
-      value: 3
+      value: 2.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
+      propertyPath: SwimSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: SightRange
@@ -225,8 +229,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
+      propertyPath: AttackToBase
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: EnemyPayOnDeath
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8470989177391195316, guid: 6a2ca8e02c048ad418afb6c8519bf76d, type: 3}
       propertyPath: FriendlyPayOnDeath
