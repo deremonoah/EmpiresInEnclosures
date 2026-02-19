@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bc6b54492e00704fbee4fbaaa0f317f, type: 3}
-  m_Name: Blubberforall
+  m_Name: ClimbingGear
   m_EditorClassIdentifier: 
-  _buffType: 3
-  _buffStrength: 2
+  _buffType: 10
+  _buffStrength: 1
   _whoToTarget: 0
   _whatToBuff: 6
   _AuraSize: 0

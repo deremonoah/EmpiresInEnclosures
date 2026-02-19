@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bc6b54492e00704fbee4fbaaa0f317f, type: 3}
-  m_Name: Blubberforall
+  m_Script: {fileID: 11500000, guid: e471f6e8601cbc64c96903c3b8bf34b4, type: 3}
+  m_Name: HornedPenguin
   m_EditorClassIdentifier: 
-  _buffType: 3
-  _buffStrength: 2
-  _whoToTarget: 0
-  _whatToBuff: 6
-  _AuraSize: 0
+  rName: Horned Penguin
+  icon: {fileID: 0}
+  description: has horns and is a penguin
+  unitPrefab: {fileID: 5567053908097656007, guid: 423b388674eeba64498f102e38462212, type: 3}

@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c86710f33dc69c343ae98aee42e7b082, type: 3}
-  m_Name: PenguinGoat
+  m_Name: PenguinSeal
   m_EditorClassIdentifier: 
   playersFaction: 0
-  defeatedFaction: 5
-  lootOptions: []
+  defeatedFaction: 6
+  lootOptions:
+  - {fileID: 11400000, guid: 9ca96aa3ebebcbd40b854ed9c0947794, type: 2}
+  - {fileID: 11400000, guid: 63bc97a5e71f6104f80b708dbd948326, type: 2}
+  - {fileID: 11400000, guid: 356362571e0b7944f89faceb70dc850c, type: 2}

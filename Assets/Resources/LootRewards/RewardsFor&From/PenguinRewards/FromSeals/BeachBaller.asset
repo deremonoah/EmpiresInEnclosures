@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e471f6e8601cbc64c96903c3b8bf34b4, type: 3}
+  m_Name: BeachBaller
+  m_EditorClassIdentifier: 
+  rName: BeachBaller
+  icon: {fileID: 0}
+  description: uses a beach ball as a weapon, which if programmer got to it will
+    bounce off multiple enemies
+  unitPrefab: {fileID: 1626462524233524660, guid: 3b9743d103d557142ac2ace1428e4aa8, type: 3}

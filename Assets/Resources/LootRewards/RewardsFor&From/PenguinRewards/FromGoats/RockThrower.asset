@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bc6b54492e00704fbee4fbaaa0f317f, type: 3}
-  m_Name: fluffyFoot
+  m_Script: {fileID: 11500000, guid: e471f6e8601cbc64c96903c3b8bf34b4, type: 3}
+  m_Name: RockThrower
   m_EditorClassIdentifier: 
-  _buffType: 3
-  _buffStrength: 2
-  _whoToTarget: 0
-  _whatToBuff: 0
-  _AuraSize: 0
+  rName: rock thrower
+  icon: {fileID: 0}
+  description: throws rocks the size of a rock at enemies
+  unitPrefab: {fileID: 6723715228622054746, guid: 339fd7231cd263944abb910b28f2eaf3, type: 3}

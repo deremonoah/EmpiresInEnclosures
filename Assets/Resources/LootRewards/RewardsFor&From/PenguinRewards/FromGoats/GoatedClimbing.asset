@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bc6b54492e00704fbee4fbaaa0f317f, type: 3}
-  m_Name: Blubberforall
+  m_Script: {fileID: 11500000, guid: dced9ae16b0c91640857f5ebfd4ee363, type: 3}
+  m_Name: GoatedClimbing
   m_EditorClassIdentifier: 
-  _buffType: 3
-  _buffStrength: 2
-  _whoToTarget: 0
-  _whatToBuff: 6
-  _AuraSize: 0
+  rName: goated climbers
+  icon: {fileID: 0}
+  description: Increase the move speed over rocky terrain
+  theBuffItself: {fileID: 11400000, guid: f320e169cfb17d84c87237037b54445a, type: 2}

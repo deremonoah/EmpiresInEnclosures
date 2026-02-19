@@ -45,9 +45,10 @@ public class UnitStats : MonoBehaviour
     [SerializeField] private float bonusAttack;
     [SerializeField] private float bonusAttackToBase;
     [SerializeField] private float bonusAttackSpeed;//bonus will be negative for faster
-    [SerializeField] private float bonusMoveSpeed;//hmm maybe for specific terrain?
+    [SerializeField] private float bonusMoveSpeed;
     [SerializeField] private float bonusWaterMoveSpeed;
     [SerializeField] private float bonusMountianMoveSpeed;
+    [SerializeField] private float bonusAllSpeed;
     [SerializeField] private float bonusHP;//will need to integrate unit hp using this class probably?
     [SerializeField] private float bonusSightRange;//certain effected classes could have a public updated from buff call
     [SerializeField] private float bonusAttackRange;
@@ -107,10 +108,12 @@ public class UnitStats : MonoBehaviour
     public float getMoveSpeed(Terrain ter)
     {
         if(ter==Terrain.water)
-        { return Mathf.Clamp(SwimSpeed+bonusMoveSpeed+bonusWaterMoveSpeed,0, 99); }
+        { return Mathf.Clamp(SwimSpeed+ bonusAllSpeed + bonusWaterMoveSpeed,0, 99); }
+
         else if(ter==Terrain.mountain)
-        { return Mathf.Clamp(MountainSpeed + bonusMoveSpeed + bonusMountianMoveSpeed, 0, 99); }
-        return Mathf.Clamp(MoveSpeed + bonusMoveSpeed , 0, 99);
+        { return Mathf.Clamp(MountainSpeed + bonusAllSpeed + bonusMountianMoveSpeed, 0, 99); }
+
+        return Mathf.Clamp(MoveSpeed + bonusMoveSpeed + bonusAllSpeed, 0, 99);
     }
 
     public bool AmRanged()
@@ -190,8 +193,8 @@ public class UnitStats : MonoBehaviour
                     case BuffsType.armor:
                         bonusArmor += buffValue;
                         break;
-                    case BuffsType.moveSpeed:
-                        //will worry about which specific one later
+                    case BuffsType.AllmoveSpeed:
+                        bonusAllSpeed += buffValue;
                         break;
                     case BuffsType.BonusPayOnDeathEnemy:
                         bonusPayOnDeathFriendly += buffValue;
@@ -199,7 +202,15 @@ public class UnitStats : MonoBehaviour
                     case BuffsType.BonusPayOnDeathFriendly:
                         bonusPayOnDeathFriendly += buffValue;//for now only the biggest + or - applies
                         break;
-
+                    case BuffsType.normalMoveSpeed:
+                        bonusMoveSpeed += buffValue;
+                        break;
+                    case BuffsType.waterMoveSpeed:
+                        bonusWaterMoveSpeed += buffValue;
+                        break;
+                    case BuffsType.mountainMoveSpeed:
+                        bonusMountianMoveSpeed += buffValue;
+                        break;
                 }
             }
         }
@@ -255,7 +266,7 @@ public class UnitStats : MonoBehaviour
                 case BuffsType.armor:
                     bonusArmor= Mathf.Max(bonusArmor, absBuffStrength);
                     break;
-                case BuffsType.moveSpeed:
+                case BuffsType.AllmoveSpeed:
                     //will worry about which specific one later
                     break;
                 case BuffsType.BonusPayOnDeathEnemy:

@@ -46,12 +46,15 @@ public enum BuffsType
     attackToBase,
     attackSpeed,
     HP,
-    moveSpeed,
+    AllmoveSpeed,
     armor,
     sightRange,
     attackRange,
     BonusPayOnDeathFriendly,
-    BonusPayOnDeathEnemy
+    BonusPayOnDeathEnemy,
+    mountainMoveSpeed,
+    waterMoveSpeed,
+    normalMoveSpeed
 }
 
 public enum Targets
