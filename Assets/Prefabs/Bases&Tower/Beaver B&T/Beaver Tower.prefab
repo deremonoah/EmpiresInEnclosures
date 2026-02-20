@@ -180,6 +180,7 @@ MonoBehaviour:
   bonusMoveSpeed: 0
   bonusWaterMoveSpeed: 0
   bonusMountianMoveSpeed: 0
+  bonusAllSpeed: 0
   bonusHP: 0
   bonusSightRange: 0
   bonusAttackRange: 0
@@ -220,10 +221,11 @@ MonoBehaviour:
   moveTargets: []
   attackTarget: {fileID: 0}
   unitState: 0
-  ProjectilePrefab: {fileID: 2814694146465000412, guid: fe1ef56a5d34275409f1adeacb5c92c2, type: 3}
+  ProjectilePrefab: {fileID: 8877284504177569965, guid: 1d6ec30d51adf6643b52e190433278da, type: 3}
   shootPoint: {fileID: 7876431908717531312}
   xRange: {x: -1, y: 1}
   yRange: {x: -1, y: 1}
+  myAttackAbility: {fileID: 0}
 --- !u!50 &1459148491766038483
 Rigidbody2D:
   serializedVersion: 4
