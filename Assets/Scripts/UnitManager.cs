@@ -14,6 +14,7 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private float playerPP,playerStartingPP, playerMaxPP, PPRegenTimer,PPRegenTimerMax;
     public Text playerPPText, playerPPMaxText;
     private List<GameObject> spawnedPlayerUnits = new List<GameObject>();
+    [SerializeField] private bool playerAutoCharge;
 
     [Header("Enmey stuff")]
     public List<GameObject> enemyPrefabs;
@@ -155,10 +156,13 @@ public class UnitManager : MonoBehaviour
             //instantiate prefab at spawnPos.pos
 
             var unit = Instantiate(PlayerUnitPrefabs[lcv], RandomizeSpawn(PlayerBasePos.position), PlayerBasePos.rotation);
-            PlayerUnitPrefabs[lcv].GetComponent<UnitStats>().getCost();
-            unit.GetComponent<UnitAI>().SetMoveTarget(EnemyBasePos.position);
-            //unit.GetComponent<UnitAI>().setUnitState(UnitState.move); will it start by default
             unit.gameObject.layer = 7;
+            PlayerUnitPrefabs[lcv].GetComponent<UnitStats>().getCost();
+            if (playerAutoCharge)
+            { unit.GetComponent<UnitAI>().SetMoveTarget(EnemyBasePos.position); }//if auto charge is on charge at enemy base
+            else { unit.GetComponent<UnitAI>().SetMoveTarget(RandomizeSpawn(gameObject.transform.position)); }//I moved the enmpy manager where the square for teaching is
+            //unit.GetComponent<UnitAI>().setUnitState(UnitState.move); will it start by default
+            
             spawnedPlayerUnits.Add(unit);
             //truned off friendly fire
         }
@@ -256,6 +260,11 @@ public class UnitManager : MonoBehaviour
         }
     }
     
+    public void SetAutoCharge(bool toggleValue)
+    {
+        playerAutoCharge = toggleValue;
+    }
+
 #region Enemy ai calls
     public void spawnEnemyUnit(int lcv, Vector2 whereToGo)
     {

@@ -168,7 +168,7 @@ public class UnitAI : MonoBehaviour
         {
             //only makes new target if old is null or they are attacking a base
             //makes sure we don't double up on attack routines
-
+            Debug.Log("seeing target");
             //helps be more natural
             //pos = RandomizePos(pos);
 
@@ -187,7 +187,7 @@ public class UnitAI : MonoBehaviour
             {
                 if(CheckMeleeInRange(pos))
                 {
-                    Debug.Log("passed check melee in range");
+                    //Debug.Log("passed check melee in range");
                     attackTarget = enmTarg;
                     currentRoutine = StartCoroutine(MeleeAttackRoutine());
                     notGoThereNow();
@@ -214,7 +214,7 @@ public class UnitAI : MonoBehaviour
             //Debug.Log(gameObject.name+" raycasted and hit " + hit.collider.gameObject.name);
             if (hit.collider.gameObject.layer == LayerToAttack)
             {
-                Debug.Log("layer is even right so we return true");
+                //Debug.Log("layer is even right so we return true");
                 return true;
             }
         }
@@ -258,7 +258,7 @@ public class UnitAI : MonoBehaviour
     {
         currentSpeed = myStats.getMoveSpeed(ter);//would be cool if animation ran slowerWhile on mountain or faster while on water
         //also need to increase sight size based on being on mountains
-        Debug.Log(ter);
+
         if (ter==Terrain.mountain)
         {
             

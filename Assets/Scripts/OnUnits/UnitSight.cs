@@ -23,14 +23,26 @@ public class UnitSight : MonoBehaviour
         _myCol = GetComponent<CircleCollider2D>();
         _myCol.radius = stats.getSightRange();
         Timer = TickMax;
-
-        StartCoroutine(SetUpEnemyLayerRoutine());//this is to see if it will help with pulled pair not seeing things?
+        SetUpEnemyLayer();
+        //StartCoroutine(SetUpEnemyLayerRoutine());//this is to see if it will help with pulled pair not seeing things?
         //if I ever made a convert ability or unit, then this will need to be called on the convert
     }
 
     private IEnumerator SetUpEnemyLayerRoutine()
     {
         yield return new WaitForSeconds(0.1f);
+        if (aiLayer == 7)//player targets enemy
+        {
+            LayerToTarget = 6;
+        }
+        if (aiLayer == 6)//enemy targets player
+        {
+            LayerToTarget = 7;
+        }
+    }
+
+    private void SetUpEnemyLayer()
+    {
         if (aiLayer == 7)//player targets enemy
         {
             LayerToTarget = 6;
