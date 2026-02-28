@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e471f6e8601cbc64c96903c3b8bf34b4, type: 3}
-  m_Name: Seal Cluber
+  m_Name: RiotRadio
   m_EditorClassIdentifier: 
-  rName: Seal Cluber
-  icon: {fileID: 21300000, guid: decb6c54742ced2449ebd7f1dbbd934c, type: 3}
-  description: penguin weilding a seal as a weapon
-  unitPrefab: {fileID: 0}
+  rName: Rioter with a Radio
+  icon: {fileID: 0}
+  description: This unit buffs the attack of your units, in an area of effect around
+    this unit
+  unitPrefab: {fileID: 4162939039673125988, guid: ef29722c974f5d241a0a38481acf6f8b, type: 3}

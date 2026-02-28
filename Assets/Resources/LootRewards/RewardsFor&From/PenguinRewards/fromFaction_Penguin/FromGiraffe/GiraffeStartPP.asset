@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dced9ae16b0c91640857f5ebfd4ee363, type: 3}
   m_Name: GiraffeStartPP
   m_EditorClassIdentifier: 
-  rName: 
+  rName: Reach for the trees
   icon: {fileID: 21300000, guid: 88a566954af7c314088dfaaea673d3ff, type: 3}
-  description: 
+  description: you start the game with 4 extra pp
+  theBuffItself: {fileID: 0}
