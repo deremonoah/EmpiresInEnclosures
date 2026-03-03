@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NodeData : MonoBehaviour
 {
-    [SerializeField] List<NodeData> nodesNextToMe;
+    [SerializeField] protected List<NodeData> nodesNextToMe;
     //prefrence for strategy
     //map to load or it loads based off faction on the map (I am thinking just disabled in scene)
 

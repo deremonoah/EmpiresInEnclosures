@@ -174,7 +174,7 @@ MonoBehaviour:
   MoveSpeed: 0
   SwimSpeed: 0
   MountainSpeed: 0
-  _unitType: 0
+  _unitType: 1
   _unitRole: 4
   Armor: 0
   FriendlyPayOnDeath: 5
@@ -187,6 +187,7 @@ MonoBehaviour:
   bonusMoveSpeed: 0
   bonusWaterMoveSpeed: 0
   bonusMountianMoveSpeed: 0
+  bonusAllSpeed: 0
   bonusHP: 0
   bonusSightRange: 0
   bonusAttackRange: 0
@@ -231,6 +232,7 @@ MonoBehaviour:
   shootPoint: {fileID: 861050973200385197}
   xRange: {x: -1, y: 1}
   yRange: {x: -1, y: 1}
+  myAttackAbility: {fileID: 0}
 --- !u!50 &7389909988656620848
 Rigidbody2D:
   serializedVersion: 4

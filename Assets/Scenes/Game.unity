@@ -2121,7 +2121,7 @@ PrefabInstance:
     - target: {fileID: 219532710650961877, guid: a355bd755d61e3a4ca4da589ebbdbec0, type: 3}
       propertyPath: nodesNextToMe.Array.data[1]
       value: 
-      objectReference: {fileID: 1161517264}
+      objectReference: {fileID: 0}
     - target: {fileID: 545625169469532683, guid: a355bd755d61e3a4ca4da589ebbdbec0, type: 3}
       propertyPath: m_Color.a
       value: 0.62352943
@@ -7480,6 +7480,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1841223137}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &758805242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7895922294567784901, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+  m_PrefabInstance: {fileID: 2363645145599264835}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &764887120
 GameObject:
   m_ObjectHideFlags: 0
@@ -8593,7 +8598,7 @@ PrefabInstance:
     - target: {fileID: 219532710650961877, guid: a355bd755d61e3a4ca4da589ebbdbec0, type: 3}
       propertyPath: nodesNextToMe.Array.data[1]
       value: 
-      objectReference: {fileID: 1161517264}
+      objectReference: {fileID: 0}
     - target: {fileID: 545625169469532683, guid: a355bd755d61e3a4ca4da589ebbdbec0, type: 3}
       propertyPath: m_Color.a
       value: 0.62352943
@@ -10145,7 +10150,7 @@ PrefabInstance:
     - target: {fileID: 219532710650961877, guid: a355bd755d61e3a4ca4da589ebbdbec0, type: 3}
       propertyPath: nodesNextToMe.Array.data[1]
       value: 
-      objectReference: {fileID: 1161517264}
+      objectReference: {fileID: 0}
     - target: {fileID: 545625169469532683, guid: a355bd755d61e3a4ca4da589ebbdbec0, type: 3}
       propertyPath: m_Color.a
       value: 0.62352943
@@ -12279,17 +12284,23 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6890069252681624986, guid: 040989803cb38ea4e916fa1066860142, type: 3}
   m_PrefabInstance: {fileID: 2363645145599264835}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1161517264 stripped
+--- !u!114 &1161517268
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
-  m_PrefabInstance: {fileID: 2363645145599264835}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 758805242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06489e493b72c484f8a83bb3e25995fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 4debcc3e2c4e045d8b8a2e9fa03cbb70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodesNextToMe:
+  - {fileID: 629981788}
+  - {fileID: 2002318210}
+  - {fileID: 7790311395787984332}
+  rewardOptions: []
 --- !u!1 &1163537163
 GameObject:
   m_ObjectHideFlags: 0
@@ -16249,7 +16260,7 @@ PrefabInstance:
     - target: {fileID: 219532710650961877, guid: a355bd755d61e3a4ca4da589ebbdbec0, type: 3}
       propertyPath: nodesNextToMe.Array.data[1]
       value: 
-      objectReference: {fileID: 1161517264}
+      objectReference: {fileID: 0}
     - target: {fileID: 545625169469532683, guid: a355bd755d61e3a4ca4da589ebbdbec0, type: 3}
       propertyPath: m_Color.a
       value: 0.62352943
@@ -18230,7 +18241,7 @@ PrefabInstance:
     - target: {fileID: 219532710650961877, guid: a355bd755d61e3a4ca4da589ebbdbec0, type: 3}
       propertyPath: nodesNextToMe.Array.data[1]
       value: 
-      objectReference: {fileID: 1161517264}
+      objectReference: {fileID: 0}
     - target: {fileID: 545625169469532683, guid: a355bd755d61e3a4ca4da589ebbdbec0, type: 3}
       propertyPath: m_Color.a
       value: 0.62352943
@@ -19867,7 +19878,7 @@ PrefabInstance:
     - target: {fileID: 219532710650961877, guid: a355bd755d61e3a4ca4da589ebbdbec0, type: 3}
       propertyPath: nodesNextToMe.Array.data[1]
       value: 
-      objectReference: {fileID: 1161517264}
+      objectReference: {fileID: 0}
     - target: {fileID: 545625169469532683, guid: a355bd755d61e3a4ca4da589ebbdbec0, type: 3}
       propertyPath: m_Color.a
       value: 0.62352943
@@ -24231,7 +24242,7 @@ PrefabInstance:
     - target: {fileID: 1605268985725725740, guid: 1b8ea1ecee74f404e97571c2117a1aca, type: 3}
       propertyPath: nodesNextToMe.Array.data[2]
       value: 
-      objectReference: {fileID: 1161517264}
+      objectReference: {fileID: 0}
     - target: {fileID: 5630677493193831663, guid: 1b8ea1ecee74f404e97571c2117a1aca, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -24425,11 +24436,11 @@ PrefabInstance:
     - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: nodesNextToMe.Array.data[0]
       value: 
-      objectReference: {fileID: 629981788}
+      objectReference: {fileID: 2002318210}
     - target: {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: nodesNextToMe.Array.data[1]
       value: 
-      objectReference: {fileID: 2002318210}
+      objectReference: {fileID: 629981788}
     - target: {fileID: 6890069252681624986, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -24511,6 +24522,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7275484442910913524, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275484442910913524, guid: 040989803cb38ea4e916fa1066860142, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SendNodeData
       objectReference: {fileID: 0}
@@ -24518,10 +24533,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Racoon Dumpster Node
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 424333831371937450, guid: 040989803cb38ea4e916fa1066860142, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7895922294567784901, guid: 040989803cb38ea4e916fa1066860142, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1161517268}
   m_SourcePrefab: {fileID: 100100000, guid: 040989803cb38ea4e916fa1066860142, type: 3}
 --- !u!1001 &3273465976658269270
 PrefabInstance:
@@ -24651,7 +24670,7 @@ PrefabInstance:
     - target: {fileID: 1194176704687128540, guid: ae7f4010f7c3a1d44a7c834fee0a8037, type: 3}
       propertyPath: nodesNextToMe.Array.data[0]
       value: 
-      objectReference: {fileID: 1161517264}
+      objectReference: {fileID: 0}
     - target: {fileID: 1194176704687128540, guid: ae7f4010f7c3a1d44a7c834fee0a8037, type: 3}
       propertyPath: nodesNextToMe.Array.data[1]
       value: 
@@ -24768,7 +24787,7 @@ PrefabInstance:
     - target: {fileID: 219532710650961877, guid: a355bd755d61e3a4ca4da589ebbdbec0, type: 3}
       propertyPath: nodesNextToMe.Array.data[1]
       value: 
-      objectReference: {fileID: 1161517264}
+      objectReference: {fileID: 0}
     - target: {fileID: 1534270712665370646, guid: a355bd755d61e3a4ca4da589ebbdbec0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
