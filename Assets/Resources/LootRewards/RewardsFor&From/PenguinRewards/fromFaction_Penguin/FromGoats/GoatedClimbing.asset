@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GoatedClimbing
   m_EditorClassIdentifier: 
   rName: goated climbers
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 27e5f95d0b824a848bd9150d76d2988b, type: 3}
   description: Increase the move speed over rocky terrain
   theBuffItself: {fileID: 11400000, guid: f320e169cfb17d84c87237037b54445a, type: 2}

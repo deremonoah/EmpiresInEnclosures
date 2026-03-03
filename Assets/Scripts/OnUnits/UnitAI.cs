@@ -99,7 +99,15 @@ public class UnitAI : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, moveTargets[0], step);
             iCloseTo(moveTargets[0]);
         }
-
+        else if(moveTargets.Count==0)
+        {
+            if(UnitManager.instance.getAutoCharge())
+            {
+                moveTargets.Add(UnitManager.instance.getEnemyBasePos().position);
+            }
+        }
+            
+             
         
     }
     
@@ -141,10 +149,10 @@ public class UnitAI : MonoBehaviour
 
     private void iCloseTo(Vector3 target)
     {
-        if(moveTargets.Count<=1)
+        /*if(moveTargets.Count<=1)
         {
             return;
-        }
+        }*/
 
         float myx = this.transform.position.x;
         float myy = this.transform.position.y;

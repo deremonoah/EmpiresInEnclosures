@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BeachBaller
   m_EditorClassIdentifier: 
   rName: BeachBaller
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 94dca488036459f4db553ac448c68de1, type: 3}
   description: uses a beach ball as a weapon, which if programmer got to it will
     bounce off multiple enemies
   unitPrefab: {fileID: 1626462524233524660, guid: 3b9743d103d557142ac2ace1428e4aa8, type: 3}

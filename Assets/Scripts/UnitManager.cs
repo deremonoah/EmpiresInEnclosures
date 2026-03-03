@@ -265,6 +265,11 @@ public class UnitManager : MonoBehaviour
         playerAutoCharge = toggleValue;
     }
 
+    public bool getAutoCharge()
+    {
+        return playerAutoCharge;
+    }
+        
 #region Enemy ai calls
     public void spawnEnemyUnit(int lcv, Vector2 whereToGo)
     {
@@ -331,6 +336,11 @@ public class UnitManager : MonoBehaviour
         PlayerBasePos = here;
     }
 #endregion
+
+    public Transform getEnemyBasePos()
+    {
+        return EnemyBasePos;
+    }
 
 #region Faction Functions
     public Faction GetPlayerFaction()
