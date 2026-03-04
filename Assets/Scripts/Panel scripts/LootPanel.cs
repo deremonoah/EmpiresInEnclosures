@@ -56,7 +56,6 @@ public class LootPanel : MonoBehaviour
         animLoot.SetBool("Open", false);
     }
 
-
     public bool IsPanOpen()
     {
         return animLoot.GetBool("Open");
@@ -103,4 +102,5 @@ public class LootPanel : MonoBehaviour
         areReplacingUnit = false;
         ReplaceButtons.SetActive(false);
     }
+
 }

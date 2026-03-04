@@ -8,10 +8,22 @@ public class EncounterNode : NodeData
     //a shop if there is some currency, that could be part of the known information, so you might pick one enemy over another
     //otherwise it might be a pick of several options, like the fountains giving temporary buffs, or popsycle stand
     [SerializeField] protected List<Reward> rewardOptions;//might need scriptable objects for these, maybe just whole encounter?
-    //can we reuse the code for upgrade panel?
+    [SerializeField] Sprite image;
+    [TextArea(3,10)]
+    [SerializeField] string text;
     public override List<Reward> GenerateRewardOptions()
     {
         Debug.Log("in encounter node");
         return RemoveDuplicateUpgrages(rewardOptions);
+    }
+
+    public Sprite getPic()
+    {
+        return image;
+    }
+
+    public string getText()
+    {
+        return text;
     }
 }

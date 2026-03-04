@@ -95,7 +95,9 @@ public class MapPanel : MonoBehaviour
     private void HandleEncounter()
     {
         //ConqueredNodes.Add(highlightedNode);
-        FlowManager.instance.didPlayerLoseBattle("Enemy Base");//hopefully work around to skip battle issues
+        FlowManager.instance.didPlayerLoseBattle("Encounter");//work around to skip battle issues
+        //tells encounter panel to display image & description
+        
         isUndecided = false;
     }
 

@@ -19,6 +19,7 @@ public class FlowManager : MonoBehaviour
     [SerializeField] GameObject lossPan;
     private MapPanel mapPan;
     private LootPanel looPan;
+    private EncounterPanel encPan;
 
     private int turnCount;
 
@@ -47,6 +48,7 @@ public class FlowManager : MonoBehaviour
         //should subscribe to events from these?
         mapPan = FindObjectOfType<MapPanel>();
         looPan = FindObjectOfType<LootPanel>();
+        encPan = FindObjectOfType<EncounterPanel>();
         StartCoroutine(GameFlowRoutine());
         //subscribe to loot selected event
     }
@@ -64,14 +66,14 @@ public class FlowManager : MonoBehaviour
     public IEnumerator GameFlowRoutine()
     {
         mapPan.openMap();
-        curState = gameState.movingLocation;//need to tell ai that we are maping or it checks
+        curState = gameState.movingLocation;//player decides what fight to have first
 
         while (mapPan.isStillDecidingNode())
         {
             yield return null;
         }
         
-        if(battleLoser.Length<1)
+        if(battleLoser.Length<1)//this is to tell if its a combat encounter or not
         {
             curState = gameState.inBattle;
             BattleStart.Invoke();//this event should tell ai battle has started
@@ -81,7 +83,7 @@ public class FlowManager : MonoBehaviour
             yield return null;
         }
 
-        if (battleLoser == "Enemy Base")
+        if (battleLoser == "Enemy Base")//this is hit if we have combat or a noncombat encounter
         {
             curState = gameState.looting;
             lootPanelSendOpen.Invoke();
@@ -96,6 +98,11 @@ public class FlowManager : MonoBehaviour
             //move enemies?, or diff punishment, could be just a loss idk
             playerLost();// later will change specific panels
         }
+        else if(battleLoser=="Encounter")
+        {
+            mapPan.PlayerBeatNode();
+            encPan.OpenEncounterPan();
+        }//could have a bossBase for it being a boss, then it counts up to 3 or a set limit to pop up win panel
         else
         { Debug.LogWarning("sent from neither base? not player or enemy"); }
         battleLoser = "";
@@ -105,6 +112,10 @@ public class FlowManager : MonoBehaviour
             yield return null;
         }
 
+        while(encPan.IsPanOpen())
+        {
+            yield return null;
+        }
 
         //maybe display pre battle info,
         //then would be another waiting for them to hit the fight? is this too many menus?
@@ -131,7 +142,7 @@ public class FlowManager : MonoBehaviour
 
     public void didPlayerLoseBattle(string whoLost)
     {
-        Debug.Log("got in battle loser");
+        Debug.Log("got in battle loser "+whoLost);
         battleLoser = whoLost;
     }
 

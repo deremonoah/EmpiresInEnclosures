@@ -20,7 +20,6 @@ public class NodeData : MonoBehaviour
 
     public virtual List<Reward> GenerateRewardOptions()
     {
-        Debug.LogError("returned list from Node Data, its empty");
         return new List<Reward>();
     }
 
