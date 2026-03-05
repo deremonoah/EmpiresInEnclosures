@@ -269,7 +269,25 @@ public class UnitManager : MonoBehaviour
     {
         return playerAutoCharge;
     }
-        
+    
+    public void AddStructuresToLists(bool isPlayer,List<GameObject> structs)
+    {
+        if(isPlayer)
+        {
+            foreach(GameObject go in structs)
+            {
+                spawnedPlayerUnits.Add(go);
+            }
+        }
+        else
+        {
+            foreach (GameObject go in structs)
+            {
+                spawnedEnemyUnits.Add(go);
+            }
+        }
+    }
+
 #region Enemy ai calls
     public void spawnEnemyUnit(int lcv, Vector2 whereToGo)
     {
