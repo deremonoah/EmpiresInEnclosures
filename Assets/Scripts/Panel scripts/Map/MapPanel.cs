@@ -21,6 +21,11 @@ public class MapPanel : MonoBehaviour
 
     public static MapPanel instance;
 
+    [Header("Visualization for map")]
+    [SerializeField] private List<NodeData> nodesOnMap;
+    [SerializeField] Color conqueredColor;
+    [SerializeField] Color canMoveColor;
+
     private void Awake()
     {
         if(instance!=null && instance!=this)
@@ -47,6 +52,7 @@ public class MapPanel : MonoBehaviour
     public void openMap()
     {
         isUndecided = true;
+        visualizeNodesYouCanMoveTo();
         animMap.SetBool("OpenMap", true);
     }
 
@@ -223,5 +229,24 @@ public class MapPanel : MonoBehaviour
     public NodeData getCurrentNode()
     {
         return highlightedNode;
+    }
+
+    private void visualizeNodesYouCanMoveTo()
+    {
+        Debug.Log("we are in visualizer");
+        foreach(NodeData no in nodesOnMap)
+        {
+            Debug.Log("node here");
+            if(CanMoveToThisNode(no))
+            {
+                no.DisplayThisColor(canMoveColor);
+                Debug.Log("can move to this one");
+            }
+        }
+
+        foreach(NodeData no in ConqueredNodes)
+        {
+            no.DisplayThisColor(conqueredColor);
+        }
     }
 }

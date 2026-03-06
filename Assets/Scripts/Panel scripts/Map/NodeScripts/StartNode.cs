@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class StartNode : NodeData
 {
-    private void Start()
+    private void Awake()
     {
-        FindObjectOfType<MapPanel>().AddConqueredNode(this);
+        //MapPanel.instance.AddConqueredNode(this); having weird error will just have it already on the list for now
     }
 }

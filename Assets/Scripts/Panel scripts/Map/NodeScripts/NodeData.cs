@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NodeData : MonoBehaviour
 {
     [SerializeField] protected List<NodeData> nodesNextToMe;
+    [SerializeField] private Image backgroundSquare;//for now will use this for telling player where they can go or have been
     //prefrence for strategy
     //map to load or it loads based off faction on the map (I am thinking just disabled in scene)
 
@@ -42,6 +44,11 @@ public class NodeData : MonoBehaviour
         }
 
         return re;
+    }
+
+    public void DisplayThisColor(Color col)
+    {
+        backgroundSquare.color = col;//in future may have to worry about bosses taking over nodes, would prob change to red
     }
 }
 public enum NodeType { start, enemy, shop, Boss}
