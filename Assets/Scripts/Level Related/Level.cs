@@ -45,7 +45,7 @@ public class Level : MonoBehaviour
     {
         //will need to get equiped base, this also needs to handle any upgrades they have
         //set the player layer
-
+        List<GameObject> addStructs = new List<GameObject>();
         var pBase=Instantiate(_playerEquip.GetPlayerBase(), p_placeBaseHere.position, p_placeBaseHere.rotation);
         pBase.gameObject.name = "Player Base";
         //realizing we need to clear up all these instantiated objects over time, added to a list on here, clears ondisable?
@@ -56,11 +56,16 @@ public class Level : MonoBehaviour
         //tower
         var pTow = Instantiate(_playerEquip.GetPlayerTower(), p_placeTowerHere.position, p_placeTowerHere.rotation);
         pTow.layer = 7;
+
+        addStructs.Add(pBase);
+        addStructs.Add(pTow);
+
+        UnitManager.instance.AddStructuresToLists(true, addStructs);
     }
 
     private void SpawnEnemyBuildings()
     {
-        
+        List<GameObject> addStructs = new List<GameObject>();
         var eBase = Instantiate(e_BasePrefab, e_placeBaseHere.position, e_placeBaseHere.rotation);
         eBase.layer = 6;
         eBase.gameObject.name = "Enemy Base";
@@ -69,7 +74,12 @@ public class Level : MonoBehaviour
         _um.UpdateEnemyBasePos(e_placeBaseHere);
 
         //child it to the base "folder" easier to find in heirachy, maybe only editor code
-        var Tower = Instantiate(e_TowerPrefab, e_placeTowerHere.position, e_TowerPrefab.transform.rotation);
-        Tower.layer = 6;
+        var eTow = Instantiate(e_TowerPrefab, e_placeTowerHere.position, e_TowerPrefab.transform.rotation);
+        eTow.layer = 6;
+
+        addStructs.Add(eBase);
+        addStructs.Add(eTow);
+
+        UnitManager.instance.AddStructuresToLists(false, addStructs);
     }
 }

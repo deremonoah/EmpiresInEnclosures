@@ -224,7 +224,7 @@ MonoBehaviour:
   nodesNextToMe:
   - {fileID: 0}
   - {fileID: 0}
-  backgroundSquare: {fileID: 0}
+  backgroundSquare: {fileID: 4495220268233424305}
   rewardOptions: []
   image: {fileID: 0}
   text: 

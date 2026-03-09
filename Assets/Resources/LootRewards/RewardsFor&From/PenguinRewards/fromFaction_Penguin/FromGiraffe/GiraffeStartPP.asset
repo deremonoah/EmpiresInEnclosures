@@ -15,4 +15,4 @@ MonoBehaviour:
   rName: Reach for the trees
   icon: {fileID: 21300000, guid: c7711a03c6031714392a35b08806694c, type: 3}
   description: you start the game with 4 extra pp
-  theBuffItself: {fileID: 0}
+  theBuffItself: {fileID: 11400000, guid: ced07dff5f0cc4231a6825a0f71d0dc1, type: 2}

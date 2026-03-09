@@ -54,7 +54,8 @@ public enum BuffsType
     BonusPayOnDeathEnemy,
     mountainMoveSpeed,
     waterMoveSpeed,
-    normalMoveSpeed
+    normalMoveSpeed,
+    PPStartUP
 }
 
 public enum Targets

@@ -66,4 +66,17 @@ public class EquipManagerPlayer : MonoBehaviour
         }
         return totalBasebuff;
     }
+
+    public float GetPlayerStartingPPBuff()
+    {
+        float totalPPbuff = 0;
+        foreach (AuraAbility buff in playerBuffs)
+        {
+            if (buff.getBuffType() == BuffsType.PPStartUP)
+            {
+                totalPPbuff += buff.getBuffStength();
+            }
+        }
+        return totalPPbuff;
+    }
 }

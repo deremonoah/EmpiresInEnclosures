@@ -87,7 +87,7 @@ public class UnitManager : MonoBehaviour
 
     private void StartOfBattleSetPP()
     {
-        playerPP = playerStartingPP;
+        playerPP = playerStartingPP+EquipManagerPlayer.instance.GetPlayerStartingPPBuff();
         enmPP = enmStartingPP;
     }
 
