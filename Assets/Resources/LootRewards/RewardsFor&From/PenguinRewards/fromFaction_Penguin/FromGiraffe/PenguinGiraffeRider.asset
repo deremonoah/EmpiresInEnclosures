@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PenguinGiraffeRider
   m_EditorClassIdentifier: 
   rName: Jocky n Giraffe
-  icon: {fileID: 21300000, guid: 3b1cd4fcd0cf7a242896755182cab89e, type: 3}
+  icon: {fileID: 21300000, guid: bd95f9e8abbb79a4e9f60f2fe408963c, type: 3}
   description: Your brave penguins ride astrde a conquered Giraffe
   unitPrefab: {fileID: 7203921678899097389, guid: b242fdf228a0da74c901e915d738cfc2, type: 3}
