@@ -83,6 +83,11 @@ public class UnitStats : MonoBehaviour
     public float getAttack()
     {
         return Mathf.Clamp(Attack + bonusAttack,1,1000); //idk when damage would get over 1000
+    }//min 1 is incase it has a debuff or multiple it can still do some damage
+
+    public float getAttackBuffs()
+    {
+        return bonusAttack;//this is for seal clubber as their attack is meant to be 0, but above returns 1 for other reasons
     }
 
     public float getBaseAttack()

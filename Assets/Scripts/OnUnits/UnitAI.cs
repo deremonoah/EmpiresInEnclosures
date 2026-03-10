@@ -253,6 +253,7 @@ public class UnitAI : MonoBehaviour
     public void Halt()
     {
         //this makes units stop when highlighted
+        //no it doesn't do anything when its highlighted, did I miss it in the tutorial?
     }
 
     private void setUnitState(UnitState state)
@@ -334,11 +335,11 @@ public class UnitAI : MonoBehaviour
 
     private void MeleeDealDamage(HP attackTarget)//added so it can handle attack ability too
     {
-        attackTarget.ThisAttackedYou(myStats);
         if(myAttackAbility!=null)
         {
             myAttackAbility.UseAttackAbility(attackTarget, this.gameObject, LayerToAttack);
         }
+        attackTarget.ThisAttackedYou(myStats);
     }
 
     private IEnumerator RangedAttackRoutine()

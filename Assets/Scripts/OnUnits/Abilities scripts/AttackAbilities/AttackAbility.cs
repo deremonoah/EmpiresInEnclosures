@@ -11,6 +11,6 @@ public class AttackAbility : UnitAbility
 
     public virtual void UseAttackAbility(HP target, GameObject attacker, int layerToAttack)
     {
-
+        Debug.Log("used based attack ability: nothing here");
     }
 }

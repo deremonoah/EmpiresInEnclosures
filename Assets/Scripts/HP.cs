@@ -55,4 +55,9 @@ public class HP : MonoBehaviour
         
     }
 
+    //for seal clubber ability might help later?
+    public float getCurrentHP()
+    {
+        return currentHp;
+    }
 }

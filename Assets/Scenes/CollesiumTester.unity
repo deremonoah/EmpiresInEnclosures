@@ -8016,6 +8016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerBasePos: {fileID: 928839976}
   PlayerUnitPrefabs:
+  - {fileID: 2801450419400278516, guid: c73f07680ceba6645bce4cdf0f09e11a, type: 3}
   - {fileID: 1548054115205157805, guid: e5a5f9871e4fabb4393ef32be1798828, type: 3}
   - {fileID: 4162939039673125988, guid: ef29722c974f5d241a0a38481acf6f8b, type: 3}
   - {fileID: 3905175288595785937, guid: 92f9ad0d68230324c920f488c800da00, type: 3}
@@ -8026,8 +8027,8 @@ MonoBehaviour:
   PPRegenTimerMax: 2
   playerPPText: {fileID: 1987334328}
   playerPPMaxText: {fileID: 1153561328}
+  playerAutoCharge: 0
   enemyPrefabs:
-  - {fileID: 3550317812265094632, guid: 2dc8e5c742e591745a87b5351b348628, type: 3}
   - {fileID: 2864915583633797780, guid: 7971749f3f35aad4a8844701b9857367, type: 3}
   - {fileID: 9069953782135950629, guid: 4864614692eeafd41aca06e83250c94f, type: 3}
   - {fileID: 747321771612565356, guid: dbeb709ccb31d0342a84b25ca13bfef6, type: 3}
