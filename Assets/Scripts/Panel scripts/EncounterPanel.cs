@@ -23,7 +23,7 @@ public class EncounterPanel : MonoBehaviour
         if (FlowManager.instance == null)
         { Debug.Log("instance null"); }
         animEnc = GetComponent<Animator>();
-        Debug.Log("Encounter anim? " + (animEnc != null));
+        
         mp = MapPanel.instance;
     }
 

@@ -104,6 +104,7 @@ public class UnitAI : MonoBehaviour
             if(UnitManager.instance.getAutoCharge())
             {
                 moveTargets.Add(UnitManager.instance.getEnemyBasePos().position);
+                Debug.Log("your logic is wrong in unit ai");
             }
         }
             
@@ -176,7 +177,7 @@ public class UnitAI : MonoBehaviour
         {
             //only makes new target if old is null or they are attacking a base
             //makes sure we don't double up on attack routines
-            Debug.Log("seeing target");
+            Debug.Log(gameObject.name+" seeing target");
             //helps be more natural
             //pos = RandomizePos(pos);
 

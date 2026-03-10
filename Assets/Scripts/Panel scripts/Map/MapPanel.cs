@@ -233,14 +233,11 @@ public class MapPanel : MonoBehaviour
 
     private void visualizeNodesYouCanMoveTo()
     {
-        Debug.Log("we are in visualizer");
         foreach(NodeData no in nodesOnMap)
         {
-            Debug.Log("node here");
             if(CanMoveToThisNode(no))
             {
                 no.DisplayThisColor(canMoveColor);
-                Debug.Log("can move to this one");
             }
         }
 

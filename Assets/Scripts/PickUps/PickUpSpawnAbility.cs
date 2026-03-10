@@ -16,6 +16,7 @@ public class PickUpSpawnAbility : PickUpAbility
         {
             var unit = Instantiate(spawnPrefab, origin.position, origin.rotation);
             unit.layer = isPlayerLayer;
+            Debug.Log("should have spawned item");
         }
         else
         {

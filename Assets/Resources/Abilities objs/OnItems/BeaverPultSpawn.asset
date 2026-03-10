@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6725fa903b4415cbc29b1506de513c, type: 3}
   m_Name: BeaverPultSpawn
   m_EditorClassIdentifier: 
-  TimeToPickUp: 14
+  TimeToPickUp: 20
+  itemType: 1
   spawnPrefab: {fileID: 5212609840737170258, guid: 5a2dd7d4d9566294699780f6396547c5, type: 3}

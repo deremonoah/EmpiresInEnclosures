@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59faffbbbf6b84b6c8071b7fbe501a4b, type: 3}
   m_Name: BigPPUp
   m_EditorClassIdentifier: 
+  TimeToPickUp: 12
+  itemType: 0
   strength: 10
-  TimeToPickUp: 8

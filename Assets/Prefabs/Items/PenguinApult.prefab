@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4802293818890951166}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.53999996, y: 12.52, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7193, y: 0.5789, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ability: {fileID: 11400000, guid: 842c594c7cab04077a63c8a9d2e0a96b, type: 2}
   progTimer: 0
+  myItemType: 1
   ProgressBar: {fileID: 1269096449184191406}
   progressText: {fileID: 0}
 --- !u!1 &6113633628299577572

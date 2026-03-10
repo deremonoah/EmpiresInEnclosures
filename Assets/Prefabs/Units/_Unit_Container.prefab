@@ -468,7 +468,7 @@ MonoBehaviour:
   MaxHp: 0
   Attack: 0
   AttackToBase: 0
-  AttackSpeed: 0
+  AttackSpeed: 2.1
   AnimAttackPreHit: 0.2
   AttackRange: 1
   SightRange: 4
@@ -488,6 +488,7 @@ MonoBehaviour:
   bonusMoveSpeed: 0
   bonusWaterMoveSpeed: 0
   bonusMountianMoveSpeed: 0
+  bonusAllSpeed: 0
   bonusHP: 0
   bonusSightRange: 0
   bonusAttackRange: 0

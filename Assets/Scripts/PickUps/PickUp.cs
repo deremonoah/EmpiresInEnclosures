@@ -8,6 +8,9 @@ public class PickUp : MonoBehaviour
 {
     [SerializeField] PickUpAbility _ability;
     [SerializeField] private float progTimer;
+    [SerializeField] private PickUpType myItemType;
+    private int engiNEAR;//true if engineer or fast pickup of the type is in
+    private float pickUpSpeed=1;
     private float _timeToPickUp;
 
 
@@ -28,11 +31,12 @@ public class PickUp : MonoBehaviour
         playerHere = false;
         enemyHere = false;
         _timeToPickUp = _ability.getTimeToPickUP();
-        progTimer = _timeToPickUp / 2;
+        progTimer = 0;
         refTimer = refreshRate;
         _myCol = GetComponent<Collider2D>();
         DisplayProgress();
         //get time from ability
+        myItemType=_ability.getPickupType();
     }
 
     
@@ -41,11 +45,11 @@ public class PickUp : MonoBehaviour
     {
         if (enemyHere && !playerHere)
         {
-            progTimer -= Time.deltaTime;
+            progTimer -= Time.deltaTime * pickUpSpeed;//pick up speed defaults to 1
         }
         else if (playerHere && !enemyHere)
         {
-            progTimer += Time.deltaTime;
+            progTimer += Time.deltaTime * pickUpSpeed;
         }
 
         DisplayProgress();
@@ -53,17 +57,20 @@ public class PickUp : MonoBehaviour
         //we need to calculate but calling every frame is expensiv
 
         refTimer -= Time.deltaTime;
-        if(refTimer<0)
+        if(refTimer<0)//its gotta not go infinite for on every frame
         {
             playerHere = false;
             enemyHere = false;
+            engiNEAR = 0;//reseting so we have accurate numbers but start with no
 
             Physics2D.OverlapCollider(_myCol, new ContactFilter2D().NoFilter(), results);
             foreach(var target in results)
             {
-
                 FigureTeam(target.gameObject);
+                //here or above is where we need to see if there is an engineer
             }
+
+            calculatePickUpSpeed();
             refTimer = refreshRate;
         }
 
@@ -124,7 +131,27 @@ public class PickUp : MonoBehaviour
         {
             enemyHere = true;
         }
-        
+        var engineer=guy.GetComponent<FasterPickUP>();
+        if(engineer!=null)
+        {
+            if(engineer.DoWhot()==myItemType)
+            {
+                engiNEAR++;
+            }
+        }
+    }
+
+    private void calculatePickUpSpeed()
+    {
+        _timeToPickUp = _ability.getTimeToPickUP();
+        float decreasingVal = 4;//idk just decided 4 seconds seemed reasonable
+        for(int lcv=0;lcv<engiNEAR;lcv++)
+        {
+            _timeToPickUp -= decreasingVal;
+            decreasingVal = decreasingVal / 2;
+        }
+        if (engiNEAR > 0)
+        { Debug.Log("calculated time to pick up " + _timeToPickUp + "  how many engineers we think" + engiNEAR); }
     }
 
     private void PickedUp()
@@ -147,8 +174,9 @@ public class PickUp : MonoBehaviour
         //2 timers for different colors?
         //progressText.text = ""+Mathf.Round(progTimer);
 
-        //starts at 0.5 and timer either gets closer to 1 for player or closer to zero
-        ProgressBar.fillAmount = progTimer  / _timeToPickUp;
+        //starts at 0 but that should look like 50%
+        //to display that I add the total time and so if it hits -timeToPick up it displays 0
+        ProgressBar.fillAmount = (progTimer+_timeToPickUp)  / (_timeToPickUp*2);
     }
 }
 public enum pickUp { heal, PP, buffAttack, BuffDefense, healBase, SummonUnit }

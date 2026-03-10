@@ -6,6 +6,7 @@ public abstract class PickUpAbility : ScriptableObject
 {
     protected UnitManager um;
     [SerializeField] protected float TimeToPickUp;
+    [SerializeField] protected PickUpType itemType;
 
     private void OnEnable()
     {
@@ -17,5 +18,15 @@ public abstract class PickUpAbility : ScriptableObject
         return TimeToPickUp;
     }
 
+    public PickUpType getPickupType()
+    {
+        return itemType;
+    }
+
     public abstract void ActivatePickUp(Transform origin, int isPlayerLayer);
 }
+public enum PickUpType
+{
+    food,
+    bluePrint
+}//blueprint is relevant for engineer ability
