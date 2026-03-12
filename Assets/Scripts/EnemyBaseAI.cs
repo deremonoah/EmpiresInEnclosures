@@ -36,43 +36,80 @@ public class EnemyBaseAI : MonoBehaviour
 
     private void beginBattle()
     {
-        StartCoroutine(actionsRoutine());
+        CalculateStrategies();
+        StartCoroutine(UltimateCheckerRoutine());
 
         //should decide strategy or adapt based off opponent
         //could base it off which faction it is, which I think it can check from um
     }
 
-    //this is the spam strat
-    public IEnumerator GiraffeStrat()
+#region OneUnitStrats
+    public IEnumerator SpamStrat()//change to have variance not right on que, so it can be set dynamically
     {
         yield return new WaitForSeconds(0.1f);
         //what do I want the ai to do? summon a guy when they have the PP to do so,
         while (ourBase.GetHP() > 0)
         {
             if (um.GetEnmPPAmount() >= um.GetEnmUnitCost(0))//could make int random, to be fair rn this if not matter, they just spam the button
-            { um.spawnEnemyUnit(0, GoThere); }//they don't have multiple units or anything they do
+            {
+                int rand = Random.Range(0, 10);
+                if(rand<4)//40% on every .3 seconds might spawn a guy if they can
+                {
+                    um.spawnEnemyUnit(0, GoThere);
+                }
+            }
             yield return new WaitForSeconds(0.3f);
         }
     }
 
-    private void followBuildStrat()//a method to check if you have enough cost for a build
+    private IEnumerator SemiSpamStrat()
     {
-        //setBuild needs, cost of the plan, and spawn order, 
-        if(um.GetEnmPPAmount()>=18)//2 infantry, then 2 ballers, based on
+        yield return new WaitForSeconds(0.1f);
+        int ourUnitsCost = um.GetEnmUnitCost(0);
+        int rand = Random.Range(1, 4);//1-3 units
+        int targeNumber = ourUnitsCost * rand;
+        while (ourBase.GetHP() > 0)
         {
-            um.spawnEnemyUnit(1, GoThere);
-            um.spawnEnemyUnit(1, GoThere);
-            um.spawnEnemyUnit(2, GoThere);
-            um.spawnEnemyUnit(2, GoThere);
+            if (um.GetEnmPPAmount() >= targeNumber)//could make int random, to be fair rn this if not matter, they just spam the button
+            {
+                spawnNumberOfUnit(0,rand);
+                rand = Random.Range(1, 4);//1-3 units wait
+            }//they don't have multiple units or anything they do
+            yield return new WaitForSeconds(0.3f);
         }
     }
 
-    private void SpamEm(int one)
+    private void spawnNumberOfUnit(int unit, int count)
     {
-        um.spawnEnemyUnit(one, GoThere);
+        for(int lcv=0;lcv<count;lcv++)
+        {
+            um.spawnEnemyUnit(unit, GoThere);
+        }
     }
 
-    public IEnumerator actionsRoutine()//in future might be more or just different strategy pattern stuff
+    //ball spam makes many dudes, but doesn't command them to base holds them back, then charges
+    //changing where GoThere is we could have them stack up units with spam
+    //set up defenders at base or tower
+    #endregion
+
+#region MulipleUnitSrats
+
+    //spawm 1 build
+    //use builds to counter enemy
+    //set up defenders at their base
+    //set up defenders at their tower
+
+#endregion
+
+    private void CalculateBuildStrat(int curPP)//a method to check if you have enough cost for a build
+    {
+        //make a list of ints based off of a team comp idea
+        //maybe takes in total points
+        //should return the list for the coroutien to itterate through
+        //using wait for seconds of random amounts between units imo. could depend on difficulty
+    }
+
+    public IEnumerator UltimateCheckerRoutine()//in future might be more or just different strategy pattern stuff
     {
         while (ourBase.GetHP() > 0)
         {
@@ -81,7 +118,7 @@ public class EnemyBaseAI : MonoBehaviour
             //Debug.Log("Invaders check found " + invaderComp.Count);
             if (isInvaders == 1)
             {
-                ulti.popPlayerUlt(false);
+                ulti.popPlayerUlt(false);//enemy uses ult
             }
             else if(isInvaders==2)
             {
@@ -94,10 +131,35 @@ public class EnemyBaseAI : MonoBehaviour
             //advance strategy, which should be variable
             //wait until a certain number to make specific build, or spam units if you can afford them, which could be cheapest or favorite
 
-            //followBuildStrat();//thinking there might be an issue with spawning them istantly, but will test
-            SpamEm(0);//I think in future a smart ai should look at multiple builds or strats and see which will work the best
-
             yield return new WaitForSeconds(0.3f);
+        }
+    }
+
+
+    private void CalculateStrategies()
+    {
+        //if strategies are coroutines,
+        //could I have it when it finishes 1 it pulls 1 at random or looks at how many alive players there are?
+
+        //how many units do I have?
+        List<UnitStats> myUnitsBlocks = new List<UnitStats>();
+
+        foreach(GameObject unit in UnitManager.instance.enemyPrefabs)
+        {
+            myUnitsBlocks.Add(unit.GetComponent<UnitStats>());
+        }
+        if (myUnitsBlocks.Count == 1)
+        {
+            StartCoroutine(SpamStrat());
+            //in future it will be set list
+            //then a coroutine that pulls from the list, and uses it until done
+            //or adapts? 
+        }
+        else//has more than 1 unit
+        {
+            //make a couple different build options, or it calculated them on the fly
+            //spawming a unit or mix of units could work
+            //if they are beavers or have builds or items place them and command units there
         }
     }
 
