@@ -13,6 +13,7 @@ public class FlowManager : MonoBehaviour
     public event Action lootPanelSendOpen;
     public event Action MapPanelSendOpen;
     public event Action BattleStart;
+    public event Action BattleEnd;
 
     [Header("Panels")]
     [SerializeField] GameObject winPan;
@@ -82,6 +83,7 @@ public class FlowManager : MonoBehaviour
         {
             yield return null;
         }
+        BattleEnd.Invoke();//battle ended if battle loser ended
 
         if (battleLoser == "Enemy Base")//this is hit if we have combat or a noncombat encounter
         {

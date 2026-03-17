@@ -17,14 +17,26 @@ public class EnemyBaseAI : MonoBehaviour
     [SerializeField] Transform towerTam;
     [SerializeField] float SearchAreaAroundBase;
     private Vector2 GoThere;//where ai sends units
+    Coroutine unitSpawner;
+    Coroutine ulitmateChecker;
 
     private void OnEnable()
     {
         if(FlowManager.instance!=null)
         {
             FlowManager.instance.BattleStart += beginBattle;
+            FlowManager.instance.BattleEnd += BattleEnded;
         }
         else { Debug.Log("in enemy base AI null flow manager"); }
+    }
+
+    private void OnDisable()
+    {
+        if (FlowManager.instance != null)
+        {
+            FlowManager.instance.BattleStart -= beginBattle;
+            FlowManager.instance.BattleEnd -= BattleEnded;
+        }
     }
 
     void Start()
@@ -36,11 +48,17 @@ public class EnemyBaseAI : MonoBehaviour
 
     private void beginBattle()
     {
-        CalculateStrategies();
-        StartCoroutine(UltimateCheckerRoutine());
+        CalculateStrategies();//which starts spawner
+        ulitmateChecker = StartCoroutine(UltimateCheckerRoutine());
 
         //should decide strategy or adapt based off opponent
         //could base it off which faction it is, which I think it can check from um
+    }
+
+    private void BattleEnded()
+    {
+        StopCoroutine(unitSpawner);
+        StopCoroutine(ulitmateChecker);
     }
 
 #region OneUnitStrats
@@ -94,19 +112,152 @@ public class EnemyBaseAI : MonoBehaviour
 
 #region MulipleUnitSrats
 
-    //spawm 1 build
+    private IEnumerator SameBuildRoutine()//calcs 1 build at start then spams it
+    {
+        List<int> comp =CalculateBuildStrat(um.GetEnmPPAmount());
+        int compCost=calculateBuildTotalCost(comp);
+
+        while (ourBase.GetHP() > 0)
+        {
+            if (um.GetEnmPPAmount() >= compCost)//could make int random, to be fair rn this if not matter, they just spam the button
+            {
+                SpawnBuild(comp);
+            }
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
     //use builds to counter enemy
     //set up defenders at their base
     //set up defenders at their tower
 
 #endregion
 
-    private void CalculateBuildStrat(int curPP)//a method to check if you have enough cost for a build
+    private List<int> CalculateBuildStrat(int curPP)//a method to check if you have enough cost for a build
     {
-        //make a list of ints based off of a team comp idea
-        //maybe takes in total points
-        //should return the list for the coroutien to itterate through
-        //using wait for seconds of random amounts between units imo. could depend on difficulty
+        List<int> comp = new List<int>();
+        List<UnitStats> enmStats = new List<UnitStats>();
+
+        //grab all units' costs
+        int unitCount = um.enemyPrefabs.Count;
+        for (int lcv =0;lcv< unitCount;lcv++)
+        {
+            enmStats.Add(um.enemyPrefabs[lcv].GetComponent<UnitStats>());//puts cost in each slot equivalant
+        }
+
+        Debug.Log(enmStats.Count);
+
+        //this works if it "divides" evenly. across all the units. and doesn't care about units
+        int ppToSpend = curPP;
+        int cycle = 0;
+        while (ppToSpend>0 && cycle<5)//go through our enemies 5 times at max, if we have an odd number
+        {
+            for(int lcv=0;lcv<enmStats.Count;lcv++)
+            {
+                ppToSpend -= enmStats[lcv].getCost();
+                comp.Add(lcv);
+            }
+            cycle++; 
+        }
+
+        //if it were to care about unit role
+        //would it add infantry first?
+
+        //also could put in here if we just want a cavalry rush. check if their units are by the player base
+
+        bool cavalryRush = AreWeAtTheirDoorstep();
+        if(cavalryRush)
+        {
+            //rush send in cavalry, or just look at unit with the most speed, most base speed?
+            comp.Clear();//clear as its in this calculate one right now
+
+            int fastestUnitIndex = 0;
+            for (int lcv = 0; lcv < enmStats.Count; lcv++)
+            {
+                float bestEnmSpeed = enmStats[fastestUnitIndex].getMoveSpeed(Terrain.normal);
+                float newEnmSpeed = enmStats[lcv].getMoveSpeed(Terrain.normal);
+
+                if (newEnmSpeed > bestEnmSpeed)//if 0 compare 0 will default be biggest cause tied
+                {
+                    fastestUnitIndex = lcv;
+                }
+                //cavalry should on average have higher speed. and most optimal to send your fastest if you want to keep the pressure on
+            }
+
+            //now we know who the fastest unit is
+            //so make build with as many as possible
+            ppToSpend = curPP;
+            while (ppToSpend > 0)
+            {
+                if (ppToSpend - enmStats[fastestUnitIndex].getCost() >= 0)
+                {
+                    ppToSpend -= enmStats[fastestUnitIndex].getCost();
+                    comp.Add(fastestUnitIndex);
+                }
+                else//so we can't put anymore in & we prob are at more than 0
+                {
+                    //check if another will fit in comp
+                    for (int lcv = 0; lcv < enmStats.Count; lcv++)
+                    {
+                        int enmCost = enmStats[lcv].getCost();
+                        if (enmCost <= ppToSpend)
+                        {
+                            ppToSpend -= enmCost;
+                            comp.Add(lcv);
+                        }
+                    }
+                    //we will assume for now it can only get 1 more unit or so
+                    ppToSpend = 0;//so we don't have an infiite loop
+                }
+            }
+        }
+
+        return comp;
+    }
+
+    private bool AreWeAtTheirDoorstep()//used to if enm units at player base
+    {
+        //cast pysics circle to check for player units
+        Collider2D[] hits = Physics2D.OverlapCircleAll(um.PlayerBasePos.position, 7);//might try different numbers
+        //clear invader Lists incase things were deleted and to have no dups, also for checking 2 different places
+
+        int unitsCount=0;
+
+        foreach (Collider2D col in hits)
+        {
+            if (col.gameObject.layer == 6)//6 for enemy layer
+            {
+                var unit = col.gameObject.GetComponent<UnitStats>();
+                if (unit != null)//this means it is a player unit
+                {
+                    unitsCount++;
+                }
+            }
+        }
+
+        if(unitsCount>2)
+        {
+            return true;
+        }
+        return false;
+    }
+    private int calculateBuildTotalCost(List<int> comp)
+    {
+        int tot = 0;
+
+        foreach(int i in comp)//i is their position
+        {
+            tot += um.GetEnmUnitCost(i);
+        }
+
+        return tot;
+    }
+
+    private void SpawnBuild(List<int> comp)
+    {
+        foreach(int i in comp)//i is their position
+        {
+            um.spawnEnemyUnit(i);
+        }
     }
 
     public IEnumerator UltimateCheckerRoutine()//in future might be more or just different strategy pattern stuff
@@ -150,7 +301,7 @@ public class EnemyBaseAI : MonoBehaviour
         }
         if (myUnitsBlocks.Count == 1)
         {
-            StartCoroutine(SpamStrat());
+            unitSpawner=StartCoroutine(SpamStrat());
             //in future it will be set list
             //then a coroutine that pulls from the list, and uses it until done
             //or adapts? 
@@ -160,6 +311,7 @@ public class EnemyBaseAI : MonoBehaviour
             //make a couple different build options, or it calculated them on the fly
             //spawming a unit or mix of units could work
             //if they are beavers or have builds or items place them and command units there
+            unitSpawner = StartCoroutine(SameBuildRoutine());
         }
     }
 
