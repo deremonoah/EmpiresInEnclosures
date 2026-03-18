@@ -112,8 +112,9 @@ public class EnemyBaseAI : MonoBehaviour
 
 #region MulipleUnitSrats
 
-    private IEnumerator SameBuildRoutine()//calcs 1 build at start then spams it
+    private IEnumerator SameBuildRoutine()//but can also charge
     {
+        Debug.Log("enemy pp " + um.GetEnmPPAmount());
         List<int> comp =CalculateBuildStrat(um.GetEnmPPAmount());
         int compCost=calculateBuildTotalCost(comp);
 
@@ -121,7 +122,12 @@ public class EnemyBaseAI : MonoBehaviour
         {
             if (um.GetEnmPPAmount() >= compCost)//could make int random, to be fair rn this if not matter, they just spam the button
             {
-                SpawnBuild(comp);
+                if (AreWeAtTheirDoorstep())
+                {
+                    cavalaryCharge();
+                }
+                else
+                { SpawnBuild(comp); }
             }
             yield return new WaitForSeconds(0.3f);
         }
@@ -144,16 +150,21 @@ public class EnemyBaseAI : MonoBehaviour
             enmStats.Add(um.enemyPrefabs[lcv].GetComponent<UnitStats>());//puts cost in each slot equivalant
         }
 
-        Debug.Log(enmStats.Count);
 
         //this works if it "divides" evenly. across all the units. and doesn't care about units
         int ppToSpend = curPP;
+        Debug.Log("starting PP " + ppToSpend);
         int cycle = 0;
         while (ppToSpend>0 && cycle<5)//go through our enemies 5 times at max, if we have an odd number
         {
             for(int lcv=0;lcv<enmStats.Count;lcv++)
             {
+                if(ppToSpend<=0)
+                {
+                    break;
+                }
                 ppToSpend -= enmStats[lcv].getCost();
+                Debug.Log("pp left to budget " + ppToSpend);
                 comp.Add(lcv);
             }
             cycle++; 
@@ -165,10 +176,72 @@ public class EnemyBaseAI : MonoBehaviour
         //also could put in here if we just want a cavalry rush. check if their units are by the player base
 
         bool cavalryRush = AreWeAtTheirDoorstep();
-        if(cavalryRush)
+
+        Debug.Log("comp count" + comp.Count);
+
+        return comp;
+    }
+
+    void OnDrawGizmosSelected()//rn checks player base
+    {
+        // Ensure this runs only in the editor
+        if (Application.isEditor)
         {
-            //rush send in cavalry, or just look at unit with the most speed, most base speed?
-            comp.Clear();//clear as its in this calculate one right now
+            // Set the color of the gizmo (e.g., red)
+            Gizmos.color = Color.green;
+
+            // Draw a wire sphere (which appears as a circle in 2D view)
+            // The 'point' is the object's position, and the 'radius' is the overlap radius
+            Gizmos.DrawWireSphere(um.PlayerBasePos.position, SearchAreaAroundBase);
+        }
+    }
+
+    private bool AreWeAtTheirDoorstep()//used to if enm units at player base
+    {
+        //cast pysics circle to check for player units
+        Vector2 playerBase = um.PlayerBasePos.position;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(playerBase, 10);//might try different numbers
+        //clear invader Lists incase things were deleted and to have no dups, also for checking 2 different places
+
+        Debug.Log("we are in door step method");
+
+        int unitsCount=0;
+        foreach (Collider2D col in hits)
+        {
+            if (col.gameObject.layer == 6)//6 for enemy layer
+            {
+                var unit = col.gameObject.GetComponent<UnitStats>();
+                if (unit != null)//this means it is a player unit
+                {
+                    unitsCount++;
+                }
+            }
+        }
+
+        if(unitsCount>2)
+        {
+            Debug.Log("door true");
+            return true;
+        }
+        return false;
+    }
+
+    private void cavalaryCharge()
+    {
+        List<int> comp = new List<int>();
+        List<UnitStats> enmStats = new List<UnitStats>();
+        int ppToSpend = um.GetEnmPPAmount();
+
+        //grab all units' costs
+        int unitCount = um.enemyPrefabs.Count;
+        for (int lcv = 0; lcv < unitCount; lcv++)
+        {
+            enmStats.Add(um.enemyPrefabs[lcv].GetComponent<UnitStats>());//puts cost in each slot equivalant
+        }
+
+
+        //rush send in cavalry, or just look at unit with the most speed, most base speed?
+        comp.Clear();//clear as its in this calculate one right now
 
             int fastestUnitIndex = 0;
             for (int lcv = 0; lcv < enmStats.Count; lcv++)
@@ -185,7 +258,6 @@ public class EnemyBaseAI : MonoBehaviour
 
             //now we know who the fastest unit is
             //so make build with as many as possible
-            ppToSpend = curPP;
             while (ppToSpend > 0)
             {
                 if (ppToSpend - enmStats[fastestUnitIndex].getCost() >= 0)
@@ -209,37 +281,9 @@ public class EnemyBaseAI : MonoBehaviour
                     ppToSpend = 0;//so we don't have an infiite loop
                 }
             }
-        }
-
-        return comp;
+        SpawnBuild(comp);
     }
 
-    private bool AreWeAtTheirDoorstep()//used to if enm units at player base
-    {
-        //cast pysics circle to check for player units
-        Collider2D[] hits = Physics2D.OverlapCircleAll(um.PlayerBasePos.position, 7);//might try different numbers
-        //clear invader Lists incase things were deleted and to have no dups, also for checking 2 different places
-
-        int unitsCount=0;
-
-        foreach (Collider2D col in hits)
-        {
-            if (col.gameObject.layer == 6)//6 for enemy layer
-            {
-                var unit = col.gameObject.GetComponent<UnitStats>();
-                if (unit != null)//this means it is a player unit
-                {
-                    unitsCount++;
-                }
-            }
-        }
-
-        if(unitsCount>2)
-        {
-            return true;
-        }
-        return false;
-    }
     private int calculateBuildTotalCost(List<int> comp)
     {
         int tot = 0;
