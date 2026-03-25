@@ -16,5 +16,16 @@ public class UnitReward : Reward
     public override void SelectReward()
     {
         UnitManager.instance.PlayerGotNewUnit(unitPrefab);
+        EquipManagerPlayer.instance.gotNewUnit(this);
+    }
+
+    public int getCost()
+    {
+        return unitPrefab.GetComponent<UnitStats>().getCost();
+    }
+
+    public UnitStats getStats()
+    {
+        return unitPrefab.GetComponent<UnitStats>();
     }
 }

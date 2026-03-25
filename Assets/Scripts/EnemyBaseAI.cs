@@ -182,20 +182,6 @@ public class EnemyBaseAI : MonoBehaviour
         return comp;
     }
 
-    void OnDrawGizmosSelected()//rn checks player base
-    {
-        // Ensure this runs only in the editor
-        if (Application.isEditor)
-        {
-            // Set the color of the gizmo (e.g., red)
-            Gizmos.color = Color.green;
-
-            // Draw a wire sphere (which appears as a circle in 2D view)
-            // The 'point' is the object's position, and the 'radius' is the overlap radius
-            Gizmos.DrawWireSphere(um.PlayerBasePos.position, SearchAreaAroundBase);
-        }
-    }
-
     private bool AreWeAtTheirDoorstep()//used to if enm units at player base
     {
         //cast pysics circle to check for player units

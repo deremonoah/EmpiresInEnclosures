@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +10,11 @@ public class EquipManagerPlayer : MonoBehaviour
 
     [SerializeField] List<AuraAbility> playerBuffs;
 
+    [SerializeField] private List<UnitReward> playerUnits;//we now set the rewards for initial equips, if we want thing to work as intended
+    [SerializeField] private List<Reward> playerItems;
+    [SerializeField] private List<Reward> playerUpgradeHistory;
+
+
     private void Awake()
     {
         if(instance!=null & instance != this)
@@ -20,10 +24,15 @@ public class EquipManagerPlayer : MonoBehaviour
         else
         {
             instance = this;
+            //for now
+            foreach(UnitReward re in playerUnits)
+            {
+                playerUpgradeHistory.Add(re);
+            }
         }
     }
     //handle buffs to tower or base
-    //handle blue prints in here?
+    //handle blue prints in here? no thats in itemsToBePlaced
     //handle equp buffs like to all units or bases or unit types
 
     public void InitialEquip(Faction fac)
@@ -79,4 +88,38 @@ public class EquipManagerPlayer : MonoBehaviour
         }
         return totalPPbuff;
     }
+
+    public void gotNewUnit(Reward re)
+    {
+        playerUnits.Add((UnitReward)re);
+        playerUpgradeHistory.Add(re);
+    }
+
+    public void gotnewItem(Reward re)
+    {
+        playerItems.Add(re);
+        playerUpgradeHistory.Add(re);
+    }
+
+    public List<UnitReward> getPlayerUnits()
+    {
+        return playerUnits;
+    }
+
+    public List<Reward> getPlayerItems()
+    {
+        return playerItems;
+    }
+
+    public List<Reward> GetUpgradeHistory()
+    {
+        return playerUpgradeHistory;
+    }
+
+    public UnitReward getUnitAtIndex(int index)
+    {
+        return playerUnits[index];
+    }
+
+
 }

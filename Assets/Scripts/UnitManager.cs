@@ -10,7 +10,6 @@ public class UnitManager : MonoBehaviour
     [Header("player stats")]
     public Transform PlayerBasePos;
     public List<GameObject> PlayerUnitPrefabs;
-    private List<GameObject> PlayerUpgradeHistory;
     [SerializeField] private float playerPP,playerStartingPP, playerMaxPP, PPRegenTimer,PPRegenTimerMax;
     public Text playerPPText, playerPPMaxText;
     private List<GameObject> spawnedPlayerUnits = new List<GameObject>();
@@ -56,11 +55,11 @@ public class UnitManager : MonoBehaviour
         playerPPMaxText.text = "" + playerMaxPP;
         //setting enemy pp for testing but maybe keep as public info
         enmPPMaxText.text = "" + enmMaxPP;//might want a set max in future for gaining max pp
-        PlayerUpgradeHistory = new List<GameObject>();
 
-        foreach(GameObject go in PlayerUnitPrefabs)
-        { 
-            PlayerUpgradeHistory.Add(go); 
+        var tempList = EquipManagerPlayer.instance.getPlayerUnits();
+        foreach(UnitReward go in tempList)
+        {
+            PlayerUnitPrefabs.Add(go.GetPrefab());
         }
     }
 
@@ -180,20 +179,13 @@ public class UnitManager : MonoBehaviour
     public void PlayerGotNewUnit(GameObject newU)
     {
         PlayerUnitPrefabs.Add(newU);//question is if the count is above 5 then we need to replace 1, how we do that? another panel?
-        PlayerUpgradeHistory.Add(newU);
         FindObjectOfType<ButtonManager>().UnitListChanged();
     }
 
     public void PlayerReplaceOldUnit(GameObject newU, int replaced)
     {
         PlayerUnitPrefabs[replaced] = newU;
-        PlayerUpgradeHistory.Add(newU);
         FindObjectOfType<ButtonManager>().UnitListChanged();//I am thinking we can see the old units so, pop up versions over the buttons hover shows X
-    }
-
-    public List<GameObject> GetUpgradeHistory()
-    {
-        return PlayerUpgradeHistory;
     }
 
     public List<GameObject> GetCurrentUnits()

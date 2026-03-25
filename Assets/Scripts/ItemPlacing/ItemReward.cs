@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="ItemPlaceAble",menuName = "LootRewards/ItemPlaceAble")]
-public class ItemToBePlaced : Reward
+public class ItemReward : Reward
 {
     [SerializeField] GameObject itemPrefab;
     [SerializeField] int uses;
@@ -21,5 +21,6 @@ public class ItemToBePlaced : Reward
     public override void SelectReward()
     {
         PlacingController.instance.GainedNewItem(this);
+        EquipManagerPlayer.instance.gotnewItem(this);
     }
 }

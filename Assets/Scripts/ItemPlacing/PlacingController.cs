@@ -11,7 +11,7 @@ public class PlacingController : MonoBehaviour
     //basically an enum if you are controlling units or if you are placing things
     //do I need that or just if an item to spawn was selected?
     
-    [SerializeField] List<ItemToBePlaced> itemsToPlace;
+    [SerializeField] List<ItemReward> itemsToPlace;
     [SerializeField] private List<int> itemUses;//thinking might be abilities too
     [Header("Item Ui")]
     [SerializeField] RectTransform heldIcon;
@@ -82,7 +82,7 @@ public class PlacingController : MonoBehaviour
         }
     }
 
-    public void GainedNewItem(ItemToBePlaced item)//sends scriptable obj?
+    public void GainedNewItem(ItemReward item)//sends scriptable obj?
     {
         itemsToPlace.Add(item);
         itemUses.Add(item.getUses());

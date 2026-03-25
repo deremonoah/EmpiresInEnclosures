@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3878812106233685776, guid: 26a22a1a474774ff3a66e936ba9f7a85, type: 3}
       propertyPath: MaxHp
-      value: 22
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 3878812106233685776, guid: 26a22a1a474774ff3a66e936ba9f7a85, type: 3}
       propertyPath: SightRange

@@ -46,17 +46,18 @@ public class ButtonManager : MonoBehaviour
             but.SetActive(false);
         }
         
-        var units = UnitManager.instance.PlayerUnitPrefabs;
+        var units = EquipManagerPlayer.instance.getPlayerUnits();
         for (int lcv = 0; lcv < units.Count; lcv++)//so do we limit the player to 3 units? for now maybe, choose which to replace? or we need more buttons
         {
-            UnitStats us = units[lcv].GetComponent<UnitStats>();
-            if (us != null)
+
+            
+            UnitButtons[lcv].SetActive(true);
+            unitButtonIcons[lcv].sprite = units[lcv].getIcon();
+            if(units[lcv] is UnitReward)
             {
-                UnitButtons[lcv].SetActive(true);
-                unitButtonCosts[lcv].text = "" + us.getCost();
-                unitButtonIcons[lcv].sprite = us.getIcon();
+               UnitReward un = (UnitReward)units[lcv];
+               unitButtonCosts[lcv].text = "" + un.getCost();
             }
-            else { Debug.Log("missing units for buttons at " + lcv); }
         }
     }
 

@@ -36,7 +36,6 @@ public class UnitStats : MonoBehaviour
     [Header("Unit Death Stats")]
     [SerializeField] private float FriendlyPayOnDeath;
     [SerializeField] private float EnemyPayOnDeath;
-    [SerializeField] private Sprite portrait;
     //maybe armor and stuff
 
     [Header("Buffs so I can check their function for now")]
@@ -145,11 +144,6 @@ public class UnitStats : MonoBehaviour
     public float getEnemyPayOnDeath()
     {
         return EnemyPayOnDeath + bonusPayOnDeathEnemy;
-    }
-
-    public Sprite getIcon()
-    {
-        return portrait;
     }
 
     public UnitType getRole()

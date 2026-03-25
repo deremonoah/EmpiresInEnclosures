@@ -48,8 +48,8 @@ public class FactionNode : NodeData
         {
             Debug.LogError("loot is Null");
         }
-
-        return RemoveDuplicateUpgrages(lootList);//this is so the player can't upgrades they already have
+        //return RemoveDuplicateUpgrages(lootList);having a null error here is duplicates the problem?
+        return lootList;
     }
 
 }

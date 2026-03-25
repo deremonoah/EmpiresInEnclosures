@@ -27,10 +27,10 @@ public class NodeData : MonoBehaviour
 
     protected List<Reward> RemoveDuplicateUpgrages(List<Reward> re)
     {
-        List<GameObject> prevUps = UnitManager.instance.GetUpgradeHistory();
-
+        List<Reward> prevUps = EquipManagerPlayer.instance.GetUpgradeHistory();
+        
         //could remove dups from the loot list first? then pull random number
-        for (int lcv = 0; lcv < prevUps.Count; lcv++)
+        for (int lcv = 0; lcv < prevUps.Count; lcv++)//this throws a null exception if player history is blank
         {
             for (int lcv2 = 0; lcv2 < re.Count; lcv2++)
             {

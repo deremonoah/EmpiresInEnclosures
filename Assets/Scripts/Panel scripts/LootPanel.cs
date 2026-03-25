@@ -17,6 +17,7 @@ public class LootPanel : MonoBehaviour
 
     public static LootPanel instance;
     private MapPanel mp;
+    private PlayerButtonDisplay pbd;
 
     private void Awake()
     {
@@ -40,6 +41,7 @@ public class LootPanel : MonoBehaviour
         animLoot = GetComponent<Animator>();
         FactionLootLists =new List<FactionLoot>(Resources.LoadAll<FactionLoot>("FactionLootSets"));// getting FactionLoot as a list refrence, loading multiple times is less effecient
         mp = MapPanel.instance;
+        pbd = FindObjectOfType<PlayerButtonDisplay>();
     }
 
     //probably should still have disable? but the plan is to leave everything loaded
@@ -49,11 +51,13 @@ public class LootPanel : MonoBehaviour
         animLoot.SetBool("Open", true);
         Debug.Log("panel set to open");
         GeneratePicks();
+        pbd.showPlayerButtons();
     }
 
     public void CloseLootPan()//on select button
     {
         animLoot.SetBool("Open", false);
+        pbd.hidePlayerButtons();
     }
 
     public bool IsPanOpen()
@@ -90,6 +94,11 @@ public class LootPanel : MonoBehaviour
         PickOptions[num].SelectReward();
 
         CloseLootPan();//but we don't always want to close it, or we have a whole new panel pop up that takes over the screen
+    }
+
+    public Reward PeakAtReward(int num)
+    {
+        return PickOptions[num];
     }
 
     //might remove this too
