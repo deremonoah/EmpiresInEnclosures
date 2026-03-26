@@ -28,5 +28,6 @@ public class Reward : ScriptableObject
     {
         //overridden by child classes for specific uses
         //the term is polymorphism I believe
+        Debug.LogError("it used the blank select reward");
     }
 }

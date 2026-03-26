@@ -12,7 +12,11 @@ public class NodeData : MonoBehaviour
 
     public void SendNodeData()
     {
-        FindObjectOfType<MapPanel>().lookAtMapNode(this);//this feels weird and prob not right, should I use events?
+        Debug.Log("in send node data");
+        var map = FindObjectOfType<MapPanel>();
+        Debug.Log("is mapPanel not getting found? " + (map == null));
+
+        map.lookAtMapNode(this);//this feels weird and prob not right, should I use events?
     }
 
     public List<NodeData> GetNearbyNodes()
@@ -34,7 +38,7 @@ public class NodeData : MonoBehaviour
         {
             for (int lcv2 = 0; lcv2 < re.Count; lcv2++)
             {
-                if (re[lcv2] == prevUps[lcv])
+                if (re[lcv2].name == prevUps[lcv].name)
                 {
                     re.RemoveAt(lcv2);
                     lcv2 = 0;

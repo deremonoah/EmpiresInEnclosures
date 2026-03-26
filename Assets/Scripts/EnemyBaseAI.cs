@@ -57,8 +57,14 @@ public class EnemyBaseAI : MonoBehaviour
 
     private void BattleEnded()
     {
-        StopCoroutine(unitSpawner);
-        StopCoroutine(ulitmateChecker);
+        if(unitSpawner!=null)
+        {
+            StopCoroutine(unitSpawner);
+        }
+        if(ulitmateChecker!=null)
+        {
+            StopCoroutine(ulitmateChecker);
+        }
     }
 
 #region OneUnitStrats

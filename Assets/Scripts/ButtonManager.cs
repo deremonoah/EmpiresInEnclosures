@@ -10,11 +10,13 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] List<GameObject> UnitButtons;//this is for enabling and disabling the correct amount of buttons
     public List<Text> unitButtonCosts;
     public List<Image> unitButtonIcons;
+    
 
     [Header("item Button variables")]
     [SerializeField] List<GameObject> itemButtons;
     public List<Text> itemButtonUses;
     public List<Image> itemButtonIcons;
+    
     private PlacingController pc;
 
     public static ButtonManager instance;
@@ -95,4 +97,6 @@ public class ButtonManager : MonoBehaviour
             itemButtonUses[lcv].text = "" + pc.GetItemsCurrentUses(lcv);
         }
     }
+
+    
 }

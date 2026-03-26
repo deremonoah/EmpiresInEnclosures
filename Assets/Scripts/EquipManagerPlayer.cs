@@ -14,7 +14,7 @@ public class EquipManagerPlayer : MonoBehaviour
     [SerializeField] private List<Reward> playerItems;
     [SerializeField] private List<Reward> playerUpgradeHistory;
 
-
+    
     private void Awake()
     {
         if(instance!=null & instance != this)
@@ -93,12 +93,14 @@ public class EquipManagerPlayer : MonoBehaviour
     {
         playerUnits.Add((UnitReward)re);
         playerUpgradeHistory.Add(re);
+        ButtonManager.instance.UnitListChanged();
     }
 
     public void gotnewItem(Reward re)
     {
         playerItems.Add(re);
         playerUpgradeHistory.Add(re);
+        ButtonManager.instance.ItemListChanged();
     }
 
     public List<UnitReward> getPlayerUnits()

@@ -16,6 +16,7 @@ public class EncounterPanel : MonoBehaviour
     [SerializeField] TextMeshProUGUI displayText;
 
     private MapPanel mp;
+    private PlayerButtonDisplay pbd;
 
     private void OnEnable()
     {
@@ -25,6 +26,7 @@ public class EncounterPanel : MonoBehaviour
         animEnc = GetComponent<Animator>();
         
         mp = MapPanel.instance;
+        pbd = FindObjectOfType<PlayerButtonDisplay>();
     }
 
    public void OpenEncounterPan()
@@ -32,24 +34,25 @@ public class EncounterPanel : MonoBehaviour
         animEnc.SetBool("Open", true);
         Debug.Log("panel set to open");
         DisplayFlavor();
-        GeneratePicks();
+        GrabPicks();
+        pbd.showPlayerButtons();
     }
 
     public void CloseEncounterPan()//on select button
     {
         animEnc.SetBool("Open", false);
+        pbd.hidePlayerButtons();
     }
 
     public bool IsPanOpen()
     {
-        Debug.Log(animEnc.GetBool("Open"));
         return animEnc.GetBool("Open");
     }
 
-    private void GeneratePicks()//needs to take in data or grab it from somewhere which 2 groups are fighting, I am thinking an Enum on their bases
+    private void GrabPicks()//needs to take in data or grab it from somewhere which 2 groups are fighting, I am thinking an Enum on their bases
     {
         List<Reward> lootList = mp.getCurrentNode().GenerateRewardOptions();//this gets the factions or encounter rewards & no repeats
-        Debug.Log("got in generatePicks");
+        Debug.Log("got in grabPicks: loot list count is "+lootList.Count);
         //if this works we get 3 randoms, and fill the images,
         PickOptions.Clear();
 
@@ -70,6 +73,11 @@ public class EncounterPanel : MonoBehaviour
         PickOptions[num].SelectReward();
 
         CloseEncounterPan();//but we don't always want to close it, or we have a whole new panel pop up that takes over the screen
+    }
+
+    public Reward PeakAtReward(int index)
+    {
+        return PickOptions[index];
     }
 
     private void DisplayFlavor()

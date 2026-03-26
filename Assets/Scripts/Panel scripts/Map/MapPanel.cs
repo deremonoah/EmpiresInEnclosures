@@ -105,10 +105,12 @@ public class MapPanel : MonoBehaviour
         //tells encounter panel to display image & description
         
         isUndecided = false;
+        closemap();
     }
 
     public void lookAtMapNode(NodeData node)//this is on the node buttons
     {
+        Debug.Log("in look at map node");
         highlightedNode = node; //technically we also should handle it being a shop, but one thing at a time
         if(CanMoveToThisNode(highlightedNode))
         {
@@ -131,6 +133,7 @@ public class MapPanel : MonoBehaviour
     {
         List<NodeData> nearbyNodes = no.GetNearbyNodes();
         //first check if we have conquered it
+        Debug.Log("in canmove to this node");
         for(int lcv=0;lcv<ConqueredNodes.Count;lcv++)
         {
             if(no==ConqueredNodes[lcv])
@@ -148,6 +151,7 @@ public class MapPanel : MonoBehaviour
                 }
             }
         }
+        
         return false;
     }
 

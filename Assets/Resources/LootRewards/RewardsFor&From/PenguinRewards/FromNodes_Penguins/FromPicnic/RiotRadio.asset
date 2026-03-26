@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RiotRadio
   m_EditorClassIdentifier: 
   rName: Rioter with a Radio
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b4f32596e3e92a2449a28b2f5bd3c859, type: 3}
   description: This unit buffs the attack of your units, in an area of effect around
     this unit
   unitPrefab: {fileID: 4162939039673125988, guid: ef29722c974f5d241a0a38481acf6f8b, type: 3}

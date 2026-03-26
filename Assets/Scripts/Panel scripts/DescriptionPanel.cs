@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DescriptionPanel : MonoBehaviour
 {
@@ -10,9 +11,10 @@ public class DescriptionPanel : MonoBehaviour
     private FlowManager fm;
     private Animator anim;
     private EquipManagerPlayer eqm;
+    private EncounterPanel enc;
 
     [Header("Text elements")]
-    [SerializeField] Text nameBox;
+    [SerializeField] TextMeshProUGUI nameBox;
     [SerializeField] Text description;
     [SerializeField] Text attackBox;
     [SerializeField] Text hpBox;
@@ -41,6 +43,7 @@ public class DescriptionPanel : MonoBehaviour
         fm = FlowManager.instance;
         anim = GetComponent<Animator>();
         eqm = EquipManagerPlayer.instance;
+        enc = FindObjectOfType<EncounterPanel>();
     }
 
     public void lookAtLoot(int index)
@@ -52,6 +55,15 @@ public class DescriptionPanel : MonoBehaviour
             rewardToSelect = index;
             DisplayData(LootPanel.instance.PeakAtReward(index));
         }
+    }
+
+    public void lookAtEncounterLoot(int index)
+    {
+        OpenDescPanel();//only need open with current set up, as it covers looking at the other options
+        selectButton.SetActive(true);
+        rewardToSelect = index;
+
+        DisplayData(enc.PeakAtReward(index));
     }
 
     public void lookAtMyUnits(int index)
@@ -195,6 +207,14 @@ public class DescriptionPanel : MonoBehaviour
 
     public void DynamicSelect()
     {
-        LootPanel.instance.PickButton(rewardToSelect);
+        if(LootPanel.instance.IsPanOpen())
+        {
+            LootPanel.instance.PickButton(rewardToSelect);
+        }
+        else if(enc.IsPanOpen())
+        {
+            enc.PickButton(rewardToSelect);
+        }
+        CloseDescriptionPanel();
     }
 }
