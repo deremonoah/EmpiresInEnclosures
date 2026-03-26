@@ -360,81 +360,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29686391}
   m_CullTransparentMesh: 1
---- !u!1 &32448478
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 32448479}
-  - component: {fileID: 32448481}
-  - component: {fileID: 32448480}
-  m_Layer: 5
-  m_Name: Mountain Speed Bar (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &32448479
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 32448478}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 953654925}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -94.756836}
-  m_SizeDelta: {x: 611.9686, y: 45.088}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &32448480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 32448478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.7647059, g: 0.7176471, b: 0.59607846, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 216f219d3778ed74d9fa24938e668b9d, type: 3}
-  m_Type: 3
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 0
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &32448481
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 32448478}
-  m_CullTransparentMesh: 1
 --- !u!1 &43711609
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,7 +372,7 @@ GameObject:
   - component: {fileID: 43711612}
   - component: {fileID: 43711611}
   m_Layer: 5
-  m_Name: Attack Bar (1)
+  m_Name: Attack Bar backing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4475,81 +4400,6 @@ RectTransform:
   m_AnchoredPosition: {x: 848, y: -436}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &399148444
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 399148445}
-  - component: {fileID: 399148447}
-  - component: {fileID: 399148446}
-  m_Layer: 5
-  m_Name: Water Speed Bar (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &399148445
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 399148444}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 953654925}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -94.756836}
-  m_SizeDelta: {x: 611.9686, y: 45.088}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &399148446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 399148444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.7647059, g: 0.7176471, b: 0.59607846, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 216f219d3778ed74d9fa24938e668b9d, type: 3}
-  m_Type: 3
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 0
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &399148447
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 399148444}
-  m_CullTransparentMesh: 1
 --- !u!1 &412136476
 GameObject:
   m_ObjectHideFlags: 0
@@ -4562,7 +4412,7 @@ GameObject:
   - component: {fileID: 412136479}
   - component: {fileID: 412136478}
   m_Layer: 5
-  m_Name: Speed Bar (1)
+  m_Name: Speed Bar Backing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12238,8 +12088,6 @@ RectTransform:
   - {fileID: 2071069212}
   - {fileID: 43711610}
   - {fileID: 412136477}
-  - {fileID: 399148445}
-  - {fileID: 32448479}
   - {fileID: 799006128}
   m_Father: {fileID: 1619536879}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22437,6 +22285,20 @@ MonoBehaviour:
   wSpeedBar: {fileID: 1547446152}
   mSpeedBar: {fileID: 577355169}
   selectButton: {fileID: 634953124}
+  Bars:
+  - {fileID: 725748700}
+  - {fileID: 483632267}
+  - {fileID: 781835522}
+  - {fileID: 1547446151}
+  - {fileID: 577355168}
+  BarsBacks:
+  - {fileID: 2071069211}
+  - {fileID: 43711609}
+  - {fileID: 412136476}
+  textForBars:
+  - {fileID: 909128391}
+  - {fileID: 1708848222}
+  - {fileID: 426839121}
 --- !u!95 &1619536883
 Animator:
   serializedVersion: 5
@@ -29284,7 +29146,7 @@ GameObject:
   - component: {fileID: 2071069214}
   - component: {fileID: 2071069213}
   m_Layer: 5
-  m_Name: HP Bar (1)
+  m_Name: HP Bar backing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

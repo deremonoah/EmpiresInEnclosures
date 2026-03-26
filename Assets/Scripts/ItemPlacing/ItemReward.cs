@@ -18,6 +18,18 @@ public class ItemReward : Reward
         return uses;
     }
 
+    public float getTimeToPickUp()
+    {
+        var abl=itemPrefab.GetComponent<PickUp>().getAbility();
+        return abl.getTimeToPickUP();
+    }
+
+    public PickUpType getPickUpType()
+    {
+        var abl = itemPrefab.GetComponent<PickUp>().getAbility();
+        return getPickUpType();
+    }
+
     public override void SelectReward()
     {
         PlacingController.instance.GainedNewItem(this);

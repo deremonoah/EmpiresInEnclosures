@@ -178,5 +178,11 @@ public class PickUp : MonoBehaviour
         //to display that I add the total time and so if it hits -timeToPick up it displays 0
         ProgressBar.fillAmount = (progTimer+_timeToPickUp)  / (_timeToPickUp*2);
     }
+
+    public PickUpAbility getAbility()//used for getting stats in ability
+    {
+        return _ability;
+    }
+
 }
 public enum pickUp { heal, PP, buffAttack, BuffDefense, healBase, SummonUnit }

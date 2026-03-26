@@ -38,12 +38,23 @@ public class DescriptionPanel : MonoBehaviour
     private float MaxAtk = 15;
     private float MaxSpd = 5;
 
+    [Header("bars & backings to get disabled")]
+    [SerializeField] List<GameObject> Bars;
+    [SerializeField] List<GameObject> BarsBacks;
+
     private void Start()
     {
         fm = FlowManager.instance;
         anim = GetComponent<Animator>();
         eqm = EquipManagerPlayer.instance;
         enc = FindObjectOfType<EncounterPanel>();
+
+        //a little jank but will work
+        Bars.Add(HPBar.gameObject);
+        Bars.Add(AttackBar.gameObject);
+        Bars.Add(nSpeedBar.gameObject);
+        Bars.Add(wSpeedBar.gameObject);
+        Bars.Add(mSpeedBar.gameObject);
     }
 
     public void lookAtLoot(int index)
@@ -126,10 +137,15 @@ public class DescriptionPanel : MonoBehaviour
         {
             DisplayItemData((ItemReward)re);
         }
+        else if (re is BuffReward)
+        {
+            DisplayBuffData((BuffReward)re);
+        }
     }
 
     private void DisplayUnitData(UnitReward re)
     {
+        enableAllBars(true);
         UnitStats stats = re.getStats();
         //max of stats for now to dived them by HP 30, atk 15?, speed 5?
         costBox.text = "Cost: " + stats.getCost();
@@ -187,7 +203,43 @@ public class DescriptionPanel : MonoBehaviour
 
     private void DisplayItemData(ItemReward re)
     {
-        costBox.text = "Item uses: ";
+        costBox.text = "Item uses: "+re.getUses();
+        //need to check if its a unit or do we not display the units stats for now?
+
+
+    }
+
+    private void DisplayBuffData(BuffReward re)
+    {
+        enableAllBars(false);
+    }
+
+    private void enableAllBars(bool doo)
+    {
+        Debug.Log("in mass disabler");
+        foreach(GameObject bar in Bars)
+        {
+            bar.SetActive(doo);
+        }
+
+        foreach (GameObject bac in BarsBacks)
+        {
+            bac.SetActive(doo);
+        }
+
+        //was having an issue where I couldn't disable them, so I will set them to nothing, nothing should be setting their text rn
+        if(!doo)
+        {
+            attackBox.text = "";
+            hpBox.text = "";
+            SpeedBox.text = "";
+        }
+        else
+        {
+            attackBox.text = "HP:";
+            hpBox.text = "Atk:";
+            SpeedBox.text = "Spd:";
+        }
     }
 
     private void OpenDescPanel()//private as its called by other methods
