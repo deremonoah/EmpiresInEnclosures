@@ -36,7 +36,9 @@ public class DescriptionPanel : MonoBehaviour
     //max numbers for stats
     private float MaxHP=30;
     private float MaxAtk = 15;
-    private float MaxSpd = 5;
+    private float MaxSpd = 4;
+
+    private float MaxPickUpSpeed = 30;
 
     [Header("bars & backings to get disabled")]
     [SerializeField] List<GameObject> Bars;
@@ -206,12 +208,20 @@ public class DescriptionPanel : MonoBehaviour
         costBox.text = "Item uses: "+re.getUses();
         //need to check if its a unit or do we not display the units stats for now?
 
+        //prob just pick up time
+        enableAllBars(false);
+        HPBar.gameObject.SetActive(true);
+        BarsBacks[0].SetActive(true);
 
+        hpBox.text = "Pick Up Spd";
+        var tim=re.getTimeToPickUp();
+        HPBar.fillAmount = (MaxPickUpSpeed-tim)/MaxPickUpSpeed;
     }
 
     private void DisplayBuffData(BuffReward re)
     {
         enableAllBars(false);
+        //myabe one bar for strength of the buff?
     }
 
     private void enableAllBars(bool doo)
