@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 5369752061666125571}
   - component: {fileID: 4495220268233424305}
   - component: {fileID: 602968375359532413}
-  - component: {fileID: 6885109245331235284}
+  - component: {fileID: -296563997735285329}
   m_Layer: 5
   m_Name: Racoon Dumpster Node
   m_TagString: Untagged
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6885109245331235284}
+      - m_Target: {fileID: -296563997735285329}
         m_TargetAssemblyTypeName: NodeData, Assembly-CSharp
         m_MethodName: SendNodeData
         m_Mode: 1
@@ -209,7 +209,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6885109245331235284
+--- !u!114 &-296563997735285329
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -218,11 +218,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8739923817680283663}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06489e493b72c484f8a83bb3e25995fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 4debcc3e2c4e045d8b8a2e9fa03cbb70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nodesNextToMe: []
   backgroundSquare: {fileID: 4495220268233424305}
   rewardOptions: []
   image: {fileID: 0}
-  text: 
+  text: hey I found these in the dumpster you want one?

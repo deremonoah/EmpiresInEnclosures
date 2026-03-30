@@ -131,6 +131,7 @@ public class MapPanel : MonoBehaviour
 
     private bool CanMoveToThisNode(NodeData no)//maybe in future we just highlight all the nodes a player could go to
     {
+        Debug.Log(no.name+" node is null? " + (no == null));
         List<NodeData> nearbyNodes = no.GetNearbyNodes();
         //first check if we have conquered it
         Debug.Log("in canmove to this node");
@@ -212,17 +213,20 @@ public class MapPanel : MonoBehaviour
         scoutTimer = 0;
     }
 
-    public void AddConqueredNode(NodeData node)
-    {
-        ConqueredNodes.Add(node);
-        //maybe we could add a color change to the ui element for the node
-    }
-
     //called by the flow manager when the player wins a fight
     public void PlayerBeatNode() 
     {
         ConqueredNodes.Add(highlightedNode);
         //should move the penguin there or change image, maybe change display image to penguin.
+        if (highlightedNode is FactionNode)
+        {
+            var boss = (FactionNode)highlightedNode;
+            if (boss.IsBoss())
+            {
+                //for now we will just display player wins
+                FlowManager.instance.playerWon();
+            }
+        }
     }
 
     public bool isStillDecidingNode()

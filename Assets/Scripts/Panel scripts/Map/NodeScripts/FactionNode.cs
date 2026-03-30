@@ -52,5 +52,10 @@ public class FactionNode : NodeData
         
     }
 
+    public bool IsBoss()
+    {
+        return isBoss;
+    }
+
 }
 public enum Faction { Penguins, Giraffes, PolarBears, Beavers, Monkeys, Goats, Seals }

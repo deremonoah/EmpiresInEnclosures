@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class FlowManager : MonoBehaviour
 {
@@ -66,6 +67,7 @@ public class FlowManager : MonoBehaviour
 
     public IEnumerator GameFlowRoutine()
     {
+        Debug.Log("map panel is null? "+(mapPan == null));
         mapPan.openMap();
         curState = gameState.movingLocation;//player decides what fight to have first
 
@@ -136,7 +138,7 @@ public class FlowManager : MonoBehaviour
         lossPan.SetActive(true);
     }
 
-    private void playerWon()
+    public void playerWon()//for the playtest setting it up because the way player beat node works
     {
         //for now just pop up panel no upgrades yet
         winPan.SetActive(true);
@@ -150,5 +152,10 @@ public class FlowManager : MonoBehaviour
 
     public gameState getCurrentState()
     { return curState; }
+
+    public void ReloadGame()
+    {
+        SceneManager.LoadScene("Game");
+    }
 }
 public enum gameState { starting,movingLocation,inBattle,looting}

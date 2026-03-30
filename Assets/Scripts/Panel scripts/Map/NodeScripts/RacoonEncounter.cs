@@ -6,7 +6,7 @@ public class RacoonEncounter : EncounterNode
 {
     public override List<Reward> GenerateRewardOptions()
     {
-        Debug.Log("in encounter node");
+        Debug.Log("in racoon node");
         List<Reward> trash = new List<Reward>();
         Debug.Log("count in nodesNextToMe " + nodesNextToMe.Count);
         foreach(NodeData no in nodesNextToMe)
