@@ -37,6 +37,8 @@ public class PickUp : MonoBehaviour
         DisplayProgress();
         //get time from ability
         myItemType=_ability.getPickupType();
+
+        PlacingController.instance.IamItemPlaced(this.gameObject);
     }
 
     
@@ -164,6 +166,7 @@ public class PickUp : MonoBehaviour
         {
             _ability.ActivatePickUp(transform, 7);
         }
+        PlacingController.instance.RemoveMeFromList(this.gameObject);
         Destroy(this.gameObject);
     }
 

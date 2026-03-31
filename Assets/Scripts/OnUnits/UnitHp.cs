@@ -36,10 +36,12 @@ public class UnitHp : HP
 
     public override void Die()
     {
-        UnitManager um = FindObjectOfType<UnitManager>();
+        UnitManager um = UnitManager.instance;
         um.PlayerGetsPower(GetComponent<UnitStats>().getFriendlyPayOnDeath(),false);
         um.EnemyGetsPower(GetComponent<UnitStats>().getEnemyPayOnDeath(), false);
-        
+        um.removeMeFromList(this.gameObject);
+
+
         ulti.chargePlayerUlt(amPlayer, 2);
 
         myOnDeathAbility?.UseAbility(this.transform);

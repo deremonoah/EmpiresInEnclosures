@@ -23,6 +23,8 @@ public class PlacingController : MonoBehaviour
 
     public static PlacingController instance;
 
+    private List<GameObject> placedItems = new List<GameObject>();
+
     private void Awake()
     {
         if(instance !=null & instance!=this)
@@ -34,6 +36,16 @@ public class PlacingController : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
+    }
+
+    private void OnEnable()
+    {
+        FlowManager.instance.BattleEnd += RemoveItemsAfterBattle;
+    }
+
+    private void OnDisable()
+    {
+        FlowManager.instance.BattleEnd -= RemoveItemsAfterBattle;
     }
 
     private void Start()
@@ -51,7 +63,7 @@ public class PlacingController : MonoBehaviour
         }
     }
 
-    private void placeItem()
+    private void placeItemPlayer()
     {
         //see where mouse is
         Vector3 placeToPlaceIt = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -59,6 +71,7 @@ public class PlacingController : MonoBehaviour
         var item=Instantiate(itemsToPlace[heldItem].getPrefab(),placeToPlaceIt, itemsToPlace[heldItem].getPrefab().transform.rotation);
         //set it to player layer as only player uses this for now
         item.layer = 7;
+        //item gets added to spawned list in pickUp start(), for items spawned by units
 
         //move Held Icon back to starting position
         heldIcon.position = IconStartingPos;
@@ -69,11 +82,16 @@ public class PlacingController : MonoBehaviour
         ButtonManager.instance.UpdateItemUses();
     }
 
+    private void placeItemEnemey()
+    {
+
+    }
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Mouse0) && heldItem>-1)
         {
-            placeItem();//sets held item to -1 in placeItem
+            placeItemPlayer();//sets held item to -1 in placeItem
         }
         if(heldItem>-1)
         {
@@ -103,5 +121,28 @@ public class PlacingController : MonoBehaviour
     public Sprite GetItemsIcon(int thisOne)
     {
         return itemsToPlace[thisOne].getIcon();
+    }
+
+    public void RemoveItemsAfterBattle()
+    {
+        for(int lcv=0;lcv<placedItems.Count;lcv++)
+        {
+            if(placedItems[lcv]!=null)
+            {
+                Destroy(placedItems[lcv]);
+            }
+        }
+
+        placedItems.Clear();//so we don't have a long list of nulls
+    }
+
+    public void IamItemPlaced(GameObject item)
+    {
+        placedItems.Add(item);
+    }
+
+    public void RemoveMeFromList(GameObject item)
+    {
+        placedItems.Remove(item);
     }
 }

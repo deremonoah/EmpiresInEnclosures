@@ -179,7 +179,6 @@ MonoBehaviour:
   Armor: 0
   FriendlyPayOnDeath: 5
   EnemyPayOnDeath: 15
-  portrait: {fileID: 0}
   auraAdders: []
   bonusAttack: 0
   bonusAttackToBase: 0
@@ -292,7 +291,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.024971962, y: 1.7114924}
+  m_Offset: {x: -0.024971962, y: 1.6229686}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -303,7 +302,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8876874, y: 3.044161}
+  m_Size: {x: 1.8876874, y: 3.2212088}
   m_EdgeRadius: 0
 --- !u!114 &5627085043522933855
 MonoBehaviour:

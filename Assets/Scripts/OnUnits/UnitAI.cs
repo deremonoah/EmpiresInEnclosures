@@ -76,6 +76,11 @@ public class UnitAI : MonoBehaviour
         myWidth=GetComponent<Collider2D>().bounds.size.x;
     }
 
+    private void OnEnable()
+    {
+        UnitManager.instance.DontChargeBase += RemoveEnemyBaseAsTarget;
+    }
+
     private void OnDisable()
     {
         if (currentRoutine != null)
@@ -83,6 +88,7 @@ public class UnitAI : MonoBehaviour
             StopCoroutine(currentRoutine);
             currentRoutine = null;
         }
+        UnitManager.instance.DontChargeBase -= RemoveEnemyBaseAsTarget;
     }
 
     public void SetSelectedVisible(bool visible)
@@ -146,6 +152,13 @@ public class UnitAI : MonoBehaviour
                 moveTargets.RemoveAt(lcv);//removes its previous instance
             }
         }
+    }
+
+    private void RemoveEnemyBaseAsTarget()//called when player disables auto charge it should remove enemy base from moveTargets
+    {
+        var bas= UnitManager.instance.getEnemyBasePos();
+        moveTargets.Remove(bas.position);
+        //now this likley will cause issues if I make a moving base but then turn moveTargets into transforms & use the pos in it
     }
 
     private void iCloseTo(Vector3 target)
@@ -396,6 +409,7 @@ public class UnitAI : MonoBehaviour
         }
         return null;//incase there isn't one near by
     }
+
 
 
 }

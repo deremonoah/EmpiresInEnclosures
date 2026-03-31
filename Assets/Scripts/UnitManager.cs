@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 //this class handles the spawning the player can do with buttons
 //and will handle the enemy spawns
@@ -12,8 +13,9 @@ public class UnitManager : MonoBehaviour
     public List<GameObject> PlayerUnitPrefabs;
     [SerializeField] private float playerPP,playerStartingPP, playerMaxPP, PPRegenTimer,PPRegenTimerMax;
     public Text playerPPText, playerPPMaxText;
-    private List<GameObject> spawnedPlayerUnits = new List<GameObject>();
+    [SerializeField] private List<GameObject> spawnedPlayerUnits = new List<GameObject>();
     [SerializeField] private bool playerAutoCharge;
+    public event Action DontChargeBase;
 
     [Header("Enmey stuff")]
     public List<GameObject> enemyPrefabs;
@@ -35,6 +37,8 @@ public class UnitManager : MonoBehaviour
     public Vector2 yRange;
 
     public static UnitManager instance;
+
+
 
     private void Awake()
     {
@@ -169,8 +173,8 @@ public class UnitManager : MonoBehaviour
     }
     public Vector3 RandomizeSpawn(Vector3 aroundHere)
     {
-        float randx = Random.Range(xRange.x, xRange.y);
-        float randy = Random.Range(yRange.x, yRange.y);
+        float randx = UnityEngine.Random.Range(xRange.x, xRange.y);//adding using system adds another random call, so need to specify
+        float randy = UnityEngine.Random.Range(yRange.x, yRange.y);
 
         Vector3 randSpawn=new Vector3(aroundHere.x+randx, aroundHere.y+randy ,aroundHere.z);
         return randSpawn;
@@ -255,6 +259,10 @@ public class UnitManager : MonoBehaviour
     public void SetAutoCharge(bool toggleValue)
     {
         playerAutoCharge = toggleValue;
+        if(playerAutoCharge==false)
+        {
+            DontChargeBase.Invoke();
+        }
     }
 
     public bool getAutoCharge()
@@ -362,4 +370,16 @@ public class UnitManager : MonoBehaviour
     public void SetEnemyFaction(List<Faction> fac)//called by the map node load type dealy
     { EnemyFaction = fac; }
 #endregion
+
+    public void removeMeFromList(GameObject unit)
+    {
+        if(unit.layer==7)
+        {
+            spawnedPlayerUnits.Remove(unit);
+        }
+        else if(unit.layer==6)
+        {
+            spawnedEnemyUnits.Remove(unit);
+        }
+    }
 }
