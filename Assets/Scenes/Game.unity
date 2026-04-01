@@ -10917,7 +10917,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2c208ba338d504a4087140aa2367ac08, type: 2}
   - {fileID: 11400000, guid: 5322b252fb47f41a0b007db0730b0418, type: 2}
   - {fileID: 11400000, guid: df9634c4245bd4a939bc443a84c8562d, type: 2}
-  playerItems: []
+  playerItems:
+  - {fileID: 11400000, guid: cd9c740ef9dea0c4f86a88ca553d5175, type: 2}
   playerUpgradeHistory: []
 --- !u!1001 &847699705
 PrefabInstance:

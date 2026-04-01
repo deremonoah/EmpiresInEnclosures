@@ -85,7 +85,7 @@ public class ButtonManager : MonoBehaviour
         DisplayUnits();
     }
 
-    public void ItemListChanged()
+    public void UpdateItemList()
     {
         DisplayItems();
     }

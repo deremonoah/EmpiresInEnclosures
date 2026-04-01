@@ -52,6 +52,13 @@ public class PlacingController : MonoBehaviour
     private void Start()
     {
         IconStartingPos = heldIcon.position;
+
+        var tempList = EquipManagerPlayer.instance.getPlayerItems();
+        foreach (ItemReward go in tempList)
+        {
+            GainedNewItem(go);
+        }
+        ButtonManager.instance.UpdateItemList();
     }
 
     public void holdItemToPlace(int one)
@@ -83,6 +90,12 @@ public class PlacingController : MonoBehaviour
         ButtonManager.instance.UpdateItemUses();
     }
 
+    private void cancelItemPlace()
+    {
+        heldIcon.position = IconStartingPos;
+        heldItem = -1;
+    }
+
     private void placeItemEnemey()
     {
 
@@ -90,9 +103,13 @@ public class PlacingController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0) && heldItem>-1)
+        if(Input.GetKeyDown(KeyCode.Mouse0) && heldItem>-1)//does it make more sense for right click to place item?
         {
             placeItemPlayer();//sets held item to -1 in placeItem
+        }
+        if(Input.GetKeyDown(KeyCode.Mouse1)&&heldItem>-1)
+        {
+            cancelItemPlace();
         }
         if(heldItem>-1)
         {
@@ -106,7 +123,7 @@ public class PlacingController : MonoBehaviour
         itemsToPlace.Add(item);
         itemUses.Add(item.getUses());
         //should we hold just the item to be placed & it has the image rather than the mess above?
-        ButtonManager.instance.ItemListChanged();
+        ButtonManager.instance.UpdateItemList();
     }
 
     public int GetItemCount()

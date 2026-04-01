@@ -30,6 +30,12 @@ public class EquipManagerPlayer : MonoBehaviour
             {
                 playerUpgradeHistory.Add(re);
             }
+
+            foreach (ItemReward re in playerItems)
+            {
+                playerUpgradeHistory.Add(re);
+            }
+            //placingController & UnitManager grab initial list from here
         }
     }
     //handle buffs to tower or base
@@ -101,7 +107,7 @@ public class EquipManagerPlayer : MonoBehaviour
     {
         playerItems.Add(re);
         playerUpgradeHistory.Add(re);
-        ButtonManager.instance.ItemListChanged();
+        ButtonManager.instance.UpdateItemList();
     }
 
     public List<UnitReward> getPlayerUnits()
