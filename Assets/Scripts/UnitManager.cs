@@ -45,11 +45,12 @@ public class UnitManager : MonoBehaviour
         if (instance != null & instance != this)
         {
             Debug.LogError("we got 2 Unit Managers in the scene");
+            Destroy(this);//only call to destroy game object for one script on obj
         }
         else
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject); we reset the game by reloading scene
         }
     }
 
@@ -254,6 +255,8 @@ public class UnitManager : MonoBehaviour
         {
             Destroy(go);
         }
+        spawnedPlayerUnits.Clear();
+        spawnedEnemyUnits.Clear();
     }
     
     public void SetAutoCharge(bool toggleValue)

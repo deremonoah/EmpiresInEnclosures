@@ -29,12 +29,13 @@ public class FlowManager : MonoBehaviour
     {
         if (instance != null & instance != this)
         {
-            Debug.LogError("we got 2 FlowManagers in the scene");
+            //this becomes expected behavior with reloading or loading other scenes
+            Destroy(this.gameObject);
         }
         else
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
         }
     }
 
@@ -156,6 +157,7 @@ public class FlowManager : MonoBehaviour
     public void ReloadGame()
     {
         SceneManager.LoadScene("Game");
+        //was considering restart application, but then it would take them to main menu right?
     }
 }
 public enum gameState { starting,movingLocation,inBattle,looting}

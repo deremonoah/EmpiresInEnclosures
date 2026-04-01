@@ -30,11 +30,12 @@ public class PlacingController : MonoBehaviour
         if(instance !=null & instance!=this)
         {
             Debug.LogError("we got 2 placing controllers in the scene");
+            Destroy(this);
         }
         else
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
         }
     }
 

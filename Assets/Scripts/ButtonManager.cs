@@ -26,11 +26,12 @@ public class ButtonManager : MonoBehaviour
         if (instance != null & instance != this)
         {
             Debug.LogError("we got 2 Unit Managers in the scene");
+            Destroy(this);
         }
         else
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
         }
     }
 

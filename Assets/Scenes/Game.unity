@@ -10762,6 +10762,7 @@ MonoBehaviour:
   PPRegenTimerMax: 2
   playerPPText: {fileID: 1956951119}
   playerPPMaxText: {fileID: 1273174426}
+  spawnedPlayerUnits: []
   playerAutoCharge: 0
   enemyPrefabs:
   - {fileID: 3248066881049308706, guid: c2cb16513c4dfee41a4027e9f26c4758, type: 3}
@@ -31765,7 +31766,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -296563997735285329, guid: d722c5b6f2578a941b7fa868f7329140, type: 3}
       propertyPath: nodesNextToMe.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -296563997735285329, guid: d722c5b6f2578a941b7fa868f7329140, type: 3}
       propertyPath: nodesNextToMe.Array.data[0]

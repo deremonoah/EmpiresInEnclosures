@@ -19,7 +19,8 @@ public class EquipManagerPlayer : MonoBehaviour
     {
         if(instance!=null & instance != this)
         {
-            Debug.LogError("2 equip managers in the scene");
+            //Debug.LogError("2 equip managers in the scene");
+            Destroy(this.gameObject);
         }
         else
         {
