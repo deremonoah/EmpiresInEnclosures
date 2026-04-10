@@ -302,6 +302,7 @@ public class EnemyBaseAI : MonoBehaviour
         {
             //check for invaders
             int isInvaders = InvadersCheck();
+            Debug.Log("invades are at " + isInvaders);
             //Debug.Log("Invaders check found " + invaderComp.Count);
             if (isInvaders == 1)
             {
@@ -375,7 +376,7 @@ public class EnemyBaseAI : MonoBehaviour
 
     private int InvadersCheck()//0 no, 1 base, 2 tower, go there
     {
-        lookForInvaders(this.transform.position, SearchAreaAroundBase);
+        lookForInvaders(um.getEnemyBasePos().position, SearchAreaAroundBase);
 
         if (invaderComp.Count>0)
         {
