@@ -28485,7 +28485,7 @@ MonoBehaviour:
   invaderComp: 
   invaderLastKnownLocation: []
   towerTam: {fileID: 0}
-  SearchAreaAroundBase: 0
+  SearchAreaAroundBase: 10
 --- !u!1 &2030422002
 GameObject:
   m_ObjectHideFlags: 0
