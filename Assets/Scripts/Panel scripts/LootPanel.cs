@@ -76,7 +76,7 @@ public class LootPanel : MonoBehaviour
         //if this works we get 3 randoms, and fill the images,
         PickOptions.Clear();
 
-        for (int lcv = 0; lcv < 3; lcv++)
+        for (int lcv = 0; lcv < 3 && lootList.Count!=0; lcv++)
         {
             int rand = Random.Range(0, lootList.Count);
             PickOptions.Add(lootList[rand]);
@@ -91,9 +91,11 @@ public class LootPanel : MonoBehaviour
     public void PickButton(int num)
     {
         //check if PickOptions[num] is a unit or not
-        PickOptions[num].SelectReward();
-
-        CloseLootPan();//but we don't always want to close it, or we have a whole new panel pop up that takes over the screen
+        if (num < PickOptions.Count)//if only 2 are available then you can't select (option num 2 because the count is only 2)
+        { 
+            PickOptions[num].SelectReward();
+            CloseLootPan();
+        }
     }
 
     public Reward PeakAtReward(int num)

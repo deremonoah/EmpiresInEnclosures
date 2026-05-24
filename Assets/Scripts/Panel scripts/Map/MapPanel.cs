@@ -131,10 +131,11 @@ public class MapPanel : MonoBehaviour
 
     private bool CanMoveToThisNode(NodeData no)//maybe in future we just highlight all the nodes a player could go to
     {
+        Debug.Log("in canmove to this node");
         Debug.Log(no.name+" node is null? " + (no == null));
         List<NodeData> nearbyNodes = no.GetNearbyNodes();
         //first check if we have conquered it
-        Debug.Log("in canmove to this node");
+        
         for(int lcv=0;lcv<ConqueredNodes.Count;lcv++)
         {
             if(no==ConqueredNodes[lcv])
