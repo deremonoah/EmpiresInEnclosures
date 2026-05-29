@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ButtonManager : MonoBehaviour
 {
     //this handles the display text and Icon of the buttons for them to change
     [Header("Unit Button variables")]
     [SerializeField] List<GameObject> UnitButtons;//this is for enabling and disabling the correct amount of buttons
-    public List<Text> unitButtonCosts;
+    public List<TextMeshProUGUI> unitButtonCosts;
     public List<Image> unitButtonIcons;
     
 
     [Header("item Button variables")]
     [SerializeField] List<GameObject> itemButtons;
-    public List<Text> itemButtonUses;
+    public List<TextMeshProUGUI> itemButtonUses;
     public List<Image> itemButtonIcons;
     
     private PlacingController pc;

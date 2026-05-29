@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 //this class handles the spawning the player can do with buttons
 //and will handle the enemy spawns
@@ -12,7 +13,7 @@ public class UnitManager : MonoBehaviour
     public Transform PlayerBasePos;
     public List<GameObject> PlayerUnitPrefabs;
     [SerializeField] private float playerPP,playerStartingPP, playerMaxPP, PPRegenTimer,PPRegenTimerMax;
-    public Text playerPPText, playerPPMaxText;
+    public TextMeshProUGUI playerPPText, playerPPMaxText;
     [SerializeField] private List<GameObject> spawnedPlayerUnits = new List<GameObject>();
     [SerializeField] private bool playerAutoCharge;
     public event Action DontChargeBase;
