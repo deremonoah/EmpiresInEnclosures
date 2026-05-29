@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GorrillaCarried
   m_EditorClassIdentifier: 
   rName: Gorilla Carrier
-  icon: {fileID: 21300000, guid: b27f7f5cf423c6a4fa0c6e24433f863c, type: 3}
+  icon: {fileID: 21300000, guid: 5d2aae3358c8142408c86ec5cad88a4f, type: 3}
   description: with their powers combined it takes more hits to defeat this absolute
     unit
   unitPrefab: {fileID: 7989242405819459906, guid: e68f73e5f38effa45b77b529d9acb194, type: 3}

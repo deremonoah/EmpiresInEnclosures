@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StinkyPenguin
   m_EditorClassIdentifier: 
   rName: Stinky Penguin
-  icon: {fileID: 21300000, guid: 1b3a3446cb154614bb616d45f29ad89e, type: 3}
+  icon: {fileID: 21300000, guid: 9f74c97f6e9a19443bfdfa909a2ecaeb, type: 3}
   description: The stink coming off this guys makes everyone gag, slowing down their
     attacks, any units that get too close smell their wrath
   unitPrefab: {fileID: 7021407983088352502, guid: becfd4104597f03449b31436b0d88cdf, type: 3}

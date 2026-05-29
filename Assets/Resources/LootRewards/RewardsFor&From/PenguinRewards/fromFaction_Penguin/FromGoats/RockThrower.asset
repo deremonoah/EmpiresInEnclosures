@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RockThrower
   m_EditorClassIdentifier: 
   rName: rock thrower
-  icon: {fileID: 21300000, guid: a1e43a52586066d4783c9ad402d4bdf2, type: 3}
+  icon: {fileID: 21300000, guid: 35ee649a6a725f3468354709b489c388, type: 3}
   description: throws rocks the size of a rock at enemies
   unitPrefab: {fileID: 6723715228622054746, guid: 339fd7231cd263944abb910b28f2eaf3, type: 3}

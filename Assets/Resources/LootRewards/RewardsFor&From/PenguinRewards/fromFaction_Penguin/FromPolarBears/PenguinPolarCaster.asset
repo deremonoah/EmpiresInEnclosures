@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PenguinPolarCaster
   m_EditorClassIdentifier: 
   rName: Polar Prognosticator Penguin
-  icon: {fileID: 21300000, guid: d9b22a8d680180a43b005001582a5f92, type: 3}
+  icon: {fileID: 21300000, guid: 8cf62ac531ee6214c9470491740eb2ce, type: 3}
   description: Having learned the ice magic from the polar bears and harnesed it
     for projectiles
   unitPrefab: {fileID: 2593683157345584653, guid: feebef167d4013f4c9c29951595718f5, type: 3}

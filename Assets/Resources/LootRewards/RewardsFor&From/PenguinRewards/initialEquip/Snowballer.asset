@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Snowballer
   m_EditorClassIdentifier: 
   rName: SnowBaller
-  icon: {fileID: 21300000, guid: dad4ae339b6d94c448517cf0c99181dc, type: 3}
+  icon: {fileID: 21300000, guid: cfcf418517f3351439d19d8e1fd8c4e0, type: 3}
   description: throws snow balls like a pro at enemies
   unitPrefab: {fileID: 9069953782135950629, guid: 4864614692eeafd41aca06e83250c94f, type: 3}
